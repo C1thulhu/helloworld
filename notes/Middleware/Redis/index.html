@@ -1,0 +1,871 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/C1thulhu/helloworld/img/icon/log_1.png">
+  <link rel="icon" href="/C1thulhu/helloworld/img/icon/log_1.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="C1thulhu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis">
+<meta property="og:url" content="https://github.com/C1thulhu/helloworld/notes/Middleware/Redis/index.html">
+<meta property="og:site_name" content="C1thulhu">
+<meta property="og:description" content="一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/redis-%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B.jpeg">
+<meta property="article:published_time" content="2022-08-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-08-21T16:00:00.000Z">
+<meta property="article:author" content="C1thulhu">
+<meta property="article:tag" content="Middleware">
+<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="NoSQL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/redis-%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B.jpeg">
+  
+  
+  <title>Redis - C1thulhu</title>
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github-dark-dimmed.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/C1thulhu/helloworld/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"github.com","root":"/C1thulhu/helloworld/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/C1thulhu/helloworld/local-search.xml"};
+  </script>
+  <script  src="/C1thulhu/helloworld/js/utils.js" ></script>
+  <script  src="/C1thulhu/helloworld/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/C1thulhu/helloworld/">
+      <strong>C1thulhu</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/C1thulhu/helloworld/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/C1thulhu/helloworld/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/C1thulhu/helloworld/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/C1thulhu/helloworld/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/C1thulhu/helloworld/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/C1thulhu/helloworld/img/background/redis.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Redis">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-08-05 00:00" pubdate>
+        2022-08-05
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.6k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Redis</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022-08-22
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> #前言</h2>
+<p><font style="color:grey">待编纂。</font></p>
+<p>参考文章：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/redis-tutorial.html">Redis 教程-菜鸟教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.pdai.tech/md/db/nosql-redis/db-redis-overview.html">Redis教程 - Redis知识体系详解</a></li>
+</ul>
+<h2 id="redis概念"><a class="markdownIt-Anchor" href="#redis概念"></a> #Redis概念</h2>
+<p>  Redis是一种内存高速缓存数据库，支持key-value等多种数据结构的存储系统。可用于缓存，事件发布或订阅，高速队列等场景。支持网络，提供字符串，哈希，列表，队列，集合结构直接存取，基于内存，可持久化。</p>
+<p>Redis优点：</p>
+<ul>
+<li>读写新能优异</li>
+<li>数据类型丰富</li>
+<li>特性丰富</li>
+<li>发布订阅</li>
+<li>原子性</li>
+<li>持久化</li>
+<li>分布式</li>
+</ul>
+<h2 id="redis数据类型"><a class="markdownIt-Anchor" href="#redis数据类型"></a> #Redis数据类型</h2>
+<p>  <font style="color:red">首先对redis来说，所有的key（键）都是字符串。我们在谈基础数据结构时，讨论的是存储值的数据类型。</font></p>
+<h3 id="基础数据类型"><a class="markdownIt-Anchor" href="#基础数据类型"></a> 基础数据类型</h3>
+<p>常见的5种数据类型，分别是：String、List、Set、Zset、Hash。</p>
+<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/redis-%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B.jpeg" srcset="/C1thulhu/helloworld/img/loading.gif" lazyload alt="redis-基础类型" /></p>
+<p>5种类型的特性如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>结构类型</th>
+<th>结构存储的值</th>
+<th>结构的读写能力</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>String字符串</strong></td>
+<td>可以是字符串、整数或浮点数</td>
+<td>对整个字符串或字符串的一部分进行操作；对整数或浮点数进行自增或自减操作；</td>
+</tr>
+<tr>
+<td><strong>List列表</strong></td>
+<td>一个链表，链表上的每个节点都包含一个字符串</td>
+<td>对链表的两端进行push和pop操作，读取单个或多个元素；根据值查找或删除元素；</td>
+</tr>
+<tr>
+<td><strong>Set集合</strong></td>
+<td>包含字符串的无序集合</td>
+<td>字符串的集合，包含基础的方法有看是否存在添加、获取、删除；还包含计算交集、并集、差集等</td>
+</tr>
+<tr>
+<td><strong>Hash散列</strong></td>
+<td>包含键值对的无序散列表</td>
+<td>包含方法有添加、获取、删除单个元素</td>
+</tr>
+<tr>
+<td><strong>Zset有序集合</strong></td>
+<td>和散列一样，用于存储键值对</td>
+<td>字符串成员与浮点数分数之间的有序映射；元素的排列顺序由分数的大小决定；包含方法有添加、获取、删除单个元素以及根据分值范围或成员来获取元素</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>
+<p><strong>String</strong></p>
+<p><font style="color:red">String类型是二进制安全的，意思是 redis 的 string 可以包含任何数据。如数字，字符串，jpg图片或者序列化的对象。</font></p>
+<p>相关命令：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>简述</th>
+<th>使用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>获取存储在给定键中的值</td>
+<td><code>GET name</code></td>
+</tr>
+<tr>
+<td>SET</td>
+<td>设置存储在给定键中的值</td>
+<td><code>SET name value</code></td>
+</tr>
+<tr>
+<td>DEL</td>
+<td>删除存储在给定键中的值</td>
+<td><code>DEL name</code></td>
+</tr>
+<tr>
+<td>INCR</td>
+<td>将键存储的值加1</td>
+<td><code>INCR key</code></td>
+</tr>
+<tr>
+<td>DECR</td>
+<td>将键存储的值减1</td>
+<td><code>DECR key</code></td>
+</tr>
+<tr>
+<td>INCRBY</td>
+<td>将键存储的值加上整数</td>
+<td><code>INCRBY key amount</code></td>
+</tr>
+<tr>
+<td>DECRBY</td>
+<td>将键存储的值减去整数</td>
+<td><code>DECRBY key amount</code></td>
+</tr>
+</tbody>
+</table>
+<p><font style="color:grey">详细请参考官方文档：<a target="_blank" rel="noopener" href="https://redis.io/commands/">https://redis.io/commands/</a></font></p>
+<p>使用场景：</p>
+<ul>
+<li><font style="color:#00FFFF"><strong>缓存</strong>：经典使用场景，把常用信息，字符串，图片或者视频等信息放到redis中，redis作为缓存层，mysql做持久化层，降低mysql的读写压力。</font></li>
+<li><strong>计数器</strong>：redis是单线程模型，一个命令执行完才会执行下一个，同时数据可以一步落地到其他的数据源。</li>
+<li><strong>session</strong>：常见方案spring session + redis实现session共享。</li>
+</ul>
+</li>
+<li>
+<p><strong>List列表</strong></p>
+<p>Redis中的List其实就是链表（Redis用双端链表实现List）。</p>
+<p>相关命令：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>简述</th>
+<th>使用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RPUSH</td>
+<td>将给定值推入到列表右端</td>
+<td>RPUSH key value</td>
+</tr>
+<tr>
+<td>LPUSH</td>
+<td>将给定值推入到列表左端</td>
+<td>LPUSH key value</td>
+</tr>
+<tr>
+<td>RPOP</td>
+<td>从列表的右端弹出一个值，并返回被弹出的值</td>
+<td>RPOP key</td>
+</tr>
+<tr>
+<td>LPOP</td>
+<td>从列表的左端弹出一个值，并返回被弹出的值</td>
+<td>LPOP key</td>
+</tr>
+<tr>
+<td>LRANGE</td>
+<td>获取列表在给定范围上的所有值</td>
+<td>LRANGE key 0 -1</td>
+</tr>
+<tr>
+<td>LINDEX</td>
+<td>通过索引获取列表中的元素。你也可以使用负数下标，以 -1 表示列表的最后一个元素， -2 表示列表的倒数第二个元素，以此类推。</td>
+<td>LINDEX key index</td>
+</tr>
+</tbody>
+</table>
+<p><font style="color:grey">详细请参考官方文档：<a target="_blank" rel="noopener" href="https://redis.io/commands/">https://redis.io/commands/</a></font></p>
+<p>应用场景：</p>
+<ul>
+<li><strong>微博TimeLine</strong>: 有人发布微博，用lpush加入时间轴，展示新的列表信息。</li>
+<li><strong>消息队列</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Set集合</strong></p>
+<p><font style="color:red">Redis 的 Set 是 String 类型的无序集合。集合成员是唯一的，这就意味着集合中不能出现重复的数据。</font></p>
+<p>相关命令：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>简述</th>
+<th>使用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SADD</td>
+<td>向集合添加一个或多个成员</td>
+<td>SADD key value</td>
+</tr>
+<tr>
+<td>SCARD</td>
+<td>获取集合的成员数</td>
+<td>SCARD key</td>
+</tr>
+<tr>
+<td>SMEMBERS</td>
+<td>返回集合中的所有成员</td>
+<td>SMEMBERS key member</td>
+</tr>
+<tr>
+<td>SISMEMBER</td>
+<td>判断 member 元素是否是集合 key 的成员</td>
+<td>SISMEMBER key member</td>
+</tr>
+</tbody>
+</table>
+<p><font style="color:grey">详细请参考官方文档：<a target="_blank" rel="noopener" href="https://redis.io/commands/">https://redis.io/commands/</a></font></p>
+<p>应用场景：</p>
+<ul>
+<li><strong>标签</strong>（tag）,给用户添加标签，或者用户给消息添加标签，这样有同一标签或者类似标签的可以给推荐关注的事或者关注的人。</li>
+<li><strong>点赞，或点踩，收藏等</strong>，可以放到set中实现</li>
+</ul>
+</li>
+<li>
+<p><strong>Hash散列</strong></p>
+<p><font style="color:red">Redis hash 是一个 string 类型的 field（字段） 和 value（值） 的映射表，hash 特别适合用于存储对象。</font></p>
+<p>相关命令：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>简述</th>
+<th>使用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HSET</td>
+<td>添加键值对</td>
+<td>HSET hash-key sub-key1 value1</td>
+</tr>
+<tr>
+<td>HGET</td>
+<td>获取指定散列键的值</td>
+<td>HGET hash-key key1</td>
+</tr>
+<tr>
+<td>HGETALL</td>
+<td>获取散列中包含的所有键值对</td>
+<td>HGETALL hash-key</td>
+</tr>
+<tr>
+<td>HDEL</td>
+<td>如果给定键存在于散列中，那么就移除这个键</td>
+<td>HDEL hash-key sub-key1</td>
+</tr>
+</tbody>
+</table>
+<p><font style="color:grey">详细请参考官方文档：<a target="_blank" rel="noopener" href="https://redis.io/commands/">https://redis.io/commands/</a></font></p>
+<p>应用场景：</p>
+<ul>
+<li><strong>缓存</strong>：相比string更节省空间地维护缓存信息，如用户信息，视频信息等。</li>
+</ul>
+</li>
+<li>
+<p><strong>Zset有序集合</strong></p>
+<p><font style="color:red">Redis 有序集合和集合一样也是 string 类型元素的集合,且不允许重复的成员。<strong>不同的是每个元素都会关联一个 double 类型的分数。redis 正是通过分数来为集合中的成员进行从小到大的排序</strong>。</font></p>
+<p>有序集合的成员是唯一的, 但分数(score)却可以重复。有序集合是通过两种数据结构实现：</p>
+<ul>
+<li><strong>压缩列表(ziplist)</strong>: ziplist是为了提高存储效率而设计的一种特殊编码的双向链表。它可以存储字符串或者整数，存储整数时是采用整数的二进制而不是字符串形式存储。它能在O(1)的时间复杂度下完成list两端的push和pop操作。但是因为每次操作都需要重新分配ziplist的内存，所以实际复杂度和ziplist的内存使用量相关</li>
+<li><strong>跳跃表（zSkiplist)</strong>: 跳跃表的性能可以保证在查找，删除，添加等操作的时候在对数期望时间内完成，这个性能是可以和平衡树来相比较的，而且在实现方面比平衡树要优雅，这是采用跳跃表的主要原因。跳跃表的复杂度是O(log(n))。</li>
+</ul>
+<p>相关命令：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>简述</th>
+<th>使用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ZADD</td>
+<td>将一个带有给定分值的成员添加到有序集合里面</td>
+<td>ZADD zset-key 178 member1</td>
+</tr>
+<tr>
+<td>ZRANGE</td>
+<td>根据元素在有序集合中所处的位置，从有序集合中获取多个元素</td>
+<td>ZRANGE zset-key 0-1 withccores</td>
+</tr>
+<tr>
+<td>ZREM</td>
+<td>如果给定元素成员存在于有序集合中，那么就移除这个元素</td>
+<td>ZREM zset-key member1</td>
+</tr>
+</tbody>
+</table>
+<p><font style="color:grey">详细请参考官方文档：<a target="_blank" rel="noopener" href="https://redis.io/commands/">https://redis.io/commands/</a></font></p>
+<p>应用场景：</p>
+<ul>
+<li><strong>排行榜</strong>：有序集合经典使用场景。例如小说视频等网站需要对用户上传的小说视频做排行榜，榜单可以按照用户关注数，更新时间，字数等打分，做排行。</li>
+</ul>
+</li>
+</ol>
+<h3 id="特殊数据类型"><a class="markdownIt-Anchor" href="#特殊数据类型"></a> 特殊数据类型</h3>
+<ol>
+<li>
+<p><strong>HyperLogLogs</strong></p>
+<p><strong>基数统计</strong>，可以非常省内存地统计各种计数的算法。在输入元素的数量或者体积非常非常大时，计算基数所需的空间总是固定的、并且是很小的。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>简述</th>
+<th>使用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PFADD</td>
+<td>添加指定元素到 HyperLogLog 中</td>
+<td>PFADD key element [element …]</td>
+</tr>
+<tr>
+<td>PFCOUNT</td>
+<td>返回给定 HyperLogLog 的基数估算值</td>
+<td>PFCOUNT key [key …]</td>
+</tr>
+<tr>
+<td>PFMERGE</td>
+<td>将多个 HyperLogLog 合并为一个 HyperLogLog</td>
+<td>PFMERGE destkey sourcekey [sourcekey …]</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>Bitmap</strong></p>
+<p><strong>位存储</strong>，即位图数据结构，都是操作二进制位来进行记录，只有0 和 1 两个状态。用于统计用户信息：打卡(不打卡)、 登录(未登录) 等<strong>两个状态的数据，都可以使用 Bitmaps</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>简述</th>
+<th>使用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SETBIT</td>
+<td>添加指定元素到 Bitmap 中</td>
+<td>SETBIT sign key value</td>
+</tr>
+<tr>
+<td>GETBIT</td>
+<td>返回Bitmap中的指定key值元素</td>
+<td>GETBIT sign key</td>
+</tr>
+<tr>
+<td>BITCOUNT</td>
+<td>统计操作</td>
+<td>BITCOUNT sign</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>geospatial</strong></p>
+<p><strong>地理位置</strong>，用于存储地理位置信息，并对存储的信息进行操作</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>简述</th>
+<th>使用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GEOADD</td>
+<td>将一个或多个经度(longitude)、纬度(latitude)、位置名称(member)添加到指定的 key(多个坐标以空格分割)</td>
+<td>GEOADD key longitude latitude member …</td>
+</tr>
+<tr>
+<td>GEOPOS</td>
+<td>获取地理位置的坐标</td>
+<td>GEOPOS key member</td>
+</tr>
+<tr>
+<td>GEODIST</td>
+<td>计算两个位置之间的距离</td>
+<td>GEODIST key member1 member2</td>
+</tr>
+<tr>
+<td>GEORADIUS</td>
+<td>根据用户给定的经纬度坐标来获取指定范围内的地理位置集合</td>
+<td></td>
+</tr>
+<tr>
+<td>GEORADIUSBYMEMBER</td>
+<td>根据储存在位置集合里面的某个地点获取指定范围内的地理位置集合</td>
+<td></td>
+</tr>
+<tr>
+<td>GEOHASH</td>
+<td>返回一个或多个位置对象的 geohash 值</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<h2 id="持久化"><a class="markdownIt-Anchor" href="#持久化"></a> #持久化</h2>
+<h2 id="事件事务"><a class="markdownIt-Anchor" href="#事件事务"></a> #事件&amp;事务</h2>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/C1thulhu/helloworld/categories/Middleware/">Middleware</a>
+                    
+                      <a class="hover-with-bg" href="/C1thulhu/helloworld/categories/Middleware/Redis/">Redis</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/C1thulhu/helloworld/tags/Middleware/">Middleware</a>
+                    
+                      <a class="hover-with-bg" href="/C1thulhu/helloworld/tags/Redis/">Redis</a>
+                    
+                      <a class="hover-with-bg" href="/C1thulhu/helloworld/tags/NoSQL/">NoSQL</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/C1thulhu/helloworld/notes/Java/JDK8%E7%89%88%E6%9C%AC%E7%89%B9%E6%80%A7/">
+                        <span class="hidden-mobile">Java8版本特性</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/C1thulhu/helloworld/js/events.js" ></script>
+<script  src="/C1thulhu/helloworld/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/C1thulhu/helloworld/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/C1thulhu/helloworld/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/C1thulhu/helloworld/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,1051 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/C1thulhu/helloworld/img/icon/log_1.png">
+  <link rel="icon" href="/C1thulhu/helloworld/img/icon/log_1.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="C1thulhu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Java I&#x2F;O（输入和输出）用于处理输入并产生输出。Java使用流的概念来加快I&#x2F;O操作的速度。java.io软件包包含输入和输出操作所需的所有类。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaIO">
+<meta property="og:url" content="https://github.com/C1thulhu/helloworld/notes/Java/API/JavaIO/index.html">
+<meta property="og:site_name" content="C1thulhu">
+<meta property="og:description" content="Java I&#x2F;O（输入和输出）用于处理输入并产生输出。Java使用流的概念来加快I&#x2F;O操作的速度。java.io软件包包含输入和输出操作所需的所有类。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/io-inputstream.png">
+<meta property="og:image" content="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/io-reader.png">
+<meta property="og:image" content="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/io-outputstream.png">
+<meta property="og:image" content="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/io-writer.png">
+<meta property="article:published_time" content="2022-06-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-07-12T16:00:00.000Z">
+<meta property="article:author" content="C1thulhu">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="JDK">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/io-inputstream.png">
+  
+  
+  <title>JavaIO - C1thulhu</title>
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github-dark-dimmed.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/C1thulhu/helloworld/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"github.com","root":"/C1thulhu/helloworld/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/C1thulhu/helloworld/local-search.xml"};
+  </script>
+  <script  src="/C1thulhu/helloworld/js/utils.js" ></script>
+  <script  src="/C1thulhu/helloworld/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/C1thulhu/helloworld/">
+      <strong>C1thulhu</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/C1thulhu/helloworld/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/C1thulhu/helloworld/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/C1thulhu/helloworld/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/C1thulhu/helloworld/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/C1thulhu/helloworld/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/C1thulhu/helloworld/img/background/IO.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JavaIO">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-06-22 00:00" pubdate>
+        2022-06-22
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      11k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JavaIO</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022-07-13
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> #前言</h2>
+<p><font style="color:grey">待完善。</font></p>
+<p>参考文章：</p>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/java/java-file.html">Java File</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://blog.kyire.site/2021/04/04/13a54546.html">Java-IO流</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="http://www.yiidian.com/java-io/what-is-java-io.html">Java IO流教程（一点教程）</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1252599548343744/1255945227202752">廖雪峰的官方网站-IO</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_32265569/article/details/108355392">设计模式—装饰者模式</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_51712663/article/details/124562360">io流详细解读</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/K_520_W/article/details/123389551">java之BIO简介</a></p>
+</li>
+</ul>
+<h2 id="file"><a class="markdownIt-Anchor" href="#file"></a> #File</h2>
+<p>Java的标准库<code>java.io</code>提供了<code>File</code>对象来操作文件和目录。<font style="color:#00FFFF">File 类不能访问文件内容本身，如果需要访问文件内容本身，则需要使用输入/输出流。</font></p>
+<p>构造File对象时，既可以传入绝对路径，也可以传入相对路径。<font style="color:yellow">注意Windows平台使用<code>\</code>作为路径分隔符，在Java字符串中需要用<code>\\</code>表示一个<code>\</code>。Linux平台使用<code>/</code>作为路径分隔符。</font>例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//Window平台</span><br><span class="hljs-type">File</span> <span class="hljs-variable">file1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;C:\\Windows\\test.text&quot;</span>);<br><span class="hljs-comment">//Linux平台</span><br><span class="hljs-type">File</span> <span class="hljs-variable">file2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;/usr/bin/test.text&quot;</span>);<br><br><span class="hljs-comment">//相对路径(假设当前目录为&quot;C:\Windows&quot;) .表示当前目录 ..表示上级目录</span><br><span class="hljs-type">File</span> <span class="hljs-variable">f1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;docs\\Test.text&quot;</span>);    <span class="hljs-comment">//绝对路径是 C:\Windowsdocs\Test.text</span><br><span class="hljs-type">File</span> <span class="hljs-variable">f2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;.\\docs\\Test.text&quot;</span>); <span class="hljs-comment">//绝对路径是 C:\Windowsdocs\Test.text</span><br><span class="hljs-type">File</span> <span class="hljs-variable">f3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;..\\Downloads&quot;</span>);      <span class="hljs-comment">//绝对路径是 C:\Downloads</span><br></code></pre></div></td></tr></table></figure>
+<p>File方法归类：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">作用</th>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">String getName()</td>
+<td style="text-align:center">返回由此抽象路径名表示的文件或目录的名称</td>
+<td style="text-align:center">void deleteOnExit()</td>
+<td style="text-align:center">在虚拟机终止时，请求删除此抽象路径名表示的文件或目录</td>
+</tr>
+<tr>
+<td style="text-align:center">String getParent()</td>
+<td style="text-align:center">获取当前路径下父路径名则返回，没有则返回null</td>
+<td style="text-align:center">String[] list()</td>
+<td style="text-align:center">获取当前路径下的目录中的所有文件和目录的名称</td>
+</tr>
+<tr>
+<td style="text-align:center">File getParentFile()</td>
+<td style="text-align:center">获取当前路径下的父级目录，没有则返回null</td>
+<td style="text-align:center">String[] list(FilenameFilter filter)</td>
+<td style="text-align:center">满足指定过滤器的当前路径下的目录中的所有文件和目录的名称</td>
+</tr>
+<tr>
+<td style="text-align:center">String getPath()</td>
+<td style="text-align:center">将此路径名转换为一个路径名字符串</td>
+<td style="text-align:center">File[] listFiles()</td>
+<td style="text-align:center">获取当前路径下目录中的文件和目录的路径</td>
+</tr>
+<tr>
+<td style="text-align:center">boolean isAbsolute()</td>
+<td style="text-align:center">是否为绝对路径名</td>
+<td style="text-align:center">File[] listFiles(FileFilter filter)</td>
+<td style="text-align:center">满足指定过滤器的当前路径下目录中的文件和目录的路径</td>
+</tr>
+<tr>
+<td style="text-align:center">String getAbsolutePath()</td>
+<td style="text-align:center">获取绝对路径名</td>
+<td style="text-align:center">boolean mkdir()</td>
+<td style="text-align:center">创建此路径名指定的目录</td>
+</tr>
+<tr>
+<td style="text-align:center">boolean canRead()</td>
+<td style="text-align:center">是否可以读取此路径名表示的文件</td>
+<td style="text-align:center">boolean mkdirs()</td>
+<td style="text-align:center">创建此路径名指定的目录，包括必需但不存在的父目录</td>
+</tr>
+<tr>
+<td style="text-align:center">boolean canWrite()</td>
+<td style="text-align:center">是否可以修改此路径名表示的文件</td>
+<td style="text-align:center">boolean renameTo(File dest)</td>
+<td style="text-align:center">重新命名当前路径名表示的文件。</td>
+</tr>
+<tr>
+<td style="text-align:center">boolean exists()</td>
+<td style="text-align:center">文件或目录是否存在</td>
+<td style="text-align:center">boolean setLastModified(long time)</td>
+<td style="text-align:center">设置由此路径名所指定的文件或目录的最后一次修改时间</td>
+</tr>
+<tr>
+<td style="text-align:center">boolean isDirectory()</td>
+<td style="text-align:center">是否是一个目录</td>
+<td style="text-align:center">boolean setReadOnly()</td>
+<td style="text-align:center">标记此路径名指定的文件或目录，以便只可对其进行读操作</td>
+</tr>
+<tr>
+<td style="text-align:center">boolean isFile()</td>
+<td style="text-align:center">是否是一个标准文件</td>
+<td style="text-align:center">static File createTempFile(String prefix, String suffix, File directory)</td>
+<td style="text-align:center">在指定目录中创建一个新的空文件，使用给定的前缀和后缀字符串生成其名称</td>
+</tr>
+<tr>
+<td style="text-align:center">long lastModified()</td>
+<td style="text-align:center">获取此路径名表示的文件最后一次被修改的时间</td>
+<td style="text-align:center">static File createTempFile(String prefix, String suffix)</td>
+<td style="text-align:center">在默认临时文件目录中创建一个空文件，使用给定前缀和后缀生成其名称</td>
+</tr>
+<tr>
+<td style="text-align:center">long length()</td>
+<td style="text-align:center">获取此路径名表示的文件的长度</td>
+<td style="text-align:center">int compareTo(File pathname)</td>
+<td style="text-align:center">按字母顺序比较两个抽象路径名</td>
+</tr>
+<tr>
+<td style="text-align:center">boolean createNewFile()</td>
+<td style="text-align:center">当且仅当不存在具有此路径名指定的名称的文件时，原子地创建由此路径名指定的一个新的空文件</td>
+<td style="text-align:center">int compareTo(Object o)</td>
+<td style="text-align:center">按字母顺序比较抽象路径名与给定对象</td>
+</tr>
+<tr>
+<td style="text-align:center">boolean delete()</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">boolean equals(Object obj)</td>
+<td style="text-align:center">测试此抽象路径名与给定对象是否相等</td>
+</tr>
+<tr>
+<td style="text-align:center">String toString()</td>
+<td style="text-align:center">此路径名的路径名字符串</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="io"><a class="markdownIt-Anchor" href="#io"></a> #IO</h2>
+<p><font style="color:red">Java I/O（输入和输出）用于处理输入并产生输出，Java使用<code>Stream</code>(流)的概念来加快I/O操作的速度。</font>java.io软件包包含输入和输出操作所需的所有类。我们可以通过Java I/O API 在Java中执行文件处理。</p>
+<p><font style="color:#00FFFF"><code>Stream</code>是数据序列。在Java中，流由字节组成。之所以称其为流，是因为它就像不断流动的水流一样。</font></p>
+<p><font style="color:yellow">在Java中，会自动为我们创建3个流。所有这些流都随控制台附带。</font></p>
+<ul>
+<li><font style="color:yellow">System.out：标准输出流</font></li>
+<li><font style="color:yellow"><a target="_blank" rel="noopener" href="http://System.in">System.in</a>：  标准输入流</font></li>
+<li><font style="color:yellow">System.err：标准错误流</font></li>
+</ul>
+<p>IO流可以根据处理数据类型的不同分为：字符流和字节流，或数据流向不同分为：输入流和输出流。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>分类</strong></th>
+<th style="text-align:center"><strong>字节输入</strong></th>
+<th style="text-align:center"><strong>字节输出</strong></th>
+<th style="text-align:center"><strong>字符输入</strong></th>
+<th style="text-align:center"><strong>字符输出</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">抽象基类</td>
+<td style="text-align:center">InputStream</td>
+<td style="text-align:center">OutputStream</td>
+<td style="text-align:center">Reader</td>
+<td style="text-align:center">Writer</td>
+</tr>
+<tr>
+<td style="text-align:center">访问文件</td>
+<td style="text-align:center">FileInputStream</td>
+<td style="text-align:center">FileOutputStream</td>
+<td style="text-align:center">FileReader</td>
+<td style="text-align:center">FileWriter</td>
+</tr>
+<tr>
+<td style="text-align:center">访问数组</td>
+<td style="text-align:center">ByteArrayInputStream</td>
+<td style="text-align:center">ByteArrayOutputStream</td>
+<td style="text-align:center">CharArrayReader</td>
+<td style="text-align:center">CharArrayWriter</td>
+</tr>
+<tr>
+<td style="text-align:center">访问管道</td>
+<td style="text-align:center">PipedInputStream</td>
+<td style="text-align:center">PipedOutputStream</td>
+<td style="text-align:center">PipedReader</td>
+<td style="text-align:center">PipedWriter</td>
+</tr>
+<tr>
+<td style="text-align:center">访问字符串</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">StringReader</td>
+<td style="text-align:center">StringWriter</td>
+</tr>
+<tr>
+<td style="text-align:center">缓存流</td>
+<td style="text-align:center">BufferedInputStream</td>
+<td style="text-align:center">BufferedOutputStream</td>
+<td style="text-align:center">BufferedReader</td>
+<td style="text-align:center">BufferedWriter</td>
+</tr>
+<tr>
+<td style="text-align:center">转换流</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">InputStreamReader</td>
+<td style="text-align:center">OutputStreamReader</td>
+</tr>
+<tr>
+<td style="text-align:center">对象流</td>
+<td style="text-align:center">ObjectInputStream</td>
+<td style="text-align:center">ObjectOutputStream</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">过滤流</td>
+<td style="text-align:center">FilterInputStream</td>
+<td style="text-align:center">FilterOutputStream</td>
+<td style="text-align:center">FilterReader</td>
+<td style="text-align:center">FilterWriter</td>
+</tr>
+<tr>
+<td style="text-align:center">打印流</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">PrintStream</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">PrintWriter</td>
+</tr>
+<tr>
+<td style="text-align:center">推回输入流</td>
+<td style="text-align:center">PushbackInputStream</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">PushbackInputReader</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">特殊流</td>
+<td style="text-align:center">DataInputStream</td>
+<td style="text-align:center">DataOutputStream</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">序列流</td>
+<td style="text-align:center">SequenceInputStream</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<p>InputStream示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * InputStream使用示例：</span><br><span class="hljs-comment"> **/</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">readFile</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>    <span class="hljs-type">InputStream</span> <span class="hljs-variable">input</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>    <span class="hljs-keyword">try</span> &#123;<br>        input = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(<span class="hljs-string">&quot;src/test.txt&quot;</span>);<br>        <span class="hljs-type">int</span> n;<br>        <span class="hljs-keyword">while</span> ((n = input.read()) != -<span class="hljs-number">1</span>) &#123; <span class="hljs-comment">// 利用while同时读取并判断</span><br>            System.out.println(n);<br>        &#125;<br>    &#125; <span class="hljs-keyword">finally</span> &#123;<br>        <span class="hljs-keyword">if</span> (input != <span class="hljs-literal">null</span>) &#123; input.close(); &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/** </span><br><span class="hljs-comment"> * 用try ... finally来编写上述代码会感觉比较复杂，更好的写法是利用Java 7引入的新的try(resource)的语法，</span><br><span class="hljs-comment"> * 只需要编写try语句，让编译器自动为我们关闭资源 如下：</span><br><span class="hljs-comment"> **/</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">readFile</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>    <span class="hljs-keyword">try</span> (<span class="hljs-type">InputStream</span> <span class="hljs-variable">input</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(<span class="hljs-string">&quot;src/test.txt&quot;</span>)) &#123;<br>        <span class="hljs-type">int</span> n;<br>        <span class="hljs-keyword">while</span> ((n = input.read()) != -<span class="hljs-number">1</span>) &#123;<br>            System.out.println(n);<br>        &#125;<br>    &#125; <span class="hljs-comment">//编译器在此自动为我们写入finally并调用close()</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>  <font style="color:red">实际上，编译器并不会特别地为<code>InputStream</code>加上自动关闭。编译器只看<code>try(resource = ...)</code>中的对象是否实现了<code>java.lang.AutoCloseable</code>接口，如果实现了，就自动加上<code>finally</code>语句并调用<code>close()</code>方法。<code>InputStream</code>和<code>OutputStream</code>都实现了这个接口，因此，都可以用在<code>try(resource)</code>中。</font></p>
+<h3 id="装饰者模式"><a class="markdownIt-Anchor" href="#装饰者模式"></a> 装饰者模式</h3>
+<p><font style="color:red"><strong>装饰模式（Decorator）</strong>，动态地给一个对象添加一些额外的职责，就增加功能来说，装饰模式比生成子类更灵活。<br />
+</font><br />
+<font style="color:grey">详细了解转至<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_32265569/article/details/108355392">设计模式—装饰者模式</a></font>，下文也会详细指出io中运用的装饰者模式。</p>
+<p><strong>初计初衷：</strong></p>
+<p>通常可以使用继承来实现功能的扩展，<font style="color:#00FFFF">如果这些需要扩展的功能的种类很繁多，那么继承势必生成很多子类，增加系统的复杂性；同时使用继承实现功能拓展，我们必须可预见这些拓展功能，这些功能是编译时就确定了的，是静态的。</font></p>
+<h3 id="inputstream"><a class="markdownIt-Anchor" href="#inputstream"></a> Inputstream</h3>
+<p><code>InputStream</code>就是Java标准库提供的最基本的输入流，抽象类<code>InputStream</code>中重要方法设计如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">abstract int read()</td>
+<td style="text-align:center">读取下一个字节，如果没有则返回-1</td>
+</tr>
+<tr>
+<td style="text-align:center">int read(byte b[])</td>
+<td style="text-align:center">将读取到的数据放在 byte 数组中，该方法实际上调用read(byte b[], int off, int len)方法</td>
+</tr>
+<tr>
+<td style="text-align:center">int read(byte b[], int off, int len)</td>
+<td style="text-align:center">从第 off 位置读取<b>最多(实际可能小于)</b> len 长度字节的数据放到 byte 数组中，流是以 -1 来判断是否读取结束的; 此方法会一直阻止，直到输入数据可用、检测到stream结尾或引发异常为止。</td>
+</tr>
+<tr>
+<td style="text-align:center">void close()</td>
+<td style="text-align:center">读取完，关闭流，释放资源</td>
+</tr>
+<tr>
+<td style="text-align:center">long skip(long n)</td>
+<td style="text-align:center">跳过指定个数的字节不读取</td>
+</tr>
+<tr>
+<td style="text-align:center">int available()</td>
+<td style="text-align:center">返回可读的字节数量</td>
+</tr>
+<tr>
+<td style="text-align:center">synchronized void reset()</td>
+<td style="text-align:center">重置读取位置为上次 mark 标记的位置</td>
+</tr>
+<tr>
+<td style="text-align:center">synchronized void mark(int readlimit)</td>
+<td style="text-align:center">标记读取位置，下次还可以从这里开始读取，使用前要看当前流是否支持，可以使用 markSupport() 方法判断</td>
+</tr>
+<tr>
+<td style="text-align:center">boolean markSupported()</td>
+<td style="text-align:center">判断当前流是否支持标记流，和上面两个方法配套使用</td>
+</tr>
+<tr>
+<td style="text-align:center">byte[] readAllBytes()</td>
+<td style="text-align:center">JDK9新增：读取 InputStream 中的所有剩余字节，调用readNBytes(Integer.MAX_VALUE)方法</td>
+</tr>
+<tr>
+<td style="text-align:center">int readNBytes(byte[] b, int off, int len)</td>
+<td style="text-align:center">JDK9新增：从输入流读取请求的字节数并保存在byte数组中； 此方法会一直阻塞，直到读取了请求的字节数、检测到流结束或引发异常为止。此方法不会关闭输入流。</td>
+</tr>
+<tr>
+<td style="text-align:center">long transferTo(OutputStream out)</td>
+<td style="text-align:center">JDK9新增：读取 InputStream 中的全部字节并写入到指定的 OutputStream 中</td>
+</tr>
+<tr>
+<td style="text-align:center">byte[] readNBytes(int len)</td>
+<td style="text-align:center">JDK11更新：读取 InputStream 中的剩余字节的指定上限大小的字节内容；此方法会一直阻塞，直到读取了请求的字节数、检测到流结束或引发异常为止。此方法不会关闭输入流。</td>
+</tr>
+</tbody>
+</table>
+<p>InputStream及其派生类实现关系：</p>
+<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/io-inputstream.png" srcset="/C1thulhu/helloworld/img/loading.gif" lazyload alt="io-inputstream" /></p>
+<h4 id="fileinputstream"><a class="markdownIt-Anchor" href="#fileinputstream"></a> FileInputStream</h4>
+<p><strong>FileInputStream</strong>：从文件系统中的文件获取输入字节，获取的文件可用性取决于主机环境。</p>
+<p><strong>构造方法：</strong></p>
+<ol>
+<li>FileInputStream(String name)</li>
+</ol>
+<p>通过打开与实际文件的连接来创建 FileInputStream ，该文件由文件系统中的路径名 name命名。</p>
+<ol start="2">
+<li>FileInputStream(File file)</li>
+</ol>
+<p>通过打开与实际文件的连接来创建 FileInputStream ，该文件由文件系统中的 File对象 file命名。</p>
+<ol start="3">
+<li>FileInputStream(FileDescriptor ds)</li>
+</ol>
+<p>使用文件描述符 fdObj创建 FileInputStream ，该文件描述符表示与文件系统中实际文件的现有连接。</p>
+<p><strong>特点：</strong></p>
+<p><font style="color:#00FFFF">FileInputStream 多用于读取诸如图像数据之类的原始字节流。使用其中<code>read()</code>方法读取中文会乱码（3字节），而使用<code>read(byte[] b)</code>方法并且不是截断读取才不会乱码。</font></p>
+<h4 id="filterinputstream"><a class="markdownIt-Anchor" href="#filterinputstream"></a> FilterInputStream</h4>
+<p>过滤输入流的主要功能是为基础流提供一些额外的功能。对FilterInputStream来说,常见的子类有BufferedInputStream，PushBackInputStream以及DataInputStream等，其子类总结为:</p>
+<ul>
+<li>
+<p>BufferedInputStream</p>
+<p><font style="color:red">缓冲输入流，由于基础输入流一个字节一个字节读取，频繁与磁盘进行交互，造成读取速度较低。缓冲流的存在就是先将数据读取到缓冲流(内存中)，然后一次性从内存中读取多个字符。提高读取的效率。</font></p>
+</li>
+<li>
+<p>PushbackInputStream</p>
+<p><font style="color:red">回退输入流，java中读取数据的方式是顺序读取，如果某个数据不需要读取，需要程序处理。PushBackInputStream就可以将某些不需要的数据回退到缓冲中。</font></p>
+</li>
+<li>
+<p>DataInputStream</p>
+<p><font style="color:red">数据输入流，以机器无关的方式读取Java的基本类型。</font></p>
+</li>
+</ul>
+<p>FilterInputStream是io流中装饰者模式的主要体现：</p>
+<p>以<code>BufferedInputStream</code>举例，当<code>FileInputStream</code>需要额外实现一个缓冲功能，就可以直接将<code>FileInputStream</code>传入<code>BufferedInputStream</code>的有参构造方法中：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-type">BufferedInputStream</span> <span class="hljs-variable">bufferedInputStream</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BufferedInputStream</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(<span class="hljs-string">&quot;src/test.txt&quot;</span>));<br></code></pre></div></td></tr></table></figure>
+<p>而BufferedInputStream继承自FilterInputStream，构造方法也是直接将传入的<code>InputStream</code>赋给父类，</p>
+<p>BufferedInputStream构造方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BufferedInputStream</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">FilterInputStream</span> &#123;<br>    ...<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">BufferedInputStream</span><span class="hljs-params">(InputStream in)</span> &#123;<br>        <span class="hljs-built_in">this</span>(in, DEFAULT_BUFFER_SIZE);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">BufferedInputStream</span><span class="hljs-params">(InputStream in, <span class="hljs-type">int</span> size)</span> &#123;<br>        <span class="hljs-built_in">super</span>(in);<br>        <span class="hljs-keyword">if</span> (size &lt;= <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<span class="hljs-string">&quot;Buffer size &lt;= 0&quot;</span>);<br>        &#125;<br>        buf = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[size];<br>    &#125;<br>    ...<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>FilterInputStream构造方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FilterInputStream</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">InputStream</span> &#123;<br>    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">volatile</span> InputStream in;<br><br>    <span class="hljs-keyword">protected</span> <span class="hljs-title function_">FilterInputStream</span><span class="hljs-params">(InputStream in)</span> &#123;<br>        <span class="hljs-built_in">this</span>.in = in;<br>    &#125;<br>    ...<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>总的来说，JDK首先将<code>InputStream</code>分为两大类：</p>
+<p>一类是直接提供数据的基础<code>InputStream</code>，如FileInputStream、ObjectInputStream等，另一类是提供额外附加功能都继承自FilterInputStream的<code>InputStream</code>，如BufferedInputStream、DataInputStream等；当需要给InputStream附加额外的功能时，将需要增强的InputStream传给提供额外附加功能<code>InputStream</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//给FileInputStream附加缓冲功能</span><br><span class="hljs-type">BufferedInputStream</span> <span class="hljs-variable">bufferedInputStream</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BufferedInputStream</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(<span class="hljs-string">&quot;src/test.txt&quot;</span>));<br><br><span class="hljs-comment">//可以给InputStream附加多个功能</span><br><span class="hljs-type">PushbackInputStream</span> <span class="hljs-variable">pushbackInputStream</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">PushbackInputStream</span>(bufferedInputStream);<br></code></pre></div></td></tr></table></figure>
+<h4 id="pipedinputstream"><a class="markdownIt-Anchor" href="#pipedinputstream"></a> PipedInputStream</h4>
+<p>java中，PipedOutputStream和PipedInputStream分别是管道输出流和管道输入流，使用管道通信时，必须将PipedOutputStream和PipedInputStream配套使用</p>
+<blockquote>
+<p>大致流程：<br />
+我们在线程A中向PipedOutputStream中写入数据，这些数据会自动的发送到与PipedOutputStream对应的PipedInputStream中，进而存储在PipedInputStream的缓冲中；线程B通过读取PipedInputStream中的数据。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//使用connect方法连接PipedInputStream与PipedOutputStream方式</span><br>PipedInputStream pipedInputStream=<span class="hljs-keyword">new</span> <span class="hljs-title class_">PipedInputStream</span>();<br>PipedOutputStream pipedOutputStream=<span class="hljs-keyword">new</span> <span class="hljs-title class_">PipedOutputStream</span>();<br><span class="hljs-keyword">try</span> &#123;<br>	pipedInputStream.connect(pipedOutputStream);<br>&#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>	e.printStackTrace();<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p><code>pipedInputStream.connect(pipedOutputStream)</code>或者<code>pipedOutputStream.connect(pipedInputStream)</code>效果是一样的，但是要注意 <strong>只能选择其中的一个而不能两个connect同时调用</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//不使用connect方法连接PipedInputStream与PipedOutputStream方式</span><br>PipedInputStream pipedInputStream=<span class="hljs-keyword">new</span> <span class="hljs-title class_">PipedInputStream</span>();<br>PipedOutputStream pipedOutputStream=<span class="hljs-literal">null</span>;<br><span class="hljs-keyword">try</span> &#123;<br>	pipedOutputStream = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PipedOutputStream</span>(pipedInputStream);<br>&#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>	e.printStackTrace();<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p><font style='color:red'><strong>在一个线程里使用PipedInpuStream和PipedOutputStream会造成死锁。</strong></font></p>
+<h3 id="reader"><a class="markdownIt-Anchor" href="#reader"></a> Reader</h3>
+<p><code>Reader</code>是Java的IO库提供的另一个输入流接口。和<code>InputStream</code>的区别是，<code>InputStream</code>是一个字节流，即以<code>byte</code>为单位读取，而<code>Reader</code>是一个字符流，即以<code>char</code>为单位读取。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">int read()</td>
+<td style="text-align:center">读取下一个字节，如果没有则返回-1</td>
+</tr>
+<tr>
+<td style="text-align:center">int read(char cbuf[])</td>
+<td style="text-align:center">将读取到的数据放在 char 数组中，该方法实际上调用read(char cbuf[], int off, int len)方法</td>
+</tr>
+<tr>
+<td style="text-align:center">int read(java.nio.CharBuffer target)</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">int read(char cbuf[], int off, int len)</td>
+<td style="text-align:center">从第 off 位置读取<b>最多(实际可能小于)</b> len 长度字节的数据放到 char 数组中，流是以 -1 来判断是否读取结束的; 此方法会一直阻止，直到输入数据可用、检测到stream结尾或引发异常为止。</td>
+</tr>
+<tr>
+<td style="text-align:center">long skip(long n)</td>
+<td style="text-align:center">跳过指定个数的字符不读取</td>
+</tr>
+<tr>
+<td style="text-align:center">boolean ready()</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">void reset()</td>
+<td style="text-align:center">重置读取位置为上次 mark 标记的位置</td>
+</tr>
+<tr>
+<td style="text-align:center">void mark(int readAheadLimit)</td>
+<td style="text-align:center">标记读取位置，下次还可以从这里开始读取，使用前要看当前流是否支持，可以使用 markSupport() 方法判断</td>
+</tr>
+<tr>
+<td style="text-align:center">boolean markSupported()</td>
+<td style="text-align:center">判断当前流是否支持标记流，和上面两个方法配套使用</td>
+</tr>
+<tr>
+<td style="text-align:center">void close()</td>
+<td style="text-align:center">读取完，关闭流，释放资源</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/io-reader.png" srcset="/C1thulhu/helloworld/img/loading.gif" lazyload alt="io-reader" /></p>
+<h4 id="inputstreamreader"><a class="markdownIt-Anchor" href="#inputstreamreader"></a> InputStreamReader</h4>
+<ul>
+<li>FileReader</li>
+</ul>
+<h4 id="filterreader"><a class="markdownIt-Anchor" href="#filterreader"></a> FilterReader</h4>
+<ul>
+<li>PushbackReader</li>
+</ul>
+<h4 id="bufferedreader"><a class="markdownIt-Anchor" href="#bufferedreader"></a> BufferedReader</h4>
+<ul>
+<li>LineNumberReader</li>
+</ul>
+<h3 id="outputstream"><a class="markdownIt-Anchor" href="#outputstream"></a> Outputstream</h3>
+<p>与<code>InputStream</code>相反，<code>OutputStream</code>是Java标准库提供的最基本的输出流，抽象类OutputStream中重要方法设计如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">abstract void write(int b)</td>
+<td style="text-align:center">写入一个字节，可以看到这里的参数是一个 int 类型，对应上面的读方法，int 类型的 32 位，只有低 8 位才写入，高 24 位将舍弃。</td>
+</tr>
+<tr>
+<td style="text-align:center">void write(byte b[])</td>
+<td style="text-align:center">将数组中的所有字节写入，实际调用的是write(byte b[], int off, int len)方法。</td>
+</tr>
+<tr>
+<td style="text-align:center">void write(byte b[], int off, int len)</td>
+<td style="text-align:center">将 byte 数组从 off 位置开始，len 长度的字节写入</td>
+</tr>
+<tr>
+<td style="text-align:center">void flush()</td>
+<td style="text-align:center">强制刷新，将缓冲中的数据写入; 默认是空实现，供子类覆盖</td>
+</tr>
+<tr>
+<td style="text-align:center">void close()</td>
+<td style="text-align:center">关闭输出流，流被关闭后就不能再输出数据了; 默认是空实现，供子类覆盖</td>
+</tr>
+</tbody>
+</table>
+<p>OutputStream及其派生类实现关系：</p>
+<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/io-outputstream.png" srcset="/C1thulhu/helloworld/img/loading.gif" lazyload alt="img" /></p>
+<h4 id="fileoutputstream"><a class="markdownIt-Anchor" href="#fileoutputstream"></a> FileOutputStream</h4>
+<p><strong>FileOutputStream</strong>：从文件系统中的文件获取输出字节，文件是否可用或能否可以被创建取决于基础平台，特别是某些平台一次只允许一个 FileOutputStream（或其他文件写入对象）打开文件进行写入。在这种情况下，如果所涉及的文件已经打开，则此类中的构造方法将失败。</p>
+<p><strong>构造方法：</strong></p>
+<ol>
+<li>
+<p>FileOutputStream(String name)</p>
+</li>
+<li>
+<p>FileOutputStream(String name, boolean append)</p>
+</li>
+<li>
+<p>FileOutputStream(File file)</p>
+</li>
+<li>
+<p>FileOutputStream(File file, boolean append)</p>
+</li>
+<li>
+<p>FileOutputStream(FileDescriptor fdObj)</p>
+<p>源码中构造方法中只有<code>FileOutputStream(FileDescriptor fdObj)</code>和其他构造方法不同，其他构造方法本质上都是调用了<code>FileOutputStream(File file, boolean append)</code>构造方法。</p>
+</li>
+</ol>
+<p><strong>特点：</strong></p>
+<p><font style="color:#00FFFF">在FileOutputStream中，append为true表示<font style="color:yellow"> 追加模式<sup>1</sup></font>，false为<font style="color:yellow"> 覆盖模式<sup>2</sup> </font>，默认false。</font></p>
+<p><font style="color:yellow">①：追加模式是指写入时往文件原本内容中追加；</font></p>
+<p><font style="color:yellow"> ②：覆盖模式是指写入文件时覆盖文件原本内容。</font></p>
+<h4 id="filteroutputstream"><a class="markdownIt-Anchor" href="#filteroutputstream"></a> FilterOutputStream</h4>
+<p>同<code>FilterInputStream</code>一样，<code>FilterOutputStream</code> 类本身只是简单地重写那些将所有请求传递给所包含输出流的 <code>OutputStream</code> 的所有方法。<code>FilterOutputStream</code> 的子类可进一步地重写这些方法中的一些方法，并且还可以提供一些额外的方法和字段。</p>
+<ul>
+<li>
+<p>PrintStream</p>
+</li>
+<li>
+<p>BufferedOutputStream</p>
+<p><font style="color:red">缓冲输出流</font></p>
+</li>
+<li>
+<p>DataOutputStream</p>
+<p>允许应用程序以与机器无关方式从底层输入流中读写基本 Java 数据类型</p>
+</li>
+</ul>
+<h3 id="writer"><a class="markdownIt-Anchor" href="#writer"></a> Writer</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">void write(int c)</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">void write(char cbuf[])</td>
+<td style="text-align:center">将数组中的所有字符写入，实际调用的是write(char cbuf[], int off, int len)方法。</td>
+</tr>
+<tr>
+<td style="text-align:center">void write(String str)</td>
+<td style="text-align:center">将数组中的所有字符串写入，实际调用的也是write(char cbuf[], int off, int len)方法。</td>
+</tr>
+<tr>
+<td style="text-align:center">void write(char cbuf[], int off, int len)</td>
+<td style="text-align:center">将 char 数组从 off 位置开始，len 长度的字节写入</td>
+</tr>
+<tr>
+<td style="text-align:center">void flush()</td>
+<td style="text-align:center">强制刷新，将缓冲中的数据写入; 默认是空实现，供子类覆盖</td>
+</tr>
+<tr>
+<td style="text-align:center">void close()</td>
+<td style="text-align:center">关闭输出流，流被关闭后就不能再输出数据了; 默认是空实现，供子类覆盖</td>
+</tr>
+<tr>
+<td style="text-align:center">Writer append(CharSequence csq)</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">Writer append(CharSequence csq, int start, int end)</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">Writer append(char c)</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/io-writer.png" srcset="/C1thulhu/helloworld/img/loading.gif" lazyload alt="io-writer" /></p>
+<h2 id="bio"><a class="markdownIt-Anchor" href="#bio"></a> #BIO</h2>
+<p><strong>同步并阻塞</strong>(传统阻塞型)，服务器实现模式为<strong>一个连接一个线程</strong>，即客户端<strong>有连接请求</strong>时服务器端就需要<strong>启动一个线程进行处理</strong>，如果这个连接不做任何事情会造成不必要的线程开销。</p>
+<blockquote>
+<ul>
+<li>客户端向服务器端发出请求后，客户端会一直等待(不会再做其他事情)，直到服务器端返回结果或者网络出现问题。</li>
+<li>服务器端同样的，当在处理某个客户端A发来的请求时，另一个客户端B发来的请求会等待，直到服务器端的这个处理线程完成上一个处理。</li>
+</ul>
+</blockquote>
+<ul>
+<li>伪异步IO</li>
+</ul>
+<h2 id="nio"><a class="markdownIt-Anchor" href="#nio"></a> #NIO</h2>
+<p><strong>同步非阻塞</strong>，服务器实现模式为<strong>一个线程处理多个请</strong>求(连接)，即客户端发送的连接请求都会注册到<strong>多路复用器</strong>上，多路复用器<strong>轮询</strong>到连接有I/O请求就进行处理</p>
+<h2 id="aio"><a class="markdownIt-Anchor" href="#aio"></a> #AIO</h2>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/C1thulhu/helloworld/categories/Java/">Java</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/C1thulhu/helloworld/tags/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/C1thulhu/helloworld/tags/JDK/">JDK</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/C1thulhu/helloworld/notes/DT/hexo/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">hexo</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/C1thulhu/helloworld/notes/SQL/MySQL/">
+                        <span class="hidden-mobile">MySQL基础</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/C1thulhu/helloworld/js/events.js" ></script>
+<script  src="/C1thulhu/helloworld/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/C1thulhu/helloworld/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/C1thulhu/helloworld/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/C1thulhu/helloworld/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,795 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/C1thulhu/helloworld/img/icon/log_1.png">
+  <link rel="icon" href="/C1thulhu/helloworld/img/icon/log_1.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="C1thulhu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Java 8是自Java 5以来最具革命性的版本。Java 8为Java语言、编译器、类库、开发工具与 JVM 带来了大量新特性。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java8版本特性">
+<meta property="og:url" content="https://github.com/C1thulhu/helloworld/notes/Java/JDK8%E7%89%88%E6%9C%AC%E7%89%B9%E6%80%A7/index.html">
+<meta property="og:site_name" content="C1thulhu">
+<meta property="og:description" content="Java 8是自Java 5以来最具革命性的版本。Java 8为Java语言、编译器、类库、开发工具与 JVM 带来了大量新特性。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-07-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-07-25T16:00:00.000Z">
+<meta property="article:author" content="C1thulhu">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="JDK">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>Java8版本特性 - C1thulhu</title>
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github-dark-dimmed.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/C1thulhu/helloworld/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"github.com","root":"/C1thulhu/helloworld/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/C1thulhu/helloworld/local-search.xml"};
+  </script>
+  <script  src="/C1thulhu/helloworld/js/utils.js" ></script>
+  <script  src="/C1thulhu/helloworld/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/C1thulhu/helloworld/">
+      <strong>C1thulhu</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/C1thulhu/helloworld/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/C1thulhu/helloworld/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/C1thulhu/helloworld/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/C1thulhu/helloworld/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/C1thulhu/helloworld/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/C1thulhu/helloworld/img/background/Java8.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java8版本特性">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-07-26 00:00" pubdate>
+        2022-07-26
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.8k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java8版本特性</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022-07-26
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> #前言</h2>
+<p>参考文章：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.kyire.site/2021/06/17/397c083a.html#Stream-API">Java8 新特性</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.pdai.tech/md/java/java8/java8-stream.html#%E7%90%86%E8%A7%A3%E6%B3%A8%E8%A7%A3-functioninterface">函数式编程</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/java/java8-streams.html">Java 8 Stream</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.pdai.tech/md/java/java8/java8-optional.html#">Optional解析</a></li>
+</ul>
+<h2 id="函数式编程"><a class="markdownIt-Anchor" href="#函数式编程"></a> #函数式编程</h2>
+<p><font style="color:red">面向对象编程是对数据进行抽象；函数式编程是对行为进行抽象。</font></p>
+<h3 id="lambda表达式"><a class="markdownIt-Anchor" href="#lambda表达式"></a> lambda表达式</h3>
+<p>lambda表达式在Java中又称为闭包或匿名函数，lambda仅能放入如下代码:</p>
+<ul>
+<li>预定义使用了<code>@Functional</code>注释的函数式接口，自带一个抽象函数的方法。例如，<code>Predicate</code>、<code>Function</code>、<code>Consumer</code> 或 <code>Supplier</code>，都那么可以向其传lambda表达式。</li>
+<li>SAM(Single Abstract Method <strong>单个抽象方法</strong>)类型。例如，若一个方法接收<code>Runnable</code>、<code>Comparable</code>或者 <code>Callable</code> 接口，都有单个抽象方法，可以传入lambda表达式</li>
+</ul>
+<p>这些称为lambda表达式的目标类型，可以用作返回类型，或lambda目标代码的参数。</p>
+<p>lambda表达式限制只能引用 final 或 final 局部变量，这就是说不能在lambda内部修改定义在域外的变量：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">List&lt;Integer&gt; primes = Arrays.asList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Integer</span>[]&#123;<span class="hljs-number">2</span>, <span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">7</span>&#125;);<br><span class="hljs-type">int</span> <span class="hljs-variable">factor</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>;<br><span class="hljs-comment">//修改域外变量会报编译时错误</span><br>primes.forEach(element -&gt; &#123; factor++; &#125;);<br><span class="hljs-comment">//访问而不作修改是可以的</span><br>primes.forEach(element -&gt; &#123; System.out.println(factor*element); &#125;);<br></code></pre></div></td></tr></table></figure>
+<h4 id="方法引用"><a class="markdownIt-Anchor" href="#方法引用"></a> 方法引用</h4>
+<p>lambda表达式内可以使用<code>方法引用</code>，仅当该方法不修改lambda表达式提供的参数。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">list.forEach(n -&gt; System.out.println(n)); <br><span class="hljs-comment">// 方法引用</span><br>list.forEach(System.out::println);  <br><span class="hljs-comment">//若对参数有任何修改，则不能使用方法引用，而需键入完整地lambda表达式</span><br>list.forEach((String n) -&gt; System.out.println(<span class="hljs-string">&quot;n:&quot;</span> + n));<br></code></pre></div></td></tr></table></figure>
+<p>方法引用可以有四种情况：</p>
+<ol>
+<li>
+<p>构造引用</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Supplier&lt;Thread&gt; thread = Thread::<span class="hljs-keyword">new</span>;<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p>对象::实例方法</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-type">List</span> <span class="hljs-variable">list</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>();<br>Collections.addAll(list,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>);<br>list.forEach(System.out::println);<br></code></pre></div></td></tr></table></figure>
+<p><font style="color:red">这种方式<code>Lambda</code>表达式的形参列表与实例方法的实参列表类型，个数需对应，如：</font></p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">list.forEach(e -&gt; System.out.println(e));<br></code></pre></div></td></tr></table></figure>
+<p>其中的**第一个<code>e</code>**是形参，**第二个<code>e</code>**是实参，二者需一致。</p>
+</li>
+<li>
+<p>类名::静态方法</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Stream&lt;Double&gt; stream = Stream.generate(Math::random);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p>类名::实例方法</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">TreeSet&lt;String&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeSet</span>&lt;&gt;(String::compareTo);<br></code></pre></div></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="stream-parallelstream"><a class="markdownIt-Anchor" href="#stream-parallelstream"></a> Stream &amp; parallelStream</h3>
+<p>每个Stream都有两种模式: 顺序执行和并行执行。</p>
+<p>顺序流:</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">List &lt;Person&gt; people = list.getStream.collect(Collectors.toList());<br></code></pre></div></td></tr></table></figure>
+<p>并行流:</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">List &lt;Person&gt; people = list.getStream.parallel().collect(Collectors.toList());<br></code></pre></div></td></tr></table></figure>
+<p>当使用<strong>顺序方式</strong>去遍历时，每个item读完后再读下一个item。而使用<strong>并行</strong>去遍历时，数组会被分成多个段，其中每一个都在不同的线程中处理，然后将结果一起输出。如果是多核配置，理论上并行流则会比顺序流快上一倍。</p>
+<blockquote>
+<p>特点：</p>
+<ul>
+<li>
+<p><code>stream</code>不存储数据，而是按照特定的规则对数据进行计算，一般会输出结果；</p>
+</li>
+<li>
+<p><code>stream</code>不会改变数据源，通常情况下会产生一个新的集合；</p>
+</li>
+<li>
+<p><code>stream</code>具有延迟执行特性，只有调用终端操作时，中间操作才会执行；</p>
+<ul>
+<li><code>终端操作</code>：会消费流，这种操作会产生一个结果的，如果一个流被消费过了，那它就不能被重用的。</li>
+<li><code>中间操作</code>：中间操作会产生另一个流。因此中间操作可以用来创建执行一系列动作的管道。</li>
+</ul>
+<p>中间操作不是立即发生的，当在中间操作创建的新流上执行完终端操作后，中间操作指定的操作才会发生。所以中间操作是延迟发生的，中间操作的延迟行为主要是让流API能够更加高效地执行。</p>
+</li>
+<li>
+<p><code>stream</code>不可复用，对一个已经进行过终端操作的流再次调用，会抛出异常。</p>
+</li>
+</ul>
+</blockquote>
+<p>获取Stream流：</p>
+<ul>
+<li>所有的 Collection 集合都可以通过 stream 默认方法获取流（顺序流）；</li>
+<li>所有的 Collection 集合都可以通过parallelStream获取并行流</li>
+<li>Stream 接口的静态方法 of 可以获取数组对应的流。</li>
+<li>Arrays的静态方法stream也可以获取流</li>
+</ul>
+<h4 id="常用方法"><a class="markdownIt-Anchor" href="#常用方法"></a> 常用方法</h4>
+<h5 id="foreach"><a class="markdownIt-Anchor" href="#foreach"></a> forEach</h5>
+<p><font style="color:red">用于遍历的方法</font>，参数传入一个函数式接口：Consumer</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Stream&lt;String&gt; stream = Stream.of(<span class="hljs-string">&quot;一&quot;</span>, <span class="hljs-string">&quot;二&quot;</span>, <span class="hljs-string">&quot;三&quot;</span>);<br>stream.forEach(item‐&gt; System.out.println(item));<br></code></pre></div></td></tr></table></figure>
+<h5 id="filter"><a class="markdownIt-Anchor" href="#filter"></a> filter</h5>
+<p>用于过滤，通过 filter 方法将一个流转换成另一个子集流。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Stream&lt;Integer&gt; stream1 = Stream.of(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>);<br><span class="hljs-comment">//对流中元素过滤，设定筛选条件</span><br>Stream&lt;Integer&gt; stream2 = stream1.filter(name -&gt; &#123;<br>    <span class="hljs-keyword">if</span>(name&gt;<span class="hljs-number">1</span>&amp;&amp;name&lt;<span class="hljs-number">5</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;);<br><span class="hljs-comment">//遍历过滤后的流</span><br>stream2.forEach(name -&gt; System.out.println(name));<br><br></code></pre></div></td></tr></table></figure>
+<h5 id="map"><a class="markdownIt-Anchor" href="#map"></a> map</h5>
+<p>如果需要将流中的元素映射到另一个流中，可以使用 map 方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//创建一个整数类型的流</span><br>Stream&lt;Integer&gt; stream1 = Stream.of(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>);<br><br><span class="hljs-comment">//把stream1流中的int类型全部转成String类型，而且可以对值做出一些修改</span><br>Stream&lt;String&gt; stream2 = stream1.map((Integer value) -&gt; &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;value：&quot;</span>+value;<br>&#125;);<br><br>stream2.forEach(name -&gt; System.out.println(name));<br></code></pre></div></td></tr></table></figure>
+<h5 id="count"><a class="markdownIt-Anchor" href="#count"></a> count</h5>
+<p>流提供 count 方法来计数其中的元素个数，该方法返回一个long值代表元素个数。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Stream&lt;Integer&gt; stream = Stream.of(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>);<br><span class="hljs-comment">//count方法常用于与其他筛选元素的方法组合起来</span><br><span class="hljs-type">long</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> stream.filter(name -&gt; &#123;<br>    <span class="hljs-keyword">if</span>(name&gt;<span class="hljs-number">1</span>&amp;&amp;name&lt;<span class="hljs-number">5</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;).count();<br></code></pre></div></td></tr></table></figure>
+<h5 id="concat"><a class="markdownIt-Anchor" href="#concat"></a> concat</h5>
+<p>如果有两个流，希望合并成为一个流，那么可以使用 <strong>Stream 接口的静态方法 <code>concat</code></strong></p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Stream&lt;Integer&gt; streamA = Stream.of(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>);<br>Stream&lt;Integer&gt; streamB = Stream.of(<span class="hljs-number">4</span>,<span class="hljs-number">5</span>);<br><span class="hljs-comment">//合并成一个新的流</span><br>Stream&lt;Integer&gt; result = Stream.concat(streamA, streamB);<br></code></pre></div></td></tr></table></figure>
+<h5 id="sorted"><a class="markdownIt-Anchor" href="#sorted"></a> sorted</h5>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">List&lt;Integer&gt; integers = List.of(<span class="hljs-number">124</span>, <span class="hljs-number">2</span>, <span class="hljs-number">15</span>, <span class="hljs-number">12</span>, <span class="hljs-number">51</span>, -<span class="hljs-number">5</span>, <span class="hljs-number">5</span>);<br><span class="hljs-comment">// 按照自然排序</span><br>integers.stream().sorted().forEach(System.out::println);<br><br>List&lt;Integer&gt; integers2 = List.of(<span class="hljs-number">124</span>, <span class="hljs-number">2</span>, <span class="hljs-number">15</span>, <span class="hljs-number">12</span>, <span class="hljs-number">51</span>, -<span class="hljs-number">5</span>, <span class="hljs-number">5</span>);<br><span class="hljs-comment">// 定制排序(大到小)，需要传入Comparator接口（如果流中的是引用类型，只能用定制排序）</span><br>integers2.stream().sorted((e1,e2) -&gt; &#123;<br>    <span class="hljs-keyword">return</span> e2-e1;<br>&#125;).forEach(System.out::println);<br><span class="hljs-comment">// 定制排序(大到小)简写</span><br>integers2.stream().sorted((e1,e2) -&gt; e2-e1).forEach(System.out::println);<br></code></pre></div></td></tr></table></figure>
+<p><font style="color:grey">Stream的方法很多，这里只简要介绍了部分简单的使用。</font></p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>类型</th>
+<th>返回类型</th>
+<th>使用的类型/函数式接口</th>
+<th>函数描述符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>filter</code></td>
+<td>中间</td>
+<td><code>Stream&lt;T&gt;</code></td>
+<td><code>Predicate&lt;T&gt;</code></td>
+<td><code>T -&gt; boolean</code></td>
+</tr>
+<tr>
+<td><code>distinct</code></td>
+<td>中间</td>
+<td><code>Stream&lt;T&gt;</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>skip</code></td>
+<td>中间</td>
+<td><code>Stream&lt;T&gt;</code></td>
+<td><code>long</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>map</code></td>
+<td>中间</td>
+<td><code>Stream&lt;R&gt;</code></td>
+<td><code>Function&lt;T, R&gt;</code></td>
+<td><code>T -&gt; R</code></td>
+</tr>
+<tr>
+<td><code>flatMap</code></td>
+<td>中间</td>
+<td><code>Stream&lt;R&gt;</code></td>
+<td><code>Function&lt;T,Stream&lt;R&gt;&gt;</code></td>
+<td><code>T -&gt; Stream&lt;R&gt;</code></td>
+</tr>
+<tr>
+<td><code>limit</code></td>
+<td>中间</td>
+<td><code>Stream&lt;T&gt;</code></td>
+<td><code>long</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>sorted</code></td>
+<td>中间</td>
+<td><code>Stream&lt;T&gt;</code></td>
+<td><code>Comparator&lt;T&gt;</code></td>
+<td><code>(T, T) -&gt; int</code></td>
+</tr>
+<tr>
+<td><code>anyMatch</code></td>
+<td>终端</td>
+<td><code>boolean</code></td>
+<td><code>Predicate&lt;T&gt;</code></td>
+<td><code>T -&gt; boolean</code></td>
+</tr>
+<tr>
+<td><code>noneMatch</code></td>
+<td>终端</td>
+<td><code>boolean</code></td>
+<td><code>Predicate&lt;T&gt;</code></td>
+<td><code>T -&gt; boolean</code></td>
+</tr>
+<tr>
+<td><code>allMatch</code></td>
+<td>终端</td>
+<td><code>boolean</code></td>
+<td><code>Predicate&lt;T&gt;</code></td>
+<td><code>T -&gt; boolean</code></td>
+</tr>
+<tr>
+<td><code>findAny</code></td>
+<td>终端</td>
+<td><code>Optional&lt;T&gt;</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>findFirst</code></td>
+<td>终端</td>
+<td><code>Optional&lt;T&gt;</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>forEach</code></td>
+<td>终端</td>
+<td><code>void</code></td>
+<td><code>Consumer&lt;T&gt;</code></td>
+<td><code>T -&gt; void</code></td>
+</tr>
+<tr>
+<td><code>collect</code></td>
+<td>终端</td>
+<td><code>R</code></td>
+<td><code>Collector&lt;T, A, R&gt;</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>reduce</code></td>
+<td>终端</td>
+<td><code>Optional&lt;T&gt;</code></td>
+<td><code>BinaryOperator&lt;T&gt;</code></td>
+<td><code>(T, T) -&gt; T</code></td>
+</tr>
+<tr>
+<td><code>count</code></td>
+<td>终端</td>
+<td><code>long</code></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="functionalinterfa"><a class="markdownIt-Anchor" href="#functionalinterfa"></a> FunctionalInterfa</h3>
+<p><font style="color:red">只包含了一个抽象方法的接口，称为函数式接口（可以有多个非抽象方法）。</font>可以使用<code>@FunctionalInterface</code>注解自定义声明。</p>
+<blockquote>
+<p>JDK 1.8 之前已有的函数式接口：</p>
+<ul>
+<li>
+<p>java.lang.Runnable</p>
+</li>
+<li>
+<p>java.util.concurrent.Callable</p>
+</li>
+<li>
+<p>java.security.PrivilegedAction</p>
+</li>
+<li>
+<p>java.util.Comparator</p>
+</li>
+<li>
+<p>java.io.FileFilter</p>
+</li>
+<li>
+<p>java.nio.file.PathMatcher</p>
+</li>
+<li>
+<p>java.lang.reflect.InvocationHandler</p>
+</li>
+<li>
+<p>java.beans.PropertyChangeListener</p>
+</li>
+<li>
+<p>java.awt.event.ActionListener</p>
+</li>
+<li>
+<p>javax.swing.event.ChangeListener</p>
+</li>
+</ul>
+<p>JDK 1.8 新增加的函数接口：</p>
+<ul>
+<li>java.util.function</li>
+</ul>
+</blockquote>
+<p>如果一个类型被这个注解修饰，那么编译器会要求这个类型必须满足如下条件:</p>
+<ul>
+<li>这个类型必须是一个interface，而不是其他的注解类型、枚举enum或者类class</li>
+<li>这个类型必须满足function interface的所有要求，如你个包含两个抽象方法的接口增加这个注解，会有编译错误。</li>
+</ul>
+<p><font style="color:red">编译器会自动把满足<code>function interface</code>要求的接口自动识别为<code>function interface</code>，所以你不需要对接口增加@FunctionInterface注解。</font></p>
+<h4 id="自定义函数接口"><a class="markdownIt-Anchor" href="#自定义函数接口"></a> 自定义函数接口</h4>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">TestInterface</span> &#123;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestImpl</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        TestInterface test=()-&gt;System.out.println(<span class="hljs-string">&quot;Test&quot;</span>);;<br>        test.test();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h4 id="四大函数接口"><a class="markdownIt-Anchor" href="#四大函数接口"></a> 四大函数接口</h4>
+<blockquote>
+<ul>
+<li>消费型接口: Consumer&lt; T&gt; void accept(T t)有参数，无返回值的抽象方法；</li>
+<li>供给型接口: Supplier &lt; T&gt; T get() 无参有返回值的抽象方法；</li>
+<li>断定型接口: Predicate<T> boolean test(T t):有参，但是返回值类型是固定的boolean；</li>
+<li>函数型接口: Function&lt;T,R&gt; R apply(T t)有参有返回值的抽象方法；</li>
+</ul>
+</blockquote>
+<h2 id="optional"><a class="markdownIt-Anchor" href="#optional"></a> #Optional</h2>
+<p>Java 8中引入的一个新类<code>Optional</code>。Javadoc对<code>Optional</code>类的描述如下:</p>
+<blockquote>
+<p>这是一个可以为null的容器对象。如果值存在则isPresent()方法会返回true，调用get()方法会返回该对象。</p>
+</blockquote>
+<ul>
+<li>
+<p><code>of</code>方法通过工厂方法创建<code>Optional</code>类。需要注意的是，创建对象时传入的参数不能为<code>null</code>。如果传入参数为<code>null</code>，则抛出<code>NullPointerException</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//调用工厂方法创建Optional实例</span><br>Optional&lt;String&gt; name = Optional.of(<span class="hljs-string">&quot;Sanaulla&quot;</span>);<br><span class="hljs-comment">//传入参数为null，抛出NullPointerException.</span><br>Optional&lt;String&gt; someNull = Optional.of(<span class="hljs-literal">null</span>);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p><code>ofNullable</code>与<code>of</code>方法相似，唯一的区别是<strong>可以接受参数为<code>null</code>的情况</strong>，如果指定的值为null，则返回一个空的Optional。示例如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//下面创建了一个不包含任何值的Optional实例</span><br><span class="hljs-type">Optional</span> <span class="hljs-variable">empty</span> <span class="hljs-operator">=</span> Optional.ofNullable(<span class="hljs-literal">null</span>);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p><code>isPresent</code>，如果值存在返回true，否则返回false；</p>
+</li>
+<li>
+<p><code>get</code>，如果Optional有值则将其返回，否则抛出NoSuchElementException；</p>
+</li>
+<li>
+<p><code>ifPresent</code>，如果Optional实例有值则为其调用**<code>consumer</code>接口**，否则不做处理；</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//ifPresent方法接受lambda表达式作为参数。</span><br><span class="hljs-comment">//lambda表达式对Optional的值调用consumer进行处理。</span><br>name.ifPresent((value) -&gt; &#123;<br>  System.out.println(<span class="hljs-string">&quot;The length of the value is: &quot;</span> + value.length());<br>&#125;);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p><code>orElse</code>，如果有值则将其返回，否则返回orElse方法传入的参数。</p>
+</li>
+<li>
+<p><code>orElseGet</code>与<code>orElse方法</code>类似，区别在于得到的默认值。<code>orElse</code>方法将传入的字符串作为默认值，<code>orElseGet</code>方法可以接受**<code>Supplier</code>接口**的实现用来生成默认值。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//orElseGet可以接受一个lambda表达式生成默认值。</span><br>System.out.println(name.orElseGet(() -&gt; <span class="hljs-string">&quot;Default Value&quot;</span>));<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p><code>orElseThrow</code>，在<code>orElseGet</code>方法中，我们传入一个<code>Supplier</code>接口。然而，在<code>orElseThrow</code>中我们可以传入一个lambda表达式或方法，如果值不存在来抛出异常。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">try</span> &#123;<br>  <span class="hljs-comment">//orElseThrow与orElse方法类似。与返回默认值不同，</span><br>  <span class="hljs-comment">//orElseThrow会抛出lambda表达式或方法生成的异常 </span><br>  empty.orElseThrow(ValueAbsentException::<span class="hljs-keyword">new</span>);<br>&#125; <span class="hljs-keyword">catch</span> (Throwable ex) &#123;<br>  System.out.println(ex.getMessage());<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p><code>ValueAbsentException</code>定义：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ValueAbsentException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Throwable</span> &#123;<br><br>  <span class="hljs-keyword">public</span> <span class="hljs-title function_">ValueAbsentException</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-built_in">super</span>();<br>  &#125;<br><br>  <span class="hljs-keyword">public</span> <span class="hljs-title function_">ValueAbsentException</span><span class="hljs-params">(String msg)</span> &#123;<br>    <span class="hljs-built_in">super</span>(msg);<br>  &#125;<br><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getMessage</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;No value present in the Optional instance&quot;</span>;<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p><code>map</code>，如果有值，则对其执行调用<code>mapping</code>函数得到返回值。如果返回值不为null，则创建包含<code>mapping</code>返回值的<code>Optional</code>作为<code>map</code>方法返回值，否则返回空<code>Optional</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//map方法执行传入的lambda表达式参数对Optional实例的值进行修改。</span><br><span class="hljs-comment">//为lambda表达式的返回值创建新的Optional实例作为map方法的返回值。</span><br>Optional&lt;String&gt; upperName = name.map((value) -&gt; value.toUpperCase());<br>System.out.println(upperName.orElse(<span class="hljs-string">&quot;No value found&quot;</span>));<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p><code>flatMap</code>与<code>map</code>类似，区别在于<code>mapping</code>函数的返回值不同。<code>map</code>方法的<code>mapping</code>函数返回值可以是任何类型T，而<code>flatMap</code>方法的<code>mapping</code>函数必须是Optional。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//在map函数返回之前会包装为Optional，但flatMap方法中的lambda表达式返回值必须是Optionl实例。 </span><br>upperName = name.flatMap((value) -&gt; Optional.of(value.toUpperCase()));<br>System.out.println(upperName.orElse(<span class="hljs-string">&quot;No value found&quot;</span>));<span class="hljs-comment">//输出SANAULLA</span><br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p><code>filter</code>，如果有值并且满足断言条件返回包含该值的<code>Optional</code>，否则返回空<code>Optional</code>。</p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/C1thulhu/helloworld/categories/Java/">Java</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/C1thulhu/helloworld/tags/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/C1thulhu/helloworld/tags/JDK/">JDK</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/C1thulhu/helloworld/notes/Middleware/Redis/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Redis</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/C1thulhu/helloworld/notes/Java/API/Excel%E6%93%8D%E4%BD%9C/">
+                        <span class="hidden-mobile">Excel操作</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/C1thulhu/helloworld/js/events.js" ></script>
+<script  src="/C1thulhu/helloworld/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/C1thulhu/helloworld/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/C1thulhu/helloworld/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/C1thulhu/helloworld/js/boot.js" ></script>
+
+
+</body>
+</html>

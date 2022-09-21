@@ -1,0 +1,753 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/C1thulhu/helloworld/img/icon/log_1.png">
+  <link rel="icon" href="/C1thulhu/helloworld/img/icon/log_1.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="C1thulhu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="JVM是Java Virtual Machine（Java虚拟机）的缩写。每个Java程序都离不开Java虚拟机，Java程序的运行依靠具体的Java虚拟机实例。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM">
+<meta property="og:url" content="https://github.com/C1thulhu/helloworld/notes/Java/JVM/index.html">
+<meta property="og:site_name" content="C1thulhu">
+<meta property="og:description" content="JVM是Java Virtual Machine（Java虚拟机）的缩写。每个Java程序都离不开Java虚拟机，Java程序的运行依靠具体的Java虚拟机实例。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/cover/JVM_CVP.png">
+<meta property="article:published_time" content="2022-04-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-18T16:00:00.000Z">
+<meta property="article:author" content="C1thulhu">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/cover/JVM_CVP.png">
+  
+  
+  <title>JVM - C1thulhu</title>
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github-dark-dimmed.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/C1thulhu/helloworld/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"github.com","root":"/C1thulhu/helloworld/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/C1thulhu/helloworld/local-search.xml"};
+  </script>
+  <script  src="/C1thulhu/helloworld/js/utils.js" ></script>
+  <script  src="/C1thulhu/helloworld/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/C1thulhu/helloworld/">
+      <strong>C1thulhu</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/C1thulhu/helloworld/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/C1thulhu/helloworld/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/C1thulhu/helloworld/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/C1thulhu/helloworld/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/C1thulhu/helloworld/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/C1thulhu/helloworld/img/background/JVM.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JVM">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-05-01 00:00" pubdate>
+        2022-05-01
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.9k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JVM</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022-05-19
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> #前言</h2>
+<p><font style="color:grey">待完善。</font></p>
+<p>参考文章：</p>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://blog.kyire.site/2021/05/06/eb9166f8.html">JVM探究</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41644234/article/details/117733410">JVM详解-栈&amp;堆</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/xtayfjpk/article/details/41924283?utm_source=tuicool&amp;utm_medium=referral">深入理解Java虚拟机笔记—运行时栈帧结构</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zuodaoyong/article/details/106560472">JVM堆详解</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.joshua317.com/article/189">Java 类和对象在内存中的表现形式</a></p>
+</li>
+<li>
+<p>Java虚拟机详解</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/qianguyihao/p/4736162.html">常用JVM配置参数</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/qianguyihao/p/4744233.html">GC算法和种类</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/qianguyihao/p/4748313.html">垃圾收集器及GC参数</a></li>
+</ol>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Littewood/article/details/123327233">JVM之本地方法接口和本地方法栈</a></p>
+</li>
+</ul>
+<h2 id="jvm体系结构"><a class="markdownIt-Anchor" href="#jvm体系结构"></a> #JVM体系结构</h2>
+<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/JVM%E4%BD%93%E7%B3%BB.png" srcset="/C1thulhu/helloworld/img/loading.gif" lazyload alt="JVM体系" /></p>
+<h2 id="类加载过程"><a class="markdownIt-Anchor" href="#类加载过程"></a> #类加载过程</h2>
+<p>  <b style="color:red">类加载指的是将类的class文件读入到内存，并为之创建一个java.lang.Class对象</b>，也就是说，当程序中使用任何类时，系统都会为之建立一个java.lang.Class对象。<br />
+  <b style="color:#00FFFF">类的加载由类加载器完成，类加载器通常由JVM提供，这些类加载器也是前面所有程序运行的基础，JVM提供的这些类加载器通常被称为系统类加载器。</b>除此之外，开发者可以通过继承ClassLoader基类来创建自己的类加载器。</p>
+<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B.png" srcset="/C1thulhu/helloworld/img/loading.gif" lazyload alt="类加载过程" /></p>
+<p><strong>双亲委派机制</strong></p>
+<p>  <b style="color:red">当某个类加载器需要加载某个<code>.class</code>文件时，它首先把这个任务委托给他的上级类加载器，递归这个操作，如果上级的类加载器没有加载，自己才会去加载这个类。</b></p>
+<p>各种类加载器的区别：</p>
+<p><strong>BootstrapClassLoader（启动类加载器）</strong></p>
+<p><code>c++</code>编写，加载<code>java</code>核心库 <code>java.*</code>,构造<code>ExtClassLoader</code>和<code>AppClassLoader</code>。由于引导类加载器涉及到虚拟机本地实现细节，开发者无法直接获取到启动类加载器的引用，所以不允许直接通过引用进行操作</p>
+<p><strong>ExtClassLoader （标准扩展类加载器）</strong></p>
+<p><code>java</code>编写，加载扩展库，如<code>classpath</code>中的<code>jre</code> ，<code>javax.*</code>或者<br />
+<code>java.ext.dir</code> 指定位置中的类，开发者可以直接使用标准扩展类加载器。</p>
+<p><strong>AppClassLoader（系统类加载器）</strong></p>
+<p><code>java</code>编写，加载程序所在的目录，如<code>user.dir</code>所在的位置的`class</p>
+<p><strong>CustomClassLoader（用户自定义类加载器）</strong></p>
+<p><code>java</code>编写,用户自定义的类加载器,可加载指定路径的<code>class</code>文件</p>
+<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE.png" srcset="/C1thulhu/helloworld/img/loading.gif" lazyload alt="双亲委派" /></p>
+<p>双亲委派作用：</p>
+<ol>
+<li><b style="color:red">防止重复加载同一个<code>.class</code></b>。通过委托去向上面查找，加载过了，就不用再加载一遍。保证数据安全。</li>
+<li><b style="color:red">保证核心<code>.class</code>不能被篡改。通过委托方式，不会去篡改核心<code>.class</code>，即使篡改也不会去加载，即使加载也不会是同一个<code>.class</code>对象了</b>。不同的加载器加载同一个<code>.class</code>也不是同一个<code>Class</code>对象。这样保证了<code>Class</code>执行安全。</li>
+</ol>
+<h2 id="运行时数据区"><a class="markdownIt-Anchor" href="#运行时数据区"></a> #运行时数据区</h2>
+<h3 id="栈"><a class="markdownIt-Anchor" href="#栈"></a> 栈</h3>
+<p>栈是一种数据结构，只能在一端进行插入和删除操作的特殊线性表。它<b style="color:red">按照后进先出的原则存储数据</b>，<b style="color:#00FFFF">先进入的数据被压入栈底，最后的数据在栈顶，需要读数据的时候从栈顶开始弹出数据(最后一个数据被第一个读出来)</b>。栈具有记忆作用，对栈的插入与删除操作中，不需要改变栈底指针。</p>
+<p><strong>JVM中的栈</strong>：Oracle关于<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-2.html">栈和栈帧</a>提供了如下描述：</p>
+<blockquote>
+<p><u>每个JVM线程拥有一个私有的 Java虚拟机栈，创建线程的同时栈也被创建。一个JVM栈由许多帧组成，称之为&quot;栈帧&quot;。</u>JVM中的栈和C等常见语言中的栈比较类似，都用于保存局部变量和部分计算结果，同时也参与方法调用和返回。</p>
+</blockquote>
+<p>如Oracle官方说明，<strong>每个线程拥有自己的私有栈</strong>，因此在多线程应用中将有多个栈，<strong>每个栈有自己的栈帧</strong>。</p>
+<p><strong>Java中的栈</strong>：</p>
+<ul>
+<li>当一个新的线程创建时，JVM会为这个线程创建一个新的Stack。一个Java Stack在一个个独立的栈帧中存储了线程的状态。<b style="color:red">JVM只会在Java Stack中做两个操作：push 和 pop.</b></li>
+<li>一个线程当前正在执行的方法称之为线程的 <u>当前方法</u>，当前方法对应的栈帧称为 <u>当前帧</u>，当前方法所属的类称为 <u>当前类</u>，当前类的常量池称为 当前常量池。 <strong>在执行一个方法时，JVM会保存当前类和当前常量池的轨迹。当JVM执行 需要操作栈帧中数据的指令时，JVM会在当前栈帧进行处理。</strong></li>
+<li>当一个线程执行一个Java方法时，JVM将创建一个新的栈帧并且把它push到栈顶。此时新的栈帧就变成了当前栈帧，<u>方法执行时，使用栈帧来存储参数、局部变量、中间指令以及其他数据</u>。</li>
+</ul>
+<p><b style="color:red">栈内存，主管程序的运行，生命周期和线程同步</b></p>
+<p><b style="color:red">线程结束，栈内存释放，对于栈来说，不存在垃圾回收</b></p>
+<p><strong>栈&amp;栈帧详解(简单了解)</strong>：</p>
+<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/Java%E6%A0%88&amp;%E6%A0%88%E5%B8%A7.png" srcset="/C1thulhu/helloworld/img/loading.gif" lazyload alt="Java栈&amp;栈帧" /></p>
+<ul>
+<li>
+<p><strong>局部变量表</strong></p>
+<p>局部变量表是一组<strong>变量值存储</strong>空间，<b style="color:red">用于存放方法参数和方法内部定义的局部变量</b>。在Java程序编译为Class文件时，就在方法表的Code属性的max_locals数据项中确定了该方法需要分配的最大局部变量表的容量。</p>
+<blockquote>
+<p>  在方法执行时，虚拟机是使用局部变量表完成参数变量列表的传递过程，如果是实例方法，那么局部变量表中的每0位索引的Slot默认是用于传递方法所属对象实例的引用，在方法中可以通过关键字<code>this</code>来访问这个隐含的参数，其余参数则按照参数列表的顺序来排列，占用从1开始的局部变量<code>Slot</code>，参数表分配完毕后，再根据方法体内部定义的变量顺序和作用域来分配其余的<code>Slot</code>。局部变量表中的Slot是可重用的，方法体中定义的变量，其作用域并不一定会覆盖整个方法，如果当前字节码PC计算器的值已经超出了某个变量的作用域，那么这个变量对应的<code>Slot</code>就可以交给其它变量使用。<br />
+  局部变量不像前面介绍的类变量那样存在“准备阶段”。类变量有两次赋初始值的过程，一次在准备阶段，赋予系统初始值；另外一次在初始化阶段，赋予程序员定义的值。因此即使在初始化阶段程序员没有为类变量赋值也没有关系，类变量仍然具有一个确定的初始值。但局部变量就不一样了，如果一个局部变量定义了但没有赋初始值是不能使用的。</p>
+</blockquote>
+</li>
+<li>
+<p>操作数栈</p>
+<p>当一个方法刚刚执行的时候，这个方法的操作数栈是空的，**在方法执行的过程中，会有各种字节码指向操作数栈中写入和提取值，也就是入栈与出栈操作。**例如，在做算术运算的时候就是通过操作数栈来进行的，又或者调用其它方法的时候是通过操作数栈来行参数传递的。</p>
+<blockquote>
+<p>   操作数栈也常被称为操作栈，它是一个后入先出栈。同局部变量表一样，操作数栈的最大深度也是编译的时候被写入到方法表的Code属性的max_stacks数据项中。操作数栈的每一个元素可以是任意Java数据类型，包括<code>long</code>和<code>double</code>。32位数据类型所占的栈容量为1，64位数据类型所占的栈容量为2。栈容量的单位为“字宽”，对于32位虚拟机来说，一个”字宽“占4个字节，对于64位虚拟机来说，一个”字宽“占8个字节。<br />
+  另外，在概念模型中，两个栈帧作为虚拟机栈的元素，相互之间是完全独立的，但是大多数虚拟机的实现里都会作一些优化处理，令两个栈帧出现一部分重叠。让下栈帧的部分操作数栈与上面栈帧的部分局部变量表重叠在一起，这样在进行方法调用返回时就可以共用一部分数据，而无须进行额外的参数复制传递了。</p>
+</blockquote>
+</li>
+<li>
+<p>动态连接</p>
+<p><strong>每个栈帧都包含一个指向运行时常量池中该栈帧所属性方法的引用</strong>，持有这个引用是为了支持方法调用过程中的动态连接。</p>
+<blockquote>
+<p>  在Class文件的常量池中存有大量的符号引用，字节码中的方法调用指令就以常量池中指向方法的符号引用为参数。这些符号引用一部分会在类加载阶段或第一次使用的时候转化为直接引用，这种转化称为<strong>静态解析</strong>。另外一部分将在每一次的运行期期间转化为直接引用，这部分称为<strong>动态连接</strong>。</p>
+</blockquote>
+</li>
+<li>
+<p>方法返回地址</p>
+<p>当一个方法被执行后，有两种方式退出这个方法。</p>
+<ol>
+<li>
+<p>执行引擎遇到任意一个方法返回的字节码指令，这时候可能会有返回值传递给上层的方法调用者(调用当前方法的的方法称为调用者)，是否有返回值和返回值的类型将根据遇到何种方法返回指令来决定，这种退出方法方式称为正常完成出口(Normal Method Invocation Completion)。</p>
+</li>
+<li>
+<p>在方法执行过程中遇到了异常，并且这个异常没有在方法体内得到处理，无论是Java虚拟机内部产生的异常，还是代码中使用athrow字节码指令产生的异常，只要在本方法的异常表中没有搜索到匹配的异常处理器，就会导致方法退出，这种退出方式称为异常完成出口(Abrupt Method Invocation Completion)。一个方法使用异常完成出口的方式退出，是不会给它的调用都产生任何返回值的。</p>
+</li>
+</ol>
+<blockquote>
+<p>  无论采用何种方式退出，在方法退出之前，都需要返回到方法被调用的位置，程序才能继续执行，方法返回时可能需要在栈帧中保存一些信息，用来帮助恢复它的上层方法的执行状态。一般来说，方法正常退出时，调用者PC计数器的值就可以作为返回地址，栈帧中很可能会保存这个计数器值。而方法异常退出时，返回地址是要通过异常处理器来确定的，栈帧中一般不会保存这部分信息。<br />
+  方法退出的过程实际上等同于把当前栈帧出栈，因此退出时可能执行的操作有：恢复上层方法的局部变量表和操作数栈，把返回值(如果有的话)压入调用都栈帧的操作数栈中，调用PC计数器的值以指向方法调用指令后面的一条指令等。</p>
+</blockquote>
+</li>
+<li>
+<p>附加信息</p>
+<p>虚拟机规范允许具体的虚拟机实现增加一些规范里没有描述的信息到栈帧中，例如与高度相关的信息，这部分信息完全取决于具体的虚拟机实现。在实际开发中，一般会把动态连接，方法返回地址与其它附加信息全部归为一类，称为栈帧信息。</p>
+</li>
+</ul>
+<h3 id="堆"><a class="markdownIt-Anchor" href="#堆"></a> 堆</h3>
+<ul>
+<li>一个JVM实例只存在一个堆内存，堆也是<b style="color:red">Java内存管理的核心区域。</b></li>
+<li><b style="color:red">Java堆在JVM启动的时候被创建，其空间大小也就确定了。</b>是JVM管理的最大的一块内存空间。</li>
+<li><b style="color:red">堆可以处于物理上不连续的内存空间中，但在逻辑上为连续的。</b></li>
+<li>所有线程共享堆，还可以划分线程私有的缓冲区（TLAB）</li>
+<li><strong>堆内存中主要存放数据是 类的成员变量，实例对象等</strong></li>
+</ul>
+<p><strong>堆空间分代思想</strong>：</p>
+<p>  为什么需要分代？<br />
+  分代唯一的理由是优化GC(垃圾回收机制)性能，如果没有分代，那所有的对象都在一起，GC的时候要找到哪些对象没用，这样就会在堆的所有区域进行扫描。</p>
+<blockquote>
+<p>Java 7及之前堆内存逻辑上分三部分：<strong>新生区+养老区+<b style="color:red">永久区</b></strong><br />
+Java 8及之后堆内存逻辑上分为：<strong>新生区+养老区+<b style="color:red">元空间</b></strong></p>
+</blockquote>
+<ul>
+<li>
+<p>新生代（新生区）</p>
+<p>主要是用来存放新生的对象。一般占据堆的1/3空间。</p>
+<p>新生代又分为 <strong>Eden区、ServivorFrom、ServivorTo</strong>三个区。</p>
+<ul>
+<li>Eden区：<b style="color:red">Java新对象的出生地</b><b style="color:#00FFFF">（如果新创建的对象占用内存很大，则直接分配到老年代）</b>。当Eden区内存不够的时候就会触发<b style="color:yellow">MinorGC<sup>1</sup></b>，对新生代区进行一次垃圾回收。</li>
+<li>ServivorTo：保留了一次<b style="color:yellow">MinorGC<sup>1</sup></b>过程中的幸存者。</li>
+<li>ServivorFrom：上一次GC的幸存者，作为这一次GC的被扫描者。</li>
+</ul>
+</li>
+<li>
+<p>老年代（养老区）</p>
+<p>在进行<b style="color:yellow">MajorGC<sup>2</sup></b>前一般都先进行了一次<b style="color:yellow">MinorGC<sup>1</sup></b>，使得有新生代的对象晋身入老年代，导致空间不够用时才触发。当无法找到足够大的连续空间分配给新创建的较大对象时也会提前触发一次<b style="color:yellow">MajorGC<sup>2</sup></b>进行垃圾回收腾出空间。</p>
+</li>
+<li>
+<p>永久代（永久区/元空间）</p>
+<p>指<strong>内存的永久保存区域</strong>，主要存放Class和Meta（元数据）的信息。</p>
+<p>Class在被加载的时候被放入永久区域。它和和存放实例的区域不同，GC不会在主程序运行期对永久区域进行清理。所以这也导致了永久代的区域会随着加载的Class的增多而胀满，最终抛出OOM异常。</p>
+<p><strong>在Java8中，永久代已经被移除，被一个称为“元数据区”（元空间）的区域所取代。</strong></p>
+<p>元空间的本质和永久代类似，都是对JVM规范中方法区的实现。不过<b style="color:red">元空间与永久代之间最大的区别在于：元空间并不在虚拟机中，而是使用本地内存。</b>因此，默认情况下，元空间的大小仅受本地内存限制。类的元数据放入 native memory，字符串池和类的静态变量放入 堆 中。这样可以加载多少类的元数据就不再由MaxPermSize控制，而由系统的实际可用空间来控制。</p>
+<p><font style="color:yellow">①：MinorGC，也称轻GC，采用复制算法。</font><br />
+<font  style="color:yellow">②：MajorGC，也称重GC，采用标记—清除算法。</font></p>
+</li>
+</ul>
+<h3 id="方法区"><a class="markdownIt-Anchor" href="#方法区"></a> 方法区</h3>
+<p>**方法区跟堆一样，又被称为静态区，通常存放常量数据。它存储已被Java虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等,它跟堆一样，被所有的线程共享。**但是<b style="color:red">实例变量存在堆内存中，和方法区无关！</b></p>
+<p>对每个加载的类型（类class、接口interface、枚举enum、注解annotation），JVM必须在方法区中存储以下类型信息：</p>
+<ul>
+<li>这个类型的完整有效名称（全名=包名.类名）</li>
+<li>这个类型直接父类的完整有效名称( java.lang.Object除外，其他类型若没有声明父类，默认父类是Object)</li>
+<li>这个类型的修饰符(public、abstract、final的某个子集)</li>
+<li>这个类型直接接口的一个有序列表</li>
+</ul>
+<p><strong>除此之外还方法区（Method Area）存储类信息还有</strong></p>
+<ul>
+<li>类型的常量池( constant pool)</li>
+<li>域(Field)信息</li>
+<li>方法(Method)信息</li>
+<li>除了常量外的所有静态(static)变量</li>
+</ul>
+<h3 id="程序计数器"><a class="markdownIt-Anchor" href="#程序计数器"></a> 程序计数器</h3>
+<p>每个线程都有一个程序计数器，是线程私有的，就是一个指针, 指向方法区中的方法字节码(用来存储指向像一条指令的地址， 也即将要执行的指令代码)，在执行引擎读取下一条指令, 是一个非常小的内存空间，几乎可以忽略不计。</p>
+<p><font style="color:grey">待完善</font></p>
+<h3 id="垃圾回收机制gc"><a class="markdownIt-Anchor" href="#垃圾回收机制gc"></a> 垃圾回收机制(GC)</h3>
+<p>垃圾回收是指<strong>对在系统运行过程当中所产生的一些无用的对象回收，如果这些对象一直占据着内存空间，长期不被释放，可能导致内存溢出(OOM)</strong>。</p>
+<p>Java中，<strong>GC的对象是Java堆和方法区</strong>：</p>
+<blockquote>
+<p>  内存区域中的<strong>程序计数器、虚拟机栈、本地方法栈</strong>这3个区域随着线程而生，线程而灭；<strong>栈中的栈帧</strong>随着方法的进入和退出，每个栈帧中分配多少内存基本是<strong>在类结构确定下来时就已知的。在这几个区域不需要过多考虑回收的问题，因为方法结束或者线程结束时，内存自然就跟着回收了</strong>。<br />
+  而<strong>Java堆和方法区</strong>则不同，一个接口中的多个实现类需要的内存可能不同，一个方法中的多个分支需要的内存也可能不一样，我们只有在程序处于运行期间时才能知道会创建哪些对象，<strong>这部分内存的分配和回收都是动态的</strong>，GC关注的也是这部分内存。</p>
+</blockquote>
+<p>垃圾回收机制算法：<sub>GC算法种类很多，本文只简单介绍几种</sub></p>
+<ul>
+<li>
+<p><strong>引用计数算法</strong></p>
+<p><b style="color:#00FFFF">给对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用失效时，计数器值就减1；任何时刻计数器为0的对象就是不可能再被使用的。</b></p>
+<p>缺陷：</p>
+<ol>
+<li>
+<p>引用和去引用伴随加法和减法，影响性能。</p>
+</li>
+<li>
+<p><b style="color:red">对于循环引用的对象无法进行回收</b></p>
+</li>
+</ol>
+<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%AE%97%E6%B3%95.png" srcset="/C1thulhu/helloworld/img/loading.gif" lazyload alt="引用计数算法" /></p>
+</li>
+<li>
+<p><strong>根搜索算法</strong></p>
+<p><b style="color:#00FFFF">设立若干种根对象，当任何一个根对象到某一个对象均不可达时，则认为这个对象是可以被回收的。</b></p>
+<p>从根（GC Roots）的对象作为起始点，开始向下搜索，搜索所走过的路径称为“<strong>引用链</strong>”，当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的。<b style="color:#00FFFF">此逻辑称为可达性分析</b>。</p>
+<p>而对于<strong>根搜索算法</strong>中的**根(GC Roots)**大致分为以下几种：</p>
+<blockquote>
+<ol>
+<li>
+<p>栈（栈帧中的本地变量表）中引用的对象。<strong>[本地变量表]</strong></p>
+</li>
+<li>
+<p>本地方法栈中JNI（一般说的Native方法）引用的对象。<strong>[本地变量表]</strong></p>
+</li>
+<li>
+<p><strong>方法区</strong>中的常量引用的对象（全局变量）</p>
+</li>
+<li>
+<p><strong>方法区</strong>中的静态成员。</p>
+</li>
+</ol>
+</blockquote>
+<p><b style="color:red">在根搜索算法的基础上，现代虚拟机的实现当中，垃圾搜集的算法主要有三种，分别是复制算法、标记-清除算法、标记-整理**算法。这三种算法都扩充了根搜索算法。</b></p>
+</li>
+<li>
+<p><strong>复制算法</strong></p>
+<p>原有的内存空间分为两块，每次只使用其中一块，<b style="color:#00FFFF">在垃圾回收时，将正在使用的内存中的存活对象复制到未使用的内存块中，之后，清除正在使用的内存块中的所有对象，交换两个内存的角色，完成垃圾回收</b>。</p>
+<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95.png" srcset="/C1thulhu/helloworld/img/loading.gif" lazyload alt="复制算法" /></p>
+<p>缺陷：</p>
+<p><strong>复制算法使得每次都只对整个半区进行内存回收</strong>，内存分配时也就不用考虑内存碎片等复杂情况，只要移动堆顶指针，按顺序分配内存即可。虽然实现简单，运行高效。但是这种算法的代价是将内存缩小为原来的一半。</p>
+</li>
+<li>
+<p><strong>标记-清除算法</strong></p>
+<p>标记-清除算法是现代垃圾回收算法的思想基础。标记-清除算法将垃圾回收分为两个阶段：<b style="color:yellow">标记阶段</b>和<b style="color:yellow">清除阶段</b>。一种可行的实现是，在标记阶段，<strong>首先通过根节点，标记所有从根节点开始的可达对象</strong>。因此，未被标记的对象就是未被引用的垃圾对象；然后，在清除阶段，清除所有未被标记的对象。</p>
+<ul>
+<li>标记：标记的过程其实就是，遍历所有的GC Roots，然后将所有GC Roots可达的对象标记为存活的对象。</li>
+<li>清除：清除的过程将遍历堆中所有的对象，将没有标记的对象全部清除掉。</li>
+</ul>
+<p><b style="color:red">当程序运行期间，若可以使用的内存被耗尽的时候，GC线程就会被触发并将程序暂停，随后将依旧存活的对象标记一遍，最终再将堆中所有没被标记的对象全部清除掉，接下来便让程序恢复运行。</b></p>
+<p><b style="color:#00FFFF">暂停程序运行是必须的！为了防止标记清除算法运行过程中，程序新创建对象进入内存，从而错过标记阶段使这个新对象直接在清除阶段被清除。所以需要停止程序运行！</b></p>
+<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95.png" srcset="/C1thulhu/helloworld/img/loading.gif" lazyload alt="标记-清除算法" /></p>
+<p>缺陷：</p>
+<ol>
+<li><strong>效率较低（递归与全堆对象遍历）</strong></li>
+<li><strong>这种方式清理出来的空闲内存是不连续的</strong></li>
+</ol>
+</li>
+<li>
+<p><strong>标记-整理算法</strong></p>
+<p>标记-压缩算法适合用于存活对象较多的场合。它在标记-清除算法的基础上做了一些优化。和标记-清除算法一样，标记-压缩算法也首先需要从根节点开始，对所有可达对象做一次标记；<b style="color:#00FFFF">但之后，它并不简单的清理未标记的对象，而是将所有的存活对象压缩到内存的一端；再清理边界外所有的空间。</b></p>
+<ul>
+<li>标记：它的第一个阶段与标记/清除算法是一模一样的，均是遍历GC Roots，然后将存活的对象标记。</li>
+<li>整理：移动所有存活的对象，且按照内存地址次序依次排列，然后将末端内存地址以后的内存全部回收。因此，第二阶段才称为整理阶段。</li>
+</ul>
+<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/%E6%A0%87%E8%AE%B0-%E6%95%B4%E7%90%86%E7%AE%97%E6%B3%95.png" srcset="/C1thulhu/helloworld/img/loading.gif" lazyload alt="标记-整理算法" /></p>
+<p>缺陷：</p>
+<p>标记/整理算法唯一的缺点就是效率也不高，不仅要标记所有存活对象，还要整理所有存活对象的引用地址。从效率上来说，标记/整理算法要低于复制算法。</p>
+<p><strong>标记-清除算法、复制算法、标记整理算法的总结：</strong></p>
+<blockquote>
+<p>（1）<strong>效率</strong>：<strong>复制算法</strong>&gt;标记/整理算法&gt;标记/清除算法（此处的效率只是简单的对比时间复杂度，实际情况不一定如此）。</p>
+<p>（2）<strong>内存整齐度</strong>：复制算法=标记/整理算法&gt;标记/清除算法。</p>
+<p>（3）内存利用率：标记/整理算法=标记/清除算法&gt;复制算法。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="native"><a class="markdownIt-Anchor" href="#native"></a> Native</h3>
+<ul>
+<li>native :凡是带了native关键字的，说明Java的作用范围达不到了，回去调用底层c语言的库！它的初衷也是为了融合C/C++程序</li>
+<li>调用本地方法本地接口 JNI (Java Native Interface)</li>
+<li>JNI作用:开拓Java的使用，融合不同的编程语言为Java所用!最初: <code>C</code>、<code>C++</code></li>
+<li>它在内存区域中专门开辟了一块标记区域: Native Method Stack，登记native方法</li>
+<li>在最终执行的时候，加载本地方法库中的方法通过JNI</li>
+<li><font style="color:grey">待完善</font></li>
+</ul>
+<h3 id="native-method-stack本地方法栈"><a class="markdownIt-Anchor" href="#native-method-stack本地方法栈"></a> Native Method Stack(本地方法栈)</h3>
+<p><b style="color:#00FFFF">Java虚拟机栈于管理Java方法的调用，而本地方法栈用于管理本地方法的调用。</b></p>
+<p><strong>本地方法栈，也是线程私有的。</strong></p>
+<p>允许被实现成固定或者是可动态扩展的内存大小。（在内存溢出方面是相同的）</p>
+<ul>
+<li>
+<p>如果线程请求分配的栈容量超过本地方法栈允许的最大容量，Java虚拟机将会抛出一个StackOverflowError 异常。</p>
+</li>
+<li>
+<p>如果本地方法栈可以动态扩展，并且在尝试扩展的时候无法申请到足够的内存，或者在创建新的线程时没有足够的内存去创建对应的本地方法栈，那么Java虚拟机将会抛出一个OutOfMemoryError异常。</p>
+</li>
+</ul>
+<p>本地方法是使用C语言实现的。</p>
+<p><font style="color:grey">待完善</font></p>
+<p><strong>具体做法：Native Method Stack中登记native方法，在执行引擎(Execution Engine)执行时加载本地方法库</strong></p>
+<p><font style="color:grey">待完善。。</font></p>
+<h2 id="执行引擎"><a class="markdownIt-Anchor" href="#执行引擎"></a> #执行引擎</h2>
+<h3 id="native-interface本地方法接口"><a class="markdownIt-Anchor" href="#native-interface本地方法接口"></a> Native Interface(本地方法接口)</h3>
+<p>简单地讲，一个Native Method是一个Java调用非Java代码的接囗。一个Native Method是这样一个Java方法：该方法的实现由非Java语言实现，比如C。</p>
+<p>在定义一个native method时，并不提供实现体（有些像定义一个Java interface），因为其实现体是由非java语言在外面实现的。</p>
+<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E8%BF%90%E8%A1%8C%E6%A6%82%E8%A6%81%E5%9B%BE.png" srcset="/C1thulhu/helloworld/img/loading.gif" lazyload alt="本地方法运行概要图" /></p>
+<p><font style="color:grey">待完善。</font></p>
+<h2 id="jvm调优"><a class="markdownIt-Anchor" href="#jvm调优"></a> #JVM调优</h2>
+<p><font style="color:grey">待编纂。。</font></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/C1thulhu/helloworld/categories/Java/">Java</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/C1thulhu/helloworld/tags/Java/">Java</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/C1thulhu/helloworld/notes/Java/API/Java%E9%9B%86%E5%90%88/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Collection&Map</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/C1thulhu/helloworld/js/events.js" ></script>
+<script  src="/C1thulhu/helloworld/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/C1thulhu/helloworld/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/C1thulhu/helloworld/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/C1thulhu/helloworld/js/boot.js" ></script>
+
+
+</body>
+</html>
