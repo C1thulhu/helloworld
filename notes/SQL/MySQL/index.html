@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/C1thulhu/helloworld/img/icon/log_1.png">
-  <link rel="icon" href="/C1thulhu/helloworld/img/icon/log_1.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/helloworld/img/icon/log_1.png">
+  <link rel="icon" href="/helloworld/img/icon/log_1.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,7 +19,7 @@
     <meta name="description" content="SQL(Structured Query Language)，标准 SQL 由 ANSI 标准委员会管理，从而称为 ANSI SQL。各个 DBMS 都有自己的实现，如 PL&#x2F;SQL、Transact-SQL 等。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL基础">
-<meta property="og:url" content="https://github.com/C1thulhu/helloworld/notes/SQL/MySQL/index.html">
+<meta property="og:url" content="https://c1thulhu.github.io/helloworld/notes/SQL/MySQL/index.html">
 <meta property="og:site_name" content="C1thulhu">
 <meta property="og:description" content="SQL(Structured Query Language)，标准 SQL 由 ANSI 标准委员会管理，从而称为 ANSI SQL。各个 DBMS 都有自己的实现，如 PL&#x2F;SQL、Transact-SQL 等。">
 <meta property="og:locale" content="en_US">
@@ -63,17 +63,17 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="/C1thulhu/helloworld/css/main.css" />
+<link  rel="stylesheet" href="/helloworld/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"github.com","root":"/C1thulhu/helloworld/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/C1thulhu/helloworld/local-search.xml"};
+    var CONFIG = {"hostname":"c1thulhu.github.io","root":"/helloworld/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/helloworld/local-search.xml"};
   </script>
-  <script  src="/C1thulhu/helloworld/js/utils.js" ></script>
-  <script  src="/C1thulhu/helloworld/js/color-schema.js" ></script>
+  <script  src="/helloworld/js/utils.js" ></script>
+  <script  src="/helloworld/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.4.2"></head>
 
 
@@ -81,7 +81,7 @@
   <header style="height: 80vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/C1thulhu/helloworld/">
+    <a class="navbar-brand" href="/helloworld/">
       <strong>C1thulhu</strong>
     </a>
 
@@ -100,7 +100,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/C1thulhu/helloworld/">
+              <a class="nav-link" href="/helloworld/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
               </a>
@@ -112,7 +112,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/C1thulhu/helloworld/archives/">
+              <a class="nav-link" href="/helloworld/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 归档
               </a>
@@ -124,7 +124,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/C1thulhu/helloworld/categories/">
+              <a class="nav-link" href="/helloworld/categories/">
                 <i class="iconfont icon-category-fill"></i>
                 分类
               </a>
@@ -136,7 +136,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/C1thulhu/helloworld/tags/">
+              <a class="nav-link" href="/helloworld/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
               </a>
@@ -148,7 +148,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/C1thulhu/helloworld/about/">
+              <a class="nav-link" href="/helloworld/about/">
                 <i class="iconfont icon-user-fill"></i>
                 关于
               </a>
@@ -174,7 +174,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/C1thulhu/helloworld/img/background/MySQL.jpg') no-repeat center center;
+         style="background: url('/helloworld/img/background/MySQL.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
@@ -623,9 +623,9 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/C1thulhu/helloworld/categories/database/">database</a>
+                      <a class="hover-with-bg" href="/helloworld/categories/database/">database</a>
                     
-                      <a class="hover-with-bg" href="/C1thulhu/helloworld/categories/database/MySQL/">MySQL</a>
+                      <a class="hover-with-bg" href="/helloworld/categories/database/MySQL/">MySQL</a>
                     
                   </div>
                 
@@ -633,9 +633,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/C1thulhu/helloworld/tags/SQL/">SQL</a>
+                      <a class="hover-with-bg" href="/helloworld/tags/SQL/">SQL</a>
                     
-                      <a class="hover-with-bg" href="/C1thulhu/helloworld/tags/MySQL/">MySQL</a>
+                      <a class="hover-with-bg" href="/helloworld/tags/MySQL/">MySQL</a>
                     
                   </div>
                 
@@ -652,7 +652,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/C1thulhu/helloworld/notes/Java/API/JavaIO/">
+                      <a href="/helloworld/notes/Java/API/JavaIO/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">JavaIO</span>
                         <span class="visible-mobile">Previous</span>
@@ -662,7 +662,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/C1thulhu/helloworld/notes/Java/Spring/Spring/">
+                      <a href="/helloworld/notes/Java/Spring/Spring/">
                         <span class="hidden-mobile">Spring</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -756,18 +756,18 @@
 
 <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
 <script  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/C1thulhu/helloworld/js/events.js" ></script>
-<script  src="/C1thulhu/helloworld/js/plugins.js" ></script>
+<script  src="/helloworld/js/events.js" ></script>
+<script  src="/helloworld/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
 
-  <script  src="/C1thulhu/helloworld/js/local-search.js" ></script>
+  <script  src="/helloworld/js/local-search.js" ></script>
 
 
 
   
-    <script  src="/C1thulhu/helloworld/js/img-lazyload.js" ></script>
+    <script  src="/helloworld/js/img-lazyload.js" ></script>
   
 
 
@@ -822,7 +822,7 @@
 
 
 <!-- 主题的启动项 保持在最底部 -->
-<script  src="/C1thulhu/helloworld/js/boot.js" ></script>
+<script  src="/helloworld/js/boot.js" ></script>
 
 
 </body>

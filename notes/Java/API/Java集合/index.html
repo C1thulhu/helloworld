@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/C1thulhu/helloworld/img/icon/log_1.png">
-  <link rel="icon" href="/C1thulhu/helloworld/img/icon/log_1.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/helloworld/img/icon/log_1.png">
+  <link rel="icon" href="/helloworld/img/icon/log_1.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,7 +19,7 @@
     <meta name="description" content="集合类是Java数据结构的实现，是java.util包中的重要内容。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Collection&amp;Map">
-<meta property="og:url" content="https://github.com/C1thulhu/helloworld/notes/Java/API/Java%E9%9B%86%E5%90%88/index.html">
+<meta property="og:url" content="https://c1thulhu.github.io/helloworld/notes/Java/API/Java%E9%9B%86%E5%90%88/index.html">
 <meta property="og:site_name" content="C1thulhu">
 <meta property="og:description" content="集合类是Java数据结构的实现，是java.util包中的重要内容。">
 <meta property="og:locale" content="en_US">
@@ -64,17 +64,17 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="/C1thulhu/helloworld/css/main.css" />
+<link  rel="stylesheet" href="/helloworld/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"github.com","root":"/C1thulhu/helloworld/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/C1thulhu/helloworld/local-search.xml"};
+    var CONFIG = {"hostname":"c1thulhu.github.io","root":"/helloworld/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/helloworld/local-search.xml"};
   </script>
-  <script  src="/C1thulhu/helloworld/js/utils.js" ></script>
-  <script  src="/C1thulhu/helloworld/js/color-schema.js" ></script>
+  <script  src="/helloworld/js/utils.js" ></script>
+  <script  src="/helloworld/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.4.2"></head>
 
 
@@ -82,7 +82,7 @@
   <header style="height: 80vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/C1thulhu/helloworld/">
+    <a class="navbar-brand" href="/helloworld/">
       <strong>C1thulhu</strong>
     </a>
 
@@ -101,7 +101,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/C1thulhu/helloworld/">
+              <a class="nav-link" href="/helloworld/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
               </a>
@@ -113,7 +113,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/C1thulhu/helloworld/archives/">
+              <a class="nav-link" href="/helloworld/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 归档
               </a>
@@ -125,7 +125,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/C1thulhu/helloworld/categories/">
+              <a class="nav-link" href="/helloworld/categories/">
                 <i class="iconfont icon-category-fill"></i>
                 分类
               </a>
@@ -137,7 +137,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/C1thulhu/helloworld/tags/">
+              <a class="nav-link" href="/helloworld/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
               </a>
@@ -149,7 +149,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/C1thulhu/helloworld/about/">
+              <a class="nav-link" href="/helloworld/about/">
                 <i class="iconfont icon-user-fill"></i>
                 关于
               </a>
@@ -175,7 +175,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/C1thulhu/helloworld/img/background/Collection&Map.jpg') no-repeat center center;
+         style="background: url('/helloworld/img/background/Collection&Map.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
@@ -297,7 +297,7 @@
 <li>**实现（类）：**是<b style="color:red">集合接口的具体实现</b>。从本质上讲，它们是可重复使用的数据结构，例如：ArrayList、LinkedList、HashSet、HashMap。</li>
 <li>**算法：**是实现<b style="color:red">集合接口的对象里的方法执行的一些有用的计算</b>，例如：搜索和排序。<b style="color:#00FFFF">这些算法被称为多态，那是因为相同的方法可以在相似的接口上有着不同的实现</b>。</li>
 </ul>
-<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/Java%E9%9B%86%E5%90%88%E4%BD%93%E7%B3%BB.png" srcset="/C1thulhu/helloworld/img/loading.gif" lazyload alt="Java集合体系" /></p>
+<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/Java%E9%9B%86%E5%90%88%E4%BD%93%E7%B3%BB.png" srcset="/helloworld/img/loading.gif" lazyload alt="Java集合体系" /></p>
 <p><strong>体系概述：</strong></p>
 <blockquote>
 <ul>
@@ -326,7 +326,7 @@
 </blockquote>
 <h4 id="linkedhashmap"><a class="markdownIt-Anchor" href="#linkedhashmap"></a> LinkedHashMap</h4>
 <p>  LinkedHashMap 可以看作是 <code>HashMap</code> 和 <code>LinkedList</code> 的结合：它<font style="color:red">在 HashMap 的基础上添加了一条双向链表</font>，<code>默认</code> 存储各个元素的插入顺序，但由于这条双向链表，使得 LinkedHashMap 可以实现 <b style="color:yellow"><code>LRU</code> 缓存淘汰策略<sup>1</sup></b>，因为我们可以设置这条双向链表按照 <code>元素的访问次序</code> 进行排序。</p>
-<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/LinkedHashMap%E7%BB%93%E6%9E%84.png" srcset="/C1thulhu/helloworld/img/loading.gif" lazyload alt="LinkedHashMap结构" /></p>
+<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/LinkedHashMap%E7%BB%93%E6%9E%84.png" srcset="/helloworld/img/loading.gif" lazyload alt="LinkedHashMap结构" /></p>
 <blockquote>
 <ul>
 <li>底层维护了一条 <code>双向链表</code>，因为继承了 HashMap，所以不是线程安全的。</li>
@@ -407,7 +407,7 @@
 <h5 id="linkedlist"><a class="markdownIt-Anchor" href="#linkedlist"></a> LinkedList</h5>
 <p><font style="color:red">LinkedList 底层采用 <strong>双向链表</strong> 数据接口存储元素，由于链表的内存地址 <strong>非连续</strong>，所以它不具备随机访问的特点，但由于它利用指针连接各个元素，所以插入、删除元素只需要 <strong>操作指针</strong>，不需要 <strong>移动元素</strong>，故具有 <strong>增删快、查询慢</strong> 的特点。</font>它也是一个<strong>非线程安全</strong>的集合。</p>
 <p>LinkedList实现了 <code>Deque</code> 接口，使得 LinkedList 可以用作 <strong>双端队列</strong> 。<code>Node</code> 是LinkedList集合中的元素，提供了前驱指针和后继指针，还提供了一系列操作 <code>头结点</code> 和 <code>尾结点</code> 的方法，具有双端队列的特性。</p>
-<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/LinkedList%E7%BB%93%E6%9E%84.png" srcset="/C1thulhu/helloworld/img/loading.gif" lazyload alt="LinkedList结构" /></p>
+<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/LinkedList%E7%BB%93%E6%9E%84.png" srcset="/helloworld/img/loading.gif" lazyload alt="LinkedList结构" /></p>
 <p>双向链表存储的每个节点称为一个 <code>Node</code> ， <code>Node</code> 中保存了 <code>next</code> 和 <code>prev</code> 指针，<code>item</code> 是该节点的值。在插入和删除时，时间复杂度都保持为 <code>O(1)</code></p>
 <blockquote>
 <ul>
@@ -431,7 +431,7 @@
 <h5 id="stack"><a class="markdownIt-Anchor" href="#stack"></a> Stack</h5>
 <p><font style="color:red"><code>Stack</code> 是一种 <code>后进先出（LIFO）</code> 型的集合容器。</font>如下图所示，<font style="color:#00FFFF">top 指针指向最后进入容器的元素。弹出元素时会将先栈顶元素开始移除。</font>Stack 继承了 Vector 类，提供了栈顶的压入元素操作（push）和弹出元素（pop），以及查看栈顶元素（peek）等等，但也是由于继承于 Vector，Stack 也渐渐被淘汰了。</p>
 <p>取而代之的是 <code>Deque</code> 接口下的<code>ArrayDeque</code>，该数据结构更加完善，可靠性更好，依靠队列也可以实现 <code>LIFO</code> 的栈操作，所以优先选择 ArrayDeque 实现栈。</p>
-<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/Stack%E7%BB%93%E6%9E%84.png" srcset="/C1thulhu/helloworld/img/loading.gif" lazyload alt="Stack结构" /></p>
+<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/Stack%E7%BB%93%E6%9E%84.png" srcset="/helloworld/img/loading.gif" lazyload alt="Stack结构" /></p>
 <h4 id="queue"><a class="markdownIt-Anchor" href="#queue"></a> Queue</h4>
 <p>队列是一种特殊的线性表，遵循先进先出、后进后出的基本原则，一般来说，它只允许在表的前端进行删除操作，而在表的后端进行插入操作，但是java的某些队列运行在任何地方插入删除；</p>
 <p>Queue 中提供了两套增加、删除元素的 API，当插入或删除元素失败时，会有两种不同的失败处理策略。</p>
@@ -628,9 +628,9 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/C1thulhu/helloworld/categories/Java/">Java</a>
+                      <a class="hover-with-bg" href="/helloworld/categories/Java/">Java</a>
                     
-                      <a class="hover-with-bg" href="/C1thulhu/helloworld/categories/Java/API/">API</a>
+                      <a class="hover-with-bg" href="/helloworld/categories/Java/API/">API</a>
                     
                   </div>
                 
@@ -638,11 +638,11 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/C1thulhu/helloworld/tags/Java/">Java</a>
+                      <a class="hover-with-bg" href="/helloworld/tags/Java/">Java</a>
                     
-                      <a class="hover-with-bg" href="/C1thulhu/helloworld/tags/JDK/">JDK</a>
+                      <a class="hover-with-bg" href="/helloworld/tags/JDK/">JDK</a>
                     
-                      <a class="hover-with-bg" href="/C1thulhu/helloworld/tags/API/">API</a>
+                      <a class="hover-with-bg" href="/helloworld/tags/API/">API</a>
                     
                   </div>
                 
@@ -659,7 +659,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/C1thulhu/helloworld/notes/Java/API/Muti-thread&amp;JUC/">
+                      <a href="/helloworld/notes/Java/API/Muti-thread&amp;JUC/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Muti-thread&JUC</span>
                         <span class="visible-mobile">Previous</span>
@@ -669,7 +669,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/C1thulhu/helloworld/notes/Java/JVM/">
+                      <a href="/helloworld/notes/Java/JVM/">
                         <span class="hidden-mobile">JVM</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -763,18 +763,18 @@
 
 <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
 <script  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/C1thulhu/helloworld/js/events.js" ></script>
-<script  src="/C1thulhu/helloworld/js/plugins.js" ></script>
+<script  src="/helloworld/js/events.js" ></script>
+<script  src="/helloworld/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
 
-  <script  src="/C1thulhu/helloworld/js/local-search.js" ></script>
+  <script  src="/helloworld/js/local-search.js" ></script>
 
 
 
   
-    <script  src="/C1thulhu/helloworld/js/img-lazyload.js" ></script>
+    <script  src="/helloworld/js/img-lazyload.js" ></script>
   
 
 
@@ -829,7 +829,7 @@
 
 
 <!-- 主题的启动项 保持在最底部 -->
-<script  src="/C1thulhu/helloworld/js/boot.js" ></script>
+<script  src="/helloworld/js/boot.js" ></script>
 
 
 </body>
