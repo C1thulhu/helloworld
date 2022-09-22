@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="C1thulhu">
 <meta property="og:description" content="Spring是Java EE编程领域的一个轻量级开源框架，是为了解决企业级编程开发中的复杂性，实现敏捷开发的应用型框架。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/notes_CVP/Spring.png">
+<meta property="og:image" content="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_CVP/Spring.png">
 <meta property="article:published_time" content="2022-06-01T00:00:00.000Z">
 <meta property="article:modified_time" content="2022-06-05T00:00:00.000Z">
 <meta property="article:author" content="C1thulhu">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Spring">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/notes_CVP/Spring.png">
+<meta name="twitter:image" content="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_CVP/Spring.png">
   
   
   <title>Spring - C1thulhu</title>
@@ -273,7 +273,7 @@
 </ul>
 <h2 id="spring组件"><a class="markdownIt-Anchor" href="#spring组件"></a> #Spring组件</h2>
 <p>Spring采用分层架构，根据不同的功能划分为多个组件模块：</p>
-<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/Spring%E7%BB%84%E4%BB%B6.png" srcset="/helloworld/img/loading.gif" lazyload alt="Spring组件" /></p>
+<p><img src="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/Spring%E7%BB%84%E4%BB%B6.png" srcset="/helloworld/img/loading.gif" lazyload alt="Spring组件" /></p>
 <ol>
 <li>
 <p><strong>Data Access/Integration（数据访问／集成）</strong>:</p>
@@ -401,11 +401,11 @@
 <p>传统程序设计下，需要我们主动去创建相关对象然后再组合起来，比如：</p>
 <p>示例1：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">UserDaoImpl userDao=<span class="hljs-keyword">new</span> <span class="hljs-title class_">UserDaoImpl</span>();<br>UserServiceImpl userService=<span class="hljs-keyword">new</span> <span class="hljs-title class_">UserServiceImpl</span>();<br>userService.setUserDao(userDao);<br></code></pre></div></td></tr></table></figure>
-<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/IoC%E7%A4%BA%E4%BE%8B1.png" srcset="/helloworld/img/loading.gif" lazyload alt="IoC示例1" /></p>
+<p><img src="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/IoC%E7%A4%BA%E4%BE%8B1.png" srcset="/helloworld/img/loading.gif" lazyload alt="IoC示例1" /></p>
 <p>当有了IoC/DI的容器后，我们就不用再主动去创建这些对象了，如下：</p>
 <p>示例2：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">ApplicationContext context=<span class="hljs-keyword">new</span> <span class="hljs-title class_">ClassPashXmlApplicationContext</span>(<span class="hljs-string">&quot;application.xml&quot;</span>);<br><span class="hljs-type">UserServiceImpl</span> <span class="hljs-variable">userService</span> <span class="hljs-operator">=</span> xmlApp.getBean(<span class="hljs-string">&quot;userService&quot;</span>,UserServiceImpl.class);<br></code></pre></div></td></tr></table></figure>
-<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/IoC%E7%A4%BA%E4%BE%8B2.png" srcset="/helloworld/img/loading.gif" lazyload alt="IoC示例2" /></p>
+<p><img src="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/IoC%E7%A4%BA%E4%BE%8B2.png" srcset="/helloworld/img/loading.gif" lazyload alt="IoC示例2" /></p>
 <p><strong>IoC</strong>的主要实现方式有两种：依赖查找、依赖注入。</p>
 <h3 id="依赖查找"><a class="markdownIt-Anchor" href="#依赖查找"></a> 依赖查找</h3>
 <p>  主要是容器为组件提供一个回调接口和上下文环境。这样一来，组件就必须自己使用容器提供的API来查找资源和协作对象，所以依赖查找的控制反转仅体现在那些回调方法上，容器调用这些回调方法，从而应用代码获取到资源。</p>
@@ -473,7 +473,7 @@
 </blockquote>
 <p>Spring MVC 是一种基于Java 的实现了Web MVC 设计模式的请求驱动类型的轻量级Web 框架，即使用了MVC 架 构模式的思想，将 web 层进行职责解耦，基于请求驱动指的就是使用请求-响应模型，<font style="color:red">框架的目的就是帮助我们简化开发。</font></p>
 <p>SpringMVC运行流程：</p>
-<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/SpringMVC%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B.png" srcset="/helloworld/img/loading.gif" lazyload alt="SpringMVC运行流程" /></p>
+<p><img src="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/SpringMVC%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B.png" srcset="/helloworld/img/loading.gif" lazyload alt="SpringMVC运行流程" /></p>
 <blockquote>
 <ol>
 <li>DispatcherServlet表示前置控制器，是整个SpringMVC的控制中心。用户发出请求，DispatcherServlet接收请求并拦截请求。</li>

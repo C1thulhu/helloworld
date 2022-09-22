@@ -23,17 +23,17 @@
 <meta property="og:site_name" content="C1thulhu">
 <meta property="og:description" content="Java I&#x2F;O（输入和输出）用于处理输入并产生输出。Java使用流的概念来加快I&#x2F;O操作的速度。java.io软件包包含输入和输出操作所需的所有类。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/io-inputstream.png">
-<meta property="og:image" content="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/io-reader.png">
-<meta property="og:image" content="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/io-outputstream.png">
-<meta property="og:image" content="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/io-writer.png">
+<meta property="og:image" content="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/io-inputstream.png">
+<meta property="og:image" content="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/io-reader.png">
+<meta property="og:image" content="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/io-outputstream.png">
+<meta property="og:image" content="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/io-writer.png">
 <meta property="article:published_time" content="2022-06-22T00:00:00.000Z">
 <meta property="article:modified_time" content="2022-07-13T00:00:00.000Z">
 <meta property="article:author" content="C1thulhu">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="JDK">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/io-inputstream.png">
+<meta name="twitter:image" content="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/io-inputstream.png">
   
   
   <title>JavaIO - C1thulhu</title>
@@ -582,7 +582,7 @@
 </tbody>
 </table>
 <p>InputStream及其派生类实现关系：</p>
-<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/io-inputstream.png" srcset="/helloworld/img/loading.gif" lazyload alt="io-inputstream" /></p>
+<p><img src="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/io-inputstream.png" srcset="/helloworld/img/loading.gif" lazyload alt="io-inputstream" /></p>
 <h4 id="fileinputstream"><a class="markdownIt-Anchor" href="#fileinputstream"></a> FileInputStream</h4>
 <p><strong>FileInputStream</strong>：从文件系统中的文件获取输入字节，获取的文件可用性取决于主机环境。</p>
 <p><strong>构造方法：</strong></p>
@@ -689,7 +689,7 @@
 </tr>
 </tbody>
 </table>
-<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/io-reader.png" srcset="/helloworld/img/loading.gif" lazyload alt="io-reader" /></p>
+<p><img src="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/io-reader.png" srcset="/helloworld/img/loading.gif" lazyload alt="io-reader" /></p>
 <h4 id="inputstreamreader"><a class="markdownIt-Anchor" href="#inputstreamreader"></a> InputStreamReader</h4>
 <ul>
 <li>FileReader</li>
@@ -735,7 +735,7 @@
 </tbody>
 </table>
 <p>OutputStream及其派生类实现关系：</p>
-<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/io-outputstream.png" srcset="/helloworld/img/loading.gif" lazyload alt="img" /></p>
+<p><img src="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/io-outputstream.png" srcset="/helloworld/img/loading.gif" lazyload alt="img" /></p>
 <h4 id="fileoutputstream"><a class="markdownIt-Anchor" href="#fileoutputstream"></a> FileOutputStream</h4>
 <p><strong>FileOutputStream</strong>：从文件系统中的文件获取输出字节，文件是否可用或能否可以被创建取决于基础平台，特别是某些平台一次只允许一个 FileOutputStream（或其他文件写入对象）打开文件进行写入。在这种情况下，如果所涉及的文件已经打开，则此类中的构造方法将失败。</p>
 <p><strong>构造方法：</strong></p>
@@ -823,7 +823,7 @@
 </tr>
 </tbody>
 </table>
-<p><img src="https://c1thulhu.oss-ap-northeast-1.aliyuncs.com/io-writer.png" srcset="/helloworld/img/loading.gif" lazyload alt="io-writer" /></p>
+<p><img src="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/io-writer.png" srcset="/helloworld/img/loading.gif" lazyload alt="io-writer" /></p>
 <h2 id="bio"><a class="markdownIt-Anchor" href="#bio"></a> #BIO</h2>
 <p><strong>同步并阻塞</strong>(传统阻塞型)，服务器实现模式为<strong>一个连接一个线程</strong>，即客户端<strong>有连接请求</strong>时服务器端就需要<strong>启动一个线程进行处理</strong>，如果这个连接不做任何事情会造成不必要的线程开销。</p>
 <blockquote>
