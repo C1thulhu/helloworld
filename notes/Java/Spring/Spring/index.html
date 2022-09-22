@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_CVP/Spring.png">
 <meta property="article:published_time" content="2022-06-01T00:00:00.000Z">
-<meta property="article:modified_time" content="2022-06-05T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-08-05T00:00:00.000Z">
 <meta property="article:author" content="C1thulhu">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Spring">
@@ -200,7 +200,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      8.9k 字
+      9k 字
     </span>
   
 
@@ -247,13 +247,13 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022-06-05
+                  本文最后更新于：2022-08-05
                 
               </p>
             
             <div class="markdown-body">
               <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> #前言</h2>
-<p><font style="color:grey">待编纂。</font></p>
+<p><font style="color:grey">待完善。</font></p>
 <p>参考文章：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://www.pdai.tech/md/spring/spring-x-framework-introduce.html">Spring框架组成</a></li>
@@ -261,7 +261,9 @@
 <li><a target="_blank" rel="noopener" href="https://www.pdai.tech/md/spring/spring-x-framework-aop.html">Spring核心之面向切面编程(AOP)</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.pdai.tech/md/spring/spring-x-framework-springmvc.html">SpringMVC请求流程和案例</a></li>
 </ul>
-<h2 id="spring概念"><a class="markdownIt-Anchor" href="#spring概念"></a> #Spring概念</h2>
+<h2 id="spring概述"><a class="markdownIt-Anchor" href="#spring概述"></a> #Spring概述</h2>
+<p>Spring框架是一个开放源代码的J2EE应用程序框架，是<font style="color:red"><strong>针对bean的生命周期进行管理的轻量级容器</strong></font>，提供了功能强大IOC、AOP及Web MVC等功能。</p>
+<h3 id="优点"><a class="markdownIt-Anchor" href="#优点"></a> 优点</h3>
 <ul>
 <li>组件化：Spring 实现了使用简单的组件配置组合成一个复杂的应用。在 Spring 中可以使用XML和Java注解组合这些对象。</li>
 <li>容器：Spring 是一个容器，因为它包含并且管理应用对象的生命周期</li>
@@ -474,21 +476,19 @@
 <p>Spring MVC 是一种基于Java 的实现了Web MVC 设计模式的请求驱动类型的轻量级Web 框架，即使用了MVC 架 构模式的思想，将 web 层进行职责解耦，基于请求驱动指的就是使用请求-响应模型，<font style="color:red">框架的目的就是帮助我们简化开发。</font></p>
 <p>SpringMVC运行流程：</p>
 <p><img src="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/SpringMVC%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B.png" srcset="/helloworld/img/loading.gif" lazyload alt="SpringMVC运行流程" /></p>
-<blockquote>
 <ol>
-<li>DispatcherServlet表示前置控制器，是整个SpringMVC的控制中心。用户发出请求，DispatcherServlet接收请求并拦截请求。</li>
-<li>HandlerMapping为处理器映射。DispatcherServlet调用HandlerMapping,HandlerMapping根据请求url查找Handler。</li>
-<li>返回处理器执行链，根据url查找控制器，并且将解析后的信息传递给DispatcherServlet</li>
-<li>HandlerAdapter表示处理器适配器，其按照特定的规则去执行Handler。</li>
-<li>执行handler找到具体的处理器</li>
-<li>Controller将具体的执行信息返回给HandlerAdapter,如ModelAndView。</li>
-<li>HandlerAdapter将视图逻辑名或模型传递给DispatcherServlet。</li>
-<li>DispatcherServlet调用视图解析器(ViewResolver)来解析HandlerAdapter传递的逻辑视图名。</li>
-<li>视图解析器将解析的逻辑视图名传给DispatcherServlet。</li>
-<li>DispatcherServlet根据视图解析器解析的视图结果，调用具体的视图，进行试图渲染</li>
-<li>将响应数据返回给客户端</li>
+<li><code>DispatcherServlet</code>表示前置控制器，是整个SpringMVC的控制中心。用户发出请求，<code>DispatcherServlet</code>接收请求并拦截请求；</li>
+<li><code>HandlerMapping</code>为处理器映射。<code>DispatcherServlet</code>调用<code>HandlerMapping</code>,<code>HandlerMapping</code>根据请求url查找<code>Handler</code>；</li>
+<li>返回<code>Headler执行链</code>，根据url查找控制器，并且将解析后的信息传递给<code>DispatcherServlet</code>；</li>
+<li><code>HandlerAdapter</code>表示处理器适配器，其按照特定的规则去执行<code>Handler</code>；</li>
+<li>执行<code>Handler</code>找到具体的处理器；</li>
+<li><code>Controller</code>将具体的执行信息返回给<code>HandlerAdapter</code>,如ModelAndView；</li>
+<li><code>HandlerAdapter</code>将视图逻辑名或模型传递给<code>DispatcherServlet</code>；</li>
+<li><code>DispatcherServlet</code>调用视图解析器(<code>ViewResolver</code>)来解析<code>HandlerAdapter</code>传递的逻辑视图名；</li>
+<li>视图解析器将解析的逻辑视图名传给<code>DispatcherServlet</code>；</li>
+<li><code>DispatcherServlet</code>根据视图解析器解析的视图结果，调用具体的视图，进行试图渲染；</li>
+<li>将响应数据返回给客户端。</li>
 </ol>
-</blockquote>
 
             </div>
             <hr>
