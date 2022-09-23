@@ -202,7 +202,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      16k 字
+      18k 字
     </span>
   
 
@@ -258,30 +258,16 @@
 <p><font style="color:grey">待编纂。</font></p>
 <p>参考文章：</p>
 <ul>
-<li>
-<p><a target="_blank" rel="noopener" href="https://blog.kyire.site/2021/04/17/dcfce7ce.html">多线程与线程同步</a></p>
-</li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://blog.kyire.site/2021/05/16/eb9166f8.html">JUC并发编程</a></p>
-</li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/pange1991/article/details/53860651">Java线程的6种状态及切换</a></p>
-</li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://www.pdai.tech/md/java/thread/java-thread-x-key-synchronized.html">synchronized详解</a></p>
-</li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://www.pdai.tech/md/java/thread/java-thread-x-key-volatile.html">volatile详解</a></p>
-</li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28082757/article/details/101065531">System.out.println如何影响内存可见性</a></p>
-</li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/duzhe2905/article/details/106038681">volatile如何保证可见性和有序性</a></p>
-</li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://www.pdai.tech/md/java/thread/java-thread-x-lock-all.html">Java中所有的锁</a></p>
-</li>
+<li><a target="_blank" rel="noopener" href="https://blog.kyire.site/2021/04/17/dcfce7ce.html">多线程与线程同步</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.kyire.site/2021/05/16/eb9166f8.html">JUC并发编程</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/pange1991/article/details/53860651">Java线程的6种状态及切换</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.pdai.tech/md/java/thread/java-thread-x-key-synchronized.html">synchronized详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.pdai.tech/md/java/thread/java-thread-x-key-volatile.html">volatile详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28082757/article/details/101065531">System.out.println如何影响内存可见性</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/duzhe2905/article/details/106038681">volatile如何保证可见性和有序性</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.pdai.tech/md/java/thread/java-thread-x-lock-all.html">Java中所有的锁</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42290561/article/details/125575083">深入了解CAS和常用原子类</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43478694/article/details/123622726">Unsafe类详解</a></li>
 </ul>
 <h2 id="多线程"><a class="markdownIt-Anchor" href="#多线程"></a> #多线程</h2>
 <p>  <font style="color : red"><strong>线程</strong>是CPU调度和执行的单位。</font>而多个线程组成一个进程，<font style="color : red"><strong>进程</strong>是一个动态的概念，是系统资源分配的单位。</font>进程又是执行程序的一次执行过程，<font style="color : red"><strong>程序</strong>是一个静态的概念，是指令和数据的有序集合，其本身没有任何运行的含义。</font></p>
@@ -463,7 +449,7 @@
 </ul>
 <p><font style="color:grey">待完善。。</font></p>
 <h2 id="并发编程juc"><a class="markdownIt-Anchor" href="#并发编程juc"></a> #并发编程(JUC)</h2>
-<p>  JUC是java.util.concurrent的简写，是jdk针对java并发编程的工具包。</p>
+<p>  JUC是<code>java.util.concurrent</code>的简写，是jdk针对java并发编程的工具包。</p>
 <p>  在了解JUC之前我们先了解<strong>并发</strong>的概念：<font style="color:red"><strong>单核下多线程操作同一个资源</strong>，将CPU运行时间划分成若干个时间段,再将时间段分配给各个线程执行，在一个时间段的线程代码运行时，其它线程处于挂起状。这种方式我们称之为并发(Concurrent)。</font><font style="color:#00FFFF">并发实质是一个物理CPU（也可以是多个物理CPU）在若干个程序之间多路复用，并发性是对有限物理资源强制行使 多用户共享以提高效率。</font><br />
 而和并发相似的<strong>并行</strong>是在<font style="color:red"><strong>多核下多线程同时执行</strong>，多个线程之间互不抢占CPU资源，可以同时进行，这种方式我们称之为并行(Parallel)。</font></p>
 <p>并发问题的三要素：可见性、原子性和有序性：</p>
@@ -524,7 +510,6 @@
 </li>
 </ul>
 <p>volatile是无法保证这三个操作是具有原子性的，我们可以通过<strong>原子类</strong>或者<code>synchronized</code>和<code>lock</code>来保证+1操作的原子性。</p>
-<p><font style="color:grey">待编纂。。</font></p>
 <h4 id="volatile有序性"><a class="markdownIt-Anchor" href="#volatile有序性"></a> volatile有序性</h4>
 <p>实例化一个对象可以分为三个步骤：</p>
 <ul>
@@ -634,7 +619,6 @@
 <p><font style="color:red">读final引用对象的成员域时结果时<strong>不可预知</strong>的，因为其对final修饰对象的成员域的写入是不可见的，两者之间存在数据竞争。</font></p>
 </li>
 </ul>
-<p><font style="color:grey">待编纂。。</font></p>
 <h3 id="juc锁"><a class="markdownIt-Anchor" href="#juc锁"></a> JUC锁</h3>
 <p>  Java提供了种类丰富的锁，每种锁因其特性的不同，在适当的场景下能够展现出非常高的效率。Java中往往是按照是否含有某一特性来定义锁，我们通过特性将锁进行分组归类，再使用对比的方式进行介绍：</p>
 <p><img src="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/Java%E9%94%81%E7%B1%BB%E5%9E%8B.png" srcset="/helloworld/img/loading.gif" lazyload alt="Java锁类型" /></p>
@@ -697,11 +681,13 @@
 <p>当有其他线程占用锁时，当前线程会进入阻塞状态。</p>
 </blockquote>
 <p>内置锁在Java中被抽象为监视器锁（monitor）。在JDK 1.6之前，监视器锁可以认为直接对应底层操作系统中的互斥量（mutex）。<font style="color:red">这种同步方式的成本非常高，包括系统调用引起的<font style="color:yellow">内核态<sup>4</sup></font>与<font style="color:yellow">用户态<sup>5</sup></font>切换、线程阻塞造成的线程切换等。因此，后来称这种锁为“重量级锁”。</font></p>
+<p><font style="color:yellow">④：</font></p>
+<p><font style="color:yellow">⑤：</font></p>
 </li>
 </ul>
 <h5 id="公平锁非公平锁"><a class="markdownIt-Anchor" href="#公平锁非公平锁"></a> 公平锁&amp;非公平锁</h5>
-<p>  公平锁是指多个线程按照申请锁的顺序来获取锁，线程直接进入队列中排队，队列中的第一个线程才能获得锁。公平锁的优点是等待锁的线程不会饿死。缺点是整体吞吐效率相对非公平锁要低，等待队列中除第一个线程以外的所有线程都会阻塞，CPU唤醒阻塞线程的开销比非公平锁大。</p>
-<p>  非公平锁是多个线程加锁时直接尝试获取锁，获取不到才会到等待队列的队尾等待。但如果此时锁刚好可用，那么这个线程可以无需阻塞直接获取到锁，所以非公平锁有可能出现后申请锁的线程先获取锁的场景。非公平锁的优点是可以减少唤起线程的开销，整体的吞吐效率高，因为线程有几率不阻塞直接获得锁，CPU不必唤醒所有线程。缺点是处于等待队列中的线程可能会饿死，或者等很久才会获得锁。</p>
+<p>  <font style="color:red">公平锁是指多个线程按照申请锁的顺序来获取锁，线程直接进入队列中排队，队列中的第一个线程才能获得锁。</font><font style="color:#00FFFF"><strong>公平锁的优点是等待锁的线程不会饿死。缺点是整体吞吐效率相对非公平锁要低，等待队列中除第一个线程以外的所有线程都会阻塞，CPU唤醒阻塞线程的开销比非公平锁大。</strong></font></p>
+<p>  <font style="color:red">非公平锁是多个线程加锁时直接尝试获取锁，获取不到才会到等待队列的队尾等待。但如果此时锁刚好可用，那么这个线程可以无需阻塞直接获取到锁，所以非公平锁有可能出现后申请锁的线程先获取锁的场景。</font><font style="color:#00FFFF"><strong>非公平锁的优点是可以减少唤起线程的开销，整体的吞吐效率高，因为线程有几率不阻塞直接获得锁，CPU不必唤醒所有线程。缺点是处于等待队列中的线程可能会饿死，或者等很久才会获得锁。</strong></font></p>
 <h5 id="可重入锁非可重入锁"><a class="markdownIt-Anchor" href="#可重入锁非可重入锁"></a> 可重入锁&amp;非可重入锁</h5>
 <p>  <font style="color:red">可重入锁是指在同一个线程在外层方法获取锁的时候，再进入该线程的内层方法会自动获取锁（前提锁对象得是同一个对象或者class），不会因为之前已经获取过还没释放而阻塞。</font>Java中<code>ReentrantLock</code>和<code>synchronized</code>都是可重入锁，可重入锁的一个优点是可一定程度避免死锁。下面用示例代码来进行分析：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Widget</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doSomething</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;方法1执行...&quot;</span>);<br>        doOthers();<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doOthers</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;方法2执行...&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
@@ -710,14 +696,20 @@
 <h5 id="共享锁排他锁"><a class="markdownIt-Anchor" href="#共享锁排他锁"></a> 共享锁&amp;排他锁</h5>
 <p><strong>共享锁</strong>是指该锁可被多个线程所持有。如果线程T对数据A加上共享锁后，则其他线程只能对A再加共享锁，不能加排它锁。获得共享锁的线程只能读数据，不能修改数据。</p>
 <p><strong>排他锁</strong>是指该锁一次只能被一个线程所持有。如果线程T对数据A加上排它锁后，则其他线程不能再对A加任何类型的锁。获得排它锁的线程即能读数据又能修改数据。JDK中的<code>synchronized</code>和JUC中<code>Lock</code>的实现类就是互斥锁。</p>
-<p>JUC锁相关体系：</p>
+<h4 id="juc锁相关体系"><a class="markdownIt-Anchor" href="#juc锁相关体系"></a> JUC锁相关体系</h4>
 <p><img src="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/Lock%E6%A1%86%E6%9E%B6.png" srcset="/helloworld/img/loading.gif" lazyload alt="Lock框架" /></p>
 <ul>
+<li>
+<p>锁核心类AQS(AbstractQueuedSynchronizer)</p>
+<p><font style="color:red"><code>AQS</code>是一个用来<strong>构建锁和同步器的框架</strong>，使用AQS能简单且高效地构造出应用广泛的大量的同步器。</font></p>
+<p>AQS核心思想</p>
+<p> <strong> 如果被请求的共享资源空闲，则将当前请求资源的线程设置为有效的工作线程，并且将共享资源设置为锁定状态。如果被请求的共享资源被占用，那么就需要一套线程阻塞等待以及被唤醒时锁分配的机制</strong>，这个机制AQS是用<font style="color:yellow">CLH队列锁<sup>6</sup></font>实现的，即将暂时获取不到锁的线程加入到队列中。</p>
+</li>
 <li>
 <p>Lock</p>
 <p><font style="color:red"><code>Lock</code>为接口类型，<code>Lock</code>实现提供了比使用<code>synchronized</code>方法和语句可获得的更广泛的锁定操作。此实现允许更灵活的结构，可以具有差别很大的属性，可以支持多个相关的Condition对象。</font></p>
 <p><strong>ReentrantLock</strong></p>
-<p><code>ReentrantLock</code>实现了<code>Lock</code>接口，<code>Lock</code>接口中定义了<code>lock</code>与<code>unlock</code>相关操作，并且还存在<code>Condition</code>方法，表示生成一个条件。</p>
+<p><code>ReentrantLock</code>可重入锁，实现了<code>Lock</code>接口，<code>Lock</code>接口中定义了<code>lock</code>与<code>unlock</code>相关操作，并且还存在<code>Condition</code>方法，表示生成一个条件。</p>
 <p><code>ReentrantLock</code>总共有三个内部类，并且三个内部类是紧密相关的，下面先看三个类的关系：</p>
 <ul>
 <li>
@@ -771,15 +763,11 @@
 </li>
 <li>
 <p>NonfairSync类</p>
-<p>NonfairSync类继承了Sync类，表示采用非公平策略获取锁，其实现了Sync类中抽象的lock方法，源码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 非公平锁</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">NonfairSync</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Sync</span> &#123;<br>    <span class="hljs-comment">// 版本号</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> <span class="hljs-number">7316153563782823691L</span>;<br>    <span class="hljs-comment">// 获得锁</span><br>    <span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">lock</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span> (compareAndSetState(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>)) <span class="hljs-comment">// 比较并设置状态成功，状态0表示锁没有被占用</span><br>            <span class="hljs-comment">// 把当前线程设置独占了锁</span><br>            setExclusiveOwnerThread(Thread.currentThread());<br>        <span class="hljs-keyword">else</span> <span class="hljs-comment">// 锁已经被占用，或者set失败</span><br>            <span class="hljs-comment">// 以独占模式获取对象，忽略中断</span><br>            acquire(<span class="hljs-number">1</span>); <br>    &#125;<br><br>    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">final</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">tryAcquire</span><span class="hljs-params">(<span class="hljs-type">int</span> acquires)</span> &#123;<br>        <span class="hljs-keyword">return</span> nonfairTryAcquire(acquires);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-<p>从<code>lock</code>方法实现可知，</p>
+<p><strong>NonfairSync类继承了Sync类，表示采用非公平策略获取锁</strong>，其实现了Sync类中抽象的lock方法，<font style="color:red">每一次都尝试获取锁，而并不会按照公平等待的原则进行等待，让等待时间最久的线程获得锁。</font></p>
 </li>
 <li>
 <p>FairSyn类</p>
-<p>FairSync类也继承了Sync类，表示采用公平策略获取锁，其实现了Sync类中的抽象lock方法，源码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 公平锁</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FairSync</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Sync</span> &#123;<br>    <span class="hljs-comment">// 版本序列化</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> -<span class="hljs-number">3000897897090466540L</span>;<br><br>    <span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">lock</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-comment">// 以独占模式获取对象，忽略中断</span><br>        acquire(<span class="hljs-number">1</span>);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">        * Fair version of tryAcquire.  Don&#x27;t grant access unless</span><br><span class="hljs-comment">        * recursive call or no waiters or is first.</span><br><span class="hljs-comment">        */</span><br>    <span class="hljs-comment">// 尝试公平获取锁</span><br>    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">final</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">tryAcquire</span><span class="hljs-params">(<span class="hljs-type">int</span> acquires)</span> &#123;<br>        <span class="hljs-comment">// 获取当前线程</span><br>        <span class="hljs-keyword">final</span> <span class="hljs-type">Thread</span> <span class="hljs-variable">current</span> <span class="hljs-operator">=</span> Thread.currentThread();<br>        <span class="hljs-comment">// 获取状态</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> getState();<br>        <span class="hljs-keyword">if</span> (c == <span class="hljs-number">0</span>) &#123; <span class="hljs-comment">// 状态为0</span><br>            <span class="hljs-keyword">if</span> (!hasQueuedPredecessors() &amp;&amp;<br>                compareAndSetState(<span class="hljs-number">0</span>, acquires)) &#123; <span class="hljs-comment">// 不存在已经等待更久的线程并且比较并且设置状态成功</span><br>                <span class="hljs-comment">// 设置当前线程独占</span><br>                setExclusiveOwnerThread(current);<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (current == getExclusiveOwnerThread()) &#123; <span class="hljs-comment">// 状态不为0，即资源已经被线程占据</span><br>            <span class="hljs-comment">// 下一个状态</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">nextc</span> <span class="hljs-operator">=</span> c + acquires;<br>            <span class="hljs-keyword">if</span> (nextc &lt; <span class="hljs-number">0</span>) <span class="hljs-comment">// 超过了int的表示范围</span><br>                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&quot;Maximum lock count exceeded&quot;</span>);<br>            <span class="hljs-comment">// 设置状态</span><br>            setState(nextc);<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-<p>从<code>lock</code>方法实现可知，</p>
+<p><strong>FairSync类也继承了Sync类，表示采用公平策略获取锁</strong>，其实现了Sync类中的抽象lock方法，<font style="color:red">当资源空闲时，它总是会先判断<code>sync</code>队列(AbstractQueuedSynchronizer中的数据结构)是否有等待时间更长的线程，如果存在，则将该线程加入到等待队列的尾部，实现了公平获取原则。</font></p>
 </li>
 </ul>
 </li>
@@ -794,7 +782,84 @@
 </ul>
 <p><font style="color:grey">待编纂。。</font></p>
 <h3 id="原子类"><a class="markdownIt-Anchor" href="#原子类"></a> 原子类</h3>
-<p><font style="color:grey">待编纂。。</font></p>
+<h4 id="cas"><a class="markdownIt-Anchor" href="#cas"></a> CAS</h4>
+<p>  <code>CAS</code>(Compare-And-Swap)意思是对比交换，这是一条<code>CPU</code>原子指令，其作用是让<code>CPU</code>先进行比较两个值是否相等，然后原子地更新某个位置的值。<font style="color:yellow"><code>CAS</code>实现方式是基于硬件平台的汇编指令，<code>JVM</code>只是封装了汇编调用。</font>而<code>java.util.concurrent.atomic</code>包下所有的原子类都是使用了封装<code>CAS</code>后的接口，包括<code>Lock</code>底层<code>AQS</code>也是基于<code>CAS</code>获取锁的。</p>
+<p><code>CAS</code>工作流程：</p>
+<img src="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/CAS%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.png" srcset="/helloworld/img/loading.gif" lazyload alt="CAS工作流程" style="zoom:80%;"/>
+<p>使用示例：</p>
+<p>不使用CAS，在高并发下，多线程同时修改同一个变量的值需要<code>synchronized</code>加锁</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-type">int</span> <span class="hljs-title function_">add</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> i++;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>以AtomicInteger原子类示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br>    <span class="hljs-keyword">private</span>  <span class="hljs-type">AtomicInteger</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AtomicInteger</span>(<span class="hljs-number">0</span>);<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">add</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> i.addAndGet(<span class="hljs-number">1</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p><font style="color:red"><code>CAS</code> 方式为乐观锁，<code>synchronized</code> 为悲观锁。因此使用 <code>CAS</code> 解决并发问题通常情况下性能更优。</font>然而<code>CAS</code>也存在几个方面问题：</p>
+<ul>
+<li>
+<p><strong>ABA问题</strong>，因为CAS需要在操作值时，检查值有没有发生变化，没有发生变化则更新，但是<strong>如果一个值原来是A，变成了B，又变成了A</strong>，那么使用CAS进行检查时则会发现它的值没有发生变化，但是实际上却变化了。</p>
+<img src="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/ABA%E9%97%AE%E9%A2%98.png" srcset="/helloworld/img/loading.gif" lazyload alt="ABA问题" style="zoom:80%;" />
+<p>ABA问题解决方案：JDK提供了版本号机制<code>AtomicStampedReference&lt;V&gt;</code>类，来解决 ABA问题 ，就是每次修改时更新版本号。<br />
+<code>AtomicMarkableReference&lt;V&gt;</code>类也能解决，只不过该类不关心版本变更了多少次，只关心是否发生了改变。</p>
+</li>
+<li>
+<p><strong>循环时间长开销大</strong>，同自旋锁一般，自旋CAS如果长时间不成功，会给CPU带来非常大的执行开销。</p>
+</li>
+<li>
+<p><strong>只能保证一个共享变量的原子操作</strong>，当对一个共享变量执行操作时，我们可以使用循环CAS的方式来保证原子操作，但是对多个共享变量操作时，循环CAS就无法保证操作的原子性，这个时候就可以用锁。</p>
+</li>
+</ul>
+<h4 id="unsafe"><a class="markdownIt-Anchor" href="#unsafe"></a> Unsafe</h4>
+<p>  Unsafe类提供了<strong>硬件级别的的原子性操作</strong>，<font style="color:red">Unsafe类中的方法都是native方法，通过使用JNI的方式访问本地C++库。</font><br />
+Unsafe是位于sun.misc包下，主要<strong>提供一些用于执行低级别、不安全操作的方法</strong>。这些方法在<strong>提升Java运行效率、增强Java语言底层资源操作能力方面起到了很大的作用</strong>。</p>
+<p>  <font style="color:red">由于<strong>Unsafe类使Java语言拥有了类似C语言指针一样操作内存空间的能力</strong>，这也<strong>增加了程序发生相关指针问题的风险</strong>。在程序中过度、不正确使用Unsafe类会使得程序出错的概率变大，使得Java这种安全的语言变得不再“安全”，因此<strong>对Unsafe的使用一定要慎重</strong>。</font></p>
+<p>Unsafe中的方法示例：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:left">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">long objectFieldOffset(Field field)</td>
+<td style="text-align:left">返回指定的变量在所属类中的内存偏移地址</td>
+</tr>
+<tr>
+<td style="text-align:center">int arrayBaseOffset(Class arrayClass)</td>
+<td style="text-align:left">获取数组中第一个元素的地址</td>
+</tr>
+<tr>
+<td style="text-align:center">boolean compareAndSwapLong(Object obj, long offset, long expect, long update)</td>
+<td style="text-align:left">CAS操作</td>
+</tr>
+<tr>
+<td style="text-align:center">public native long getLongvolatile(Object obj, long offset</td>
+<td style="text-align:left">获取对象obj中偏移量offset 的变量对应volatile语义的值</td>
+</tr>
+<tr>
+<td style="text-align:center">void putLongvolatile(Object obj, long offset, long value)</td>
+<td style="text-align:left">设置 obj 对象中<code>offset</code>偏移 的类型为 long 的 field 的值为 value，支持 volatile 语义</td>
+</tr>
+<tr>
+<td style="text-align:center">void park(boolean isAbsolute, long time</td>
+<td style="text-align:left">阻塞当前线程</td>
+</tr>
+<tr>
+<td style="text-align:center">void unpark(Object thread</td>
+<td style="text-align:left">唤醒调用park后阻塞的线程</td>
+</tr>
+<tr>
+<td style="text-align:center">long getAndSetLong(Object obj , long offset, long update</td>
+<td style="text-align:left">获取对象 obj 中偏移量为offset 的变量 volatile语义的当前值，并设置变量 volatile 语义的值为 update</td>
+</tr>
+<tr>
+<td style="text-align:center">long getAndAddLong(Object obj, long offset, long addValue</td>
+<td style="text-align:left">获取对象obj中偏移量为 offset 的变量 volatile 语义的当前值，并设置变量值为原始值＋addValue</td>
+</tr>
+</tbody>
+</table>
+<p><code>Unsafe</code>类尽管里面的方法都是 public 的，但是并没有办法使用它们，因为<code>AppClassLoader</code>应用程序加载器加载的，不是启动类加载器加载的，这是一种安全机制。然而可以使用<strong>反射</strong>来使用UnSafe类</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UnsafeDemo</span> &#123;<br>	<span class="hljs-keyword">volatile</span> <span class="hljs-type">long</span> <span class="hljs-variable">state</span> <span class="hljs-operator">=</span> O;<span class="hljs-comment">//变量</span><br>	<span class="hljs-keyword">static</span> Unsafe unsafe;<span class="hljs-comment">//获取Unsafe的实例</span><br>	<span class="hljs-keyword">static</span> <span class="hljs-type">long</span> stateoffset;<span class="hljs-comment">//记录变量state在类unsafeDemo类中的偏移值</span><br>	<span class="hljs-keyword">static</span> &#123;<br>		<span class="hljs-keyword">try</span> &#123;<br>			Field field;<br>            <span class="hljs-comment">//使用反射获取unsafe类的成员交量theUnsafe,</span><br>            field = Unsafe.class.getDeclaredField(<span class="hljs-string">&quot;theUnsafe&quot;</span> );<br>            field.setAccessible(<span class="hljs-literal">true</span>);<span class="hljs-comment">//设置为可存取</span><br>            unsafe = (unsafe) field.get(<span class="hljs-literal">null</span>);	<span class="hljs-comment">//获取该变量的值//获取state在unsafeDemo中的偏移量</span><br>            stateOffset = unsafe.objectFieldoffset(UnsafeDemo.class.getDeclaredField(<span class="hljs-string">&quot;state&quot;</span>));<br>		&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>			e.printstackTrace();<br>		&#125;<br>	&#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(string[] args)</span>&#123;<br>    	<span class="hljs-type">UnsafeDemo</span> <span class="hljs-variable">uDemo</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UnsafeDemo</span>();<br>    	System.out.println( <span class="hljs-string">&quot;before CAS: &quot;</span>+uDemo.state);<br>    	<span class="hljs-type">Boolean</span> <span class="hljs-variable">success</span> <span class="hljs-operator">=</span> unsafe.compareAndSwapInt(uDemo,stateoffset,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>);<br>		System.out.println(success);<br>		System.out.println( <span class="hljs-string">&quot;after CAS: &quot;</span>+uDemo.state);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h4 id="atomic"><a class="markdownIt-Anchor" href="#atomic"></a> Atomic</h4>
 <h3 id="juc集合"><a class="markdownIt-Anchor" href="#juc集合"></a> JUC集合</h3>
 <p><font style="color:grey">待编纂。。</font></p>
 <h3 id="线程池"><a class="markdownIt-Anchor" href="#线程池"></a> 线程池</h3>
