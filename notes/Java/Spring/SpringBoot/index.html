@@ -201,7 +201,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      7.1k 字
+      6.9k 字
     </span>
   
 
@@ -368,9 +368,6 @@
 <p>@ComponentScan()，注解会告知Spring扫描指定的包来初始化Spring</p>
 </li>
 <li>
-<p>@EnableZuulProxy()，</p>
-</li>
-<li>
 <p>@Autowired()，可以对成员变量、方法和构造函数进行标注，来完成自动装配的工作，@Autowired标注可以放在<strong>成员变量</strong>上，也可以放在<strong>成员变量的set方法</strong>上，也可以放在<strong>任意方法</strong>上表示，自动执行当前方法，如果方法有参数，会在IOC容器中自动寻找同类型参数为其传值。</p>
 <p>@Autowired等同于Spring配置<code>default-autowire</code>都是主要用于Spring的IOC的依赖注入。</p>
 <p>四种模式：</p>
@@ -410,25 +407,10 @@
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Configuration(&quot;name&quot;)</span><span class="hljs-comment">//表示这是一个配置信息类,可以给这个配置类也起一个名称</span><br><span class="hljs-meta">@ComponentScan(&quot;spring4&quot;)</span><span class="hljs-comment">//类似于xml中的&lt;context:component-scan base-package=&quot;spring4&quot;/&gt;</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Config</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><span class="hljs-comment">//自动注入，如果容器中有多个符合的bean时，需要进一步明确</span><br>    <span class="hljs-meta">@Qualifier(&quot;compent&quot;)</span><span class="hljs-comment">//进一步指明注入bean名称为compent的bean</span><br>    <span class="hljs-keyword">private</span> Compent compent;<br><br>    <span class="hljs-meta">@Bean</span><span class="hljs-comment">//类似于xml中的&lt;bean id=&quot;newbean&quot; class=&quot;spring4.Compent&quot;/&gt;</span><br>    <span class="hljs-keyword">public</span> Compent <span class="hljs-title function_">newbean</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Compent</span>();<br>    &#125;   <br>&#125;<br></code></pre></div></td></tr></table></figure>
 </li>
 <li>
-<p>@Import(Config1.class)</p>
+<p>@Order()，参数值越小优先级超高，越先运行</p>
 </li>
 <li>
-<p>@Order()</p>
-</li>
-<li>
-<p>@ConditionalOnExpression()</p>
-</li>
-<li>
-<p>@ConditionalOnProperty()</p>
-</li>
-<li>
-<p>@ConditionalOnClass()</p>
-</li>
-<li>
-<p>@ConditionalOnMisssingClass({ApplicationManager.class})()</p>
-</li>
-<li>
-<p>@ConditionOnMissingBean(name = “example”)()</p>
+<p>… 本文介绍的注解很局限，实际对注解的运用还需具体问题具体分析。</p>
 </li>
 </ul>
 <h2 id="统一接口封装"><a class="markdownIt-Anchor" href="#统一接口封装"></a> #统一接口封装</h2>
