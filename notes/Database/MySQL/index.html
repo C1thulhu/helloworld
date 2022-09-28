@@ -1,0 +1,839 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/helloworld/img/icon/log_1.png">
+  <link rel="icon" href="/helloworld/img/icon/log_1.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="C1thulhu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="MySQL 是最流行的 关系型数据库管理系统(Relational Database Management System)，在WEB应用方面MySQL是最好的关系数据库管理系统应用软件之一。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL">
+<meta property="og:url" content="https://c1thulhu.github.io/helloworld/notes/Database/MySQL/index.html">
+<meta property="og:site_name" content="C1thulhu">
+<meta property="og:description" content="MySQL 是最流行的 关系型数据库管理系统(Relational Database Management System)，在WEB应用方面MySQL是最好的关系数据库管理系统应用软件之一。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_CVP/MySQL.png">
+<meta property="article:published_time" content="2022-06-10T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-08-12T00:00:00.000Z">
+<meta property="article:author" content="C1thulhu">
+<meta property="article:tag" content="Database">
+<meta property="article:tag" content="Sql">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_CVP/MySQL.png">
+  
+  
+  <title>MySQL - C1thulhu</title>
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github-dark-dimmed.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/helloworld/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"c1thulhu.github.io","root":"/helloworld/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/helloworld/local-search.xml"};
+  </script>
+  <script  src="/helloworld/js/utils.js" ></script>
+  <script  src="/helloworld/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/helloworld/">
+      <strong>C1thulhu</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/helloworld/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/helloworld/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/helloworld/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/helloworld/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/helloworld/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/helloworld/img/background/MySQL.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="MySQL">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-06-10 00:00" pubdate>
+        2022-06-10
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.4k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MySQL</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022-08-12
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> #前言</h2>
+<p><font style="color:grey">待编纂。</font></p>
+<p>参考文章：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.pdai.tech/md/db/sql-lan/sql-lan.html">SQL语法基础</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/mysql/mysql-tutorial.html">MySQL教程 | 菜鸟教程</a></li>
+<li></li>
+</ul>
+<h2 id="mysql数据类型"><a class="markdownIt-Anchor" href="#mysql数据类型"></a> #MySQL数据类型</h2>
+<h3 id="数值类型"><a class="markdownIt-Anchor" href="#数值类型"></a> 数值类型</h3>
+<p>MySQL 支持所有标准 SQL 数值数据类型。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>大小</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TINYINT</td>
+<td>1 bytes</td>
+<td>小整数值</td>
+</tr>
+<tr>
+<td>SMALLINT</td>
+<td>2 bytes</td>
+<td>大整数值</td>
+</tr>
+<tr>
+<td>MEDIUMINT</td>
+<td>3 bytes</td>
+<td>大整数值</td>
+</tr>
+<tr>
+<td>INT或INTEGER</td>
+<td>4 bytes</td>
+<td>大整数值</td>
+</tr>
+<tr>
+<td>BIGINT</td>
+<td>8 bytes</td>
+<td>极大整数值</td>
+</tr>
+<tr>
+<td>FLOAT</td>
+<td>4 bytes</td>
+<td>单精度<br/>浮点数值</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>8 bytes</td>
+<td>双精度<br/>浮点数值</td>
+</tr>
+<tr>
+<td>DECIMAL</td>
+<td>对DECIMAL(M,D) ，如果M&gt;D，为M+2否则为D+2</td>
+<td>小数值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="时间类型"><a class="markdownIt-Anchor" href="#时间类型"></a> 时间类型</h3>
+<p>表示时间值的时间类型有DATETIME、DATE、TIMESTAMP、TIME和YEAR。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>大小</th>
+<th>描述</th>
+<th>格式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DATE</td>
+<td>3 bytes</td>
+<td>日期值</td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>3 bytes</td>
+<td>时间值或持续时间</td>
+<td>HH:MM:SS</td>
+</tr>
+<tr>
+<td>YEAR</td>
+<td>1 bytes</td>
+<td>年份值</td>
+<td>YYYY</td>
+</tr>
+<tr>
+<td>DATETIME</td>
+<td>8 bytes</td>
+<td>混合日期和时间值</td>
+<td>YYYY-MM-DD hh:mm:ss</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>4 bytes</td>
+<td>混合日期和时间值，时间戳</td>
+<td>YYYY-MM-DD hh:mm:ss</td>
+</tr>
+</tbody>
+</table>
+<h3 id="字符串类型"><a class="markdownIt-Anchor" href="#字符串类型"></a> 字符串类型</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">大小</th>
+<th style="text-align:left">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">CHAR</td>
+<td style="text-align:left">0-255 bytes</td>
+<td style="text-align:left">定长字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">VARCHAR</td>
+<td style="text-align:left">0-65535 bytes</td>
+<td style="text-align:left">变长字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">TINYBLOB</td>
+<td style="text-align:left">0-255 bytes</td>
+<td style="text-align:left">不超过 255 个字符的二进制字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">TINYTEXT</td>
+<td style="text-align:left">0-255 bytes</td>
+<td style="text-align:left">短文本字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">BLOB</td>
+<td style="text-align:left">0-65 535 bytes</td>
+<td style="text-align:left">二进制形式的长文本数据</td>
+</tr>
+<tr>
+<td style="text-align:left">TEXT</td>
+<td style="text-align:left">0-65 535 bytes</td>
+<td style="text-align:left">长文本数据</td>
+</tr>
+<tr>
+<td style="text-align:left">MEDIUMBLOB</td>
+<td style="text-align:left">0-16 777 215 bytes</td>
+<td style="text-align:left">二进制形式的中等长度文本数据</td>
+</tr>
+<tr>
+<td style="text-align:left">MEDIUMTEXT</td>
+<td style="text-align:left">0-16 777 215 bytes</td>
+<td style="text-align:left">中等长度文本数据</td>
+</tr>
+<tr>
+<td style="text-align:left">LONGBLOB</td>
+<td style="text-align:left">0-4 294 967 295 bytes</td>
+<td style="text-align:left">二进制形式的极大文本数据</td>
+</tr>
+<tr>
+<td style="text-align:left">LONGTEXT</td>
+<td style="text-align:left">0-4 294 967 295 bytes</td>
+<td style="text-align:left">极大文本数据</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sql基础语法"><a class="markdownIt-Anchor" href="#sql基础语法"></a> #SQL基础语法</h2>
+<ul>
+<li>
+<p>创建</p>
+<p>数据库的创建与使用</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> DATABASE test;<br>USE test;<br></code></pre></div></td></tr></table></figure>
+<p>表的创建</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> table1 (<br>  id <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> AUTO_INCREMENT,<br>  col1 <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">1</span>,<br>  col2 <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">45</span>) <span class="hljs-keyword">NULL</span>,<br>  col3 <span class="hljs-type">DATE</span> <span class="hljs-keyword">NULL</span>,<br>  <span class="hljs-keyword">PRIMARY</span> KEY (`id`));<br>  <br># 复制表，包括表结构和数据<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> newtable <span class="hljs-keyword">AS</span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> table1;<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p>插入</p>
+<p>普通插入</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> table1(col1, col2)<br><span class="hljs-keyword">VALUES</span>(val1, val2);<br></code></pre></div></td></tr></table></figure>
+<p>插入检索的数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> table2(col1, col2)<br><span class="hljs-keyword">SELECT</span> col1, col2<br><span class="hljs-keyword">FROM</span> table1;<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p>删除</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"># 使用更新和删除操作时一定要用 <span class="hljs-keyword">WHERE</span> 子句，不然会把整张表的数据都破坏。可以先用 <span class="hljs-keyword">SELECT</span> 语句进行测试，防止错误删除。<br><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> table1<br><span class="hljs-keyword">WHERE</span> id <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br><br># <span class="hljs-keyword">TRUNCATE</span> <span class="hljs-keyword">TABLE</span> 可以清空表，也就是删除所有行。<br><span class="hljs-keyword">TRUNCATE</span> <span class="hljs-keyword">TABLE</span> table1;<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p>更新</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">UPDATE</span> table1<br><span class="hljs-keyword">SET</span> col <span class="hljs-operator">=</span> val<br><span class="hljs-keyword">WHERE</span> id <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p>查询</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"># 普通查询<br><span class="hljs-keyword">SELECT</span> col1,col2 <span class="hljs-keyword">FROM</span> table1;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li><strong>WHERE</strong></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"># 尽量使用 <span class="hljs-keyword">SQL</span> 语句来过滤不必要的数据，如果数据非常大，会导致通过网络传输了多余的数据，从而浪费了网络带宽。<br><span class="hljs-keyword">SELECT</span> col1,col2 <span class="hljs-keyword">FROM</span> table1 <span class="hljs-keyword">WHERE</span> col <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NULL</span>;<br></code></pre></div></td></tr></table></figure>
+<p><strong>AND 和 OR</strong>  用于连接多个过滤条件。优先处理 AND，当一个过滤表达式涉及到多个 AND 和 OR 时，可以使用 () 来决定优先级，使得优先级关系更清晰。</p>
+<p><strong>IN</strong>  操作符用于匹配一组值，其后也可以接一个 SELECT 子句，从而匹配子查询得到的一组值。</p>
+<p><strong>NOT</strong>  操作符用于否定一个条件。</p>
+<p><strong>LIKE</strong>操作符用于模糊查询，对应的通配符：</p>
+<p>  <strong>%</strong>  匹配 &gt;=0 个任意字符；</p>
+<p>  <strong>_</strong>  匹配 ==1 个任意字符；</p>
+<p>  <strong>[ ]</strong>  可以匹配集合内的字符，例如 [ab] 将匹配字符 a 或者 b。用脱字符 <strong>^</strong> 可以对其进行否定，也就是不匹配集合内的字符。</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"># 匹配不以 A 和 B 开头的任意文本<br><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span><br><span class="hljs-keyword">FROM</span> table1<br><span class="hljs-keyword">WHERE</span> col <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;[^AB]%&#x27;</span>; <br></code></pre></div></td></tr></table></figure>
+<ul>
+<li><strong>DISTINCT</strong></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"># 用于去重 相同值只会出现一次。对于多个列所有列的值都相同才算相同。<br><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">DISTINCT</span> col1, col2<br><span class="hljs-keyword">FROM</span> table1;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li><strong>LIMIT</strong></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"># 限制返回的行数。可以有两个参数，第一个参数为起始行，从 <span class="hljs-number">0</span> 开始;第二个参数为返回的总行数。<br><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span><br><span class="hljs-keyword">FROM</span> table1<br>LIMIT <span class="hljs-number">0</span>, <span class="hljs-number">5</span>;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li><strong>ORDER BY</strong></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs SQL"># <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span>可以对查询字段进行排序，并且为每个列指定不同的排序方式: <span class="hljs-keyword">ASC</span>(默认)：升序；<span class="hljs-keyword">DESC</span>：降序 <br><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <br><span class="hljs-keyword">FROM</span> table1 <br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> col1 <span class="hljs-keyword">ASC</span>, col2 <span class="hljs-keyword">DESC</span>;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li><strong>GROUP BY</strong></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"># <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span>可以把具有相同的数据值的行放在同一组中。<br><span class="hljs-keyword">SELECT</span> col, <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">AS</span> num<br><span class="hljs-keyword">FROM</span> table1<br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> col;<br><br># <span class="hljs-keyword">WHERE</span> 过滤行，<span class="hljs-keyword">HAVING</span> 过滤分组，行过滤应当先于分组过滤。<br><span class="hljs-keyword">SELECT</span> col, <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">AS</span> num<br><span class="hljs-keyword">FROM</span> table1<br><span class="hljs-keyword">WHERE</span> col <span class="hljs-operator">&gt;</span> <span class="hljs-number">2</span><br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> col<br><span class="hljs-keyword">HAVING</span> num <span class="hljs-operator">&gt;=</span> <span class="hljs-number">2</span>;<br><br># <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> 后可以接<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> 按分组后字段来进行排序。<br><span class="hljs-keyword">SELECT</span> col, <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">AS</span> num<br><span class="hljs-keyword">FROM</span> table1<br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> col<br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> num;<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>
+<p>GROUP BY 子句出现在 WHERE 子句之后，ORDER BY 子句之前；</p>
+</li>
+<li>
+<p>除了汇总字段外，SELECT 语句中的每一字段都必须在 GROUP BY 子句中给出；</p>
+</li>
+<li>
+<p>NULL 的行会单独分为一组；</p>
+</li>
+<li>
+<p>大多数 SQL 实现不支持 GROUP BY 列具有可变长度的数据类型。</p>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>
+<p><strong>子查询</strong></p>
+<p>子查询中只能返回一个字段的数据。</p>
+<p>可以将子查询的结果作为 WHRER 语句的过滤条件：</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span><br><span class="hljs-keyword">FROM</span> mytable1<br><span class="hljs-keyword">WHERE</span> col1 <span class="hljs-keyword">IN</span> (<span class="hljs-keyword">SELECT</span> col2<br>               <span class="hljs-keyword">FROM</span> mytable2);<br></code></pre></div></td></tr></table></figure>
+<p>下面的语句可以检索出客户的订单数量，子查询语句会对第一个查询检索出的每个客户执行一次：</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> cust_name, <br>( <span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <br>  <span class="hljs-keyword">FROM</span> Orders <br>  <span class="hljs-keyword">WHERE</span> Orders.cust_id <span class="hljs-operator">=</span> Customers.cust_id) <span class="hljs-keyword">AS</span> orders_num <br><span class="hljs-keyword">FROM</span> Customers<br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> cust_name;<br></code></pre></div></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="连接"><a class="markdownIt-Anchor" href="#连接"></a> #连接</h2>
+<p><font style="color:red">连接用于连接多个表，使用 <code>JOIN</code> 关键字，并且连接的条件语句使用 <code>ON</code> 而不是 <code>WHERE</code>。</font></p>
+<p><strong>连接可以替换子查询，并且比子查询的效率一般会更快。</strong></p>
+<p>可以用 AS 给列名、计算字段和表名取别名，给表名取别名是为了简化 SQL 语句以及连接相同表。</p>
+<ul>
+<li>
+<p><strong>自然连接</strong></p>
+<p>自然连接是把同名列通过等值测试连接起来的，同名列可以有多个。</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> tab1.value, tab2.value<br><span class="hljs-keyword">FROM</span> table1 <span class="hljs-keyword">AS</span> tab1 <span class="hljs-keyword">NATURAL</span> <span class="hljs-keyword">JOIN</span> table2 <span class="hljs-keyword">AS</span> tab2;<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p><strong>内连接</strong></p>
+<p>内连接又称等值连接，使用 INNER JOIN 关键字。可以不明确使用 INNER JOIN，而使用普通查询并在 WHERE 中将两个表中要连接的列用等值方法连接起来。</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> tab1.value, tab2.value<br><span class="hljs-keyword">FROM</span> table1 <span class="hljs-keyword">AS</span> tab1 <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> table2 <span class="hljs-keyword">AS</span> tab2<br><span class="hljs-keyword">ON</span> tab1.key <span class="hljs-operator">=</span> tab2.key;<br><br><span class="hljs-keyword">SELECT</span> tab1.value, tab2.value<br><span class="hljs-keyword">FROM</span> table1 <span class="hljs-keyword">AS</span> tab1  <br><span class="hljs-keyword">WHERE</span> tab1.key <span class="hljs-operator">=</span> tab2.key;<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p><strong>外连接</strong></p>
+<p>外连接保留了没有关联的那些行。分为左外连接，右外连接以及全外连接，左外连接就是保留左表没有关联的行。</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"># 检索所有顾客的订单信息，包括还没有订单信息的顾客。<br><span class="hljs-keyword">SELECT</span> Customers.cust_id, Orders.order_num<br><span class="hljs-keyword">FROM</span> Customers <span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">OUTER</span> <span class="hljs-keyword">JOIN</span> Orders<br><span class="hljs-keyword">ON</span> Customers.cust_id <span class="hljs-operator">=</span> Orders.cust_id;<br></code></pre></div></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="索引"><a class="markdownIt-Anchor" href="#索引"></a> #索引</h2>
+<p>索引是在存储引擎层实现的，而不是在服务器层实现的，所以不同存储引擎具有不同的索引类型和实现。</p>
+<p><font style="color:grey">待编纂。。</font></p>
+<h2 id="触发器"><a class="markdownIt-Anchor" href="#触发器"></a> #触发器</h2>
+<p><font style="color:red">触发器会在某个表执行以下语句时而自动执行: DELETE、INSERT、UPDATE。</font></p>
+<p><font style="color:red">触发器必须指定在语句执行之前或者之后自动执行，之前执行使用 <code>BEFORE</code> 关键字，之后执行使用 <code>AFTER</code> 关键字。<code>BEFORE</code> 用于数据验证和净化，<code>AFTER</code> 用于审计跟踪，将修改记录到另外一张表中。</font></p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TRIGGER</span> trigger1 AFTER <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">ON</span> table1<br><span class="hljs-keyword">FOR</span> <span class="hljs-keyword">EACH</span> <span class="hljs-type">ROW</span> <span class="hljs-keyword">SELECT</span> NEW.col <span class="hljs-keyword">into</span> <span class="hljs-variable">@result</span>;<br><br><span class="hljs-keyword">SELECT</span> <span class="hljs-variable">@result</span>; <span class="hljs-comment">-- 获取结果</span><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>INSERT 触发器包含一个名为 <code>NEW</code> 的虚拟表。</p>
+<p>DELETE 触发器包含一个名为 <code>OLD</code> 的虚拟表，并且是只读的。</p>
+<p>UPDATE 触发器包含一个名为 <code>NEW</code> 和一个名为 <code>OLD</code> 的虚拟表，其中 <strong>NEW 是可以被修改的，而 OLD 是只读的。</strong></p>
+<p>MySQL 不允许在触发器中使用 <code>CALL</code> 语句，也就是不能调用存储过程。</p>
+</blockquote>
+<h2 id="存储过程"><a class="markdownIt-Anchor" href="#存储过程"></a> #存储过程</h2>
+<p><font style="color:grey">待编纂。。</font></p>
+<h2 id="游标"><a class="markdownIt-Anchor" href="#游标"></a> #游标</h2>
+<p><font style="color:grey">待编纂。。</font></p>
+<h2 id="事务"><a class="markdownIt-Anchor" href="#事务"></a> #事务</h2>
+<p><font style="color:grey">待编纂。。</font></p>
+<h2 id="sql优化"><a class="markdownIt-Anchor" href="#sql优化"></a> #SQL优化</h2>
+<ol>
+<li>
+<p><strong>避免全表扫描</strong>，首先应考虑在 where 及 order by 涉及的列上建立索引；</p>
+</li>
+<li>
+<p><strong>避免在 where 子句中对字段进行 null 值判断</strong>，否则将导致引擎放弃使用索引而进行全表扫描，如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> id <span class="hljs-keyword">FROM</span> table1 <span class="hljs-keyword">WHERE</span> num <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NULL</span><br></code></pre></div></td></tr></table></figure>
+<p>也可以自定义表示 null 值的标识符来填充，同时 定长类型 的字段在建立时，空间也固定了不管是否插入值（NULL也包含在内）。如果是 变长类型 字段 null 值是不占用空间的；</p>
+</li>
+<li>
+<p><strong>避免在where子句中使用<code>!=</code>或<code>&lt;&gt;</code>操作符</strong>，否则引擎会放弃索引搜索而进行全表扫描；</p>
+</li>
+<li>
+<p><strong>避免在where子句中使用<code>or</code>来连接条件</strong>，如果一个字段有索引，另一个没有索引时，引擎也会放弃索引搜索而进行全表扫描；</p>
+<p><strong>可以将<code>or</code>连接方式改成<code>union</code>方式</strong> ：</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> id <span class="hljs-keyword">FROM</span> table1 <span class="hljs-keyword">WHERE</span> role <span class="hljs-operator">=</span> <span class="hljs-number">1</span> <br><span class="hljs-keyword">union</span> <span class="hljs-keyword">all</span><br><span class="hljs-keyword">SELECT</span> id <span class="hljs-keyword">FROM</span> table1 <span class="hljs-keyword">where</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;admin&#x27;</span><br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p><strong><code>in</code>和<code>not in</code>也会导致全表扫描，用 <code>exists</code> 代替 <code>in</code>，或者对于连续的数值使用<code>between</code></strong>；</p>
+</li>
+<li>
+<p>前导的模糊查询会导致全表扫描：</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> id <span class="hljs-keyword">from</span> table1 <span class="hljs-keyword">where</span> name <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%abc&#x27;</span><br></code></pre></div></td></tr></table></figure>
+<p>若要提高效率，可以考虑全文检索。</p>
+</li>
+<li>
+<p>避免在where子句中对字段进行函数操作，这将导致引擎放弃使用索引而进行全表扫描。</p>
+</li>
+<li>
+<p>Update 语句，如果只更改1、2个字段，不要Update全部字段，否则频繁调用会引起明显的性能消耗，同时带来大量日志。</p>
+</li>
+<li>
+<p>对于多张大数据量（这里几百条就算大了）的表JOIN，要先分页再JOIN，否则逻辑读会很高，性能很差。</p>
+</li>
+<li>
+<p>类似 <code>select count(*) from table；</code>这样不带任何条件的count会引起全表扫描，并且没有任何业务意义，是一定要杜绝的。</p>
+</li>
+<li>
+<p>索引并不是越多越好，<strong>索引固然可以提高相应的 select 的效率，但同时也降低了 insert 及 update 的效率，因为 insert 或 update 时有可能会重建索引</strong>，所以怎样建索引需要慎重考虑，视具体情况而定。<strong>一个表的索引数最好不要超过6个，若太多则应考虑一些不常使用到的列上建的索引是否有必要。</strong></p>
+</li>
+<li>
+<p>尽量使用数字型字段，若只含数值信息的字段尽量不要设计为字符型，这会降低查询和连接的性能，并会增加存储开销。这是因为引擎在处理查询和连 接时会逐个比较字符串中每一个字符，而对于数字型而言只需要比较一次就够了。</p>
+</li>
+<li>
+<p>尽可能的使用 varchar/nvarchar 代替 char/nchar ，因为首先变长字段存储空间小，可以节省存储空间，其次对于查询来说，在一个相对较小的字段内搜索效率显然要高些。</p>
+</li>
+<li>
+<p>任何地方都不要使用 select * from t ，用具体的字段列表代替“ * ”，不要返回用不到的任何字段。</p>
+</li>
+<li>
+<p>避免频繁创建和删除临时表，以减少系统表资源的消耗。临时表并不是不可使用，适当地使用它们可以使某些例程更有效，例如，当需要重复引用大型表或常用表中的某个数据集时。但是，对于一次性事件， 最好使用导出表。</p>
+</li>
+<li>
+<p>**在新建临时表时，如果一次性插入数据量很大，那么可以使用 select into 代替 create table，避免造成大量 log ，以提高速度；**如果数据量不大，为了缓和系统表的资源，应先create table，然后insert。</p>
+</li>
+<li>
+<p><strong>如果使用到了临时表，在存储过程的最后务必将所有的临时表显式删除，先 truncate table ，然后 drop table ，这样可以避免系统表的较长时间锁定。</strong></p>
+</li>
+<li>
+<p>尽量避免向客户端返回大数据量，若数据量过大，应该考虑相应需求是否合理。</p>
+</li>
+<li>
+<p>尽量避免大事务操作，提高系统并发能力。</p>
+</li>
+<li>
+<p>尽量避免使用游标，因为游标的效率较差，如果游标操作的数据超过1万行，那么就应该考虑改写；使用基于游标的方法或临时表方法之前，应先寻找基于集的解决方案来解决问题，基于集的方法通常更有效。</p>
+</li>
+</ol>
+<h2 id="规范"><a class="markdownIt-Anchor" href="#规范"></a> #规范</h2>
+<p><font style="color:grey">待编纂。。</font></p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/helloworld/categories/Database/">Database</a>
+                    
+                      <a class="hover-with-bg" href="/helloworld/categories/Database/MySQL/">MySQL</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/helloworld/tags/Database/">Database</a>
+                    
+                      <a class="hover-with-bg" href="/helloworld/tags/Sql/">Sql</a>
+                    
+                      <a class="hover-with-bg" href="/helloworld/tags/MySQL/">MySQL</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/helloworld/notes/Java/API/JavaIO/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JavaIO</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/helloworld/notes/Java/Spring/Spring/">
+                        <span class="hidden-mobile">Spring</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/helloworld/js/events.js" ></script>
+<script  src="/helloworld/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/helloworld/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/helloworld/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/helloworld/js/boot.js" ></script>
+
+
+</body>
+</html>
