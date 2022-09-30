@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_CVP/Collection&Map.png">
 <meta property="article:published_time" content="2022-05-11T00:00:00.000Z">
-<meta property="article:modified_time" content="2022-05-27T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-09-30T00:00:00.000Z">
 <meta property="article:author" content="C1thulhu">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="JDK">
@@ -201,7 +201,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      12k 字
+      15k 字
     </span>
   
 
@@ -248,23 +248,17 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022-05-27
+                  本文最后更新于：2022-09-30
                 
               </p>
             
             <div class="markdown-body">
               <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> #前言</h2>
-<p><font style="color:grey">待完善。</font></p>
 <p>参考文章：</p>
 <ul>
-<li>
-<p><a target="_blank" rel="noopener" href="https://blog.kyire.site//2021/07/02/13a54546.html">Java中的集合</a></p>
-</li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://www.runoob.com/java/java-collections.html">菜鸟驿站-Java 集合框架</a></p>
-</li>
-<li>
-<p>Map</p>
+<li><a target="_blank" rel="noopener" href="https://blog.kyire.site//2021/07/02/13a54546.html">Java中的集合</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/java/java-collections.html">菜鸟驿站-Java 集合框架</a></li>
+<li>Map
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_54361971/article/details/122430827">HashMap详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40050586/article/details/105851970">LinkedHashMap详解</a></li>
@@ -272,21 +266,23 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013467442/article/details/105826778">WeakHashMap</a></li>
 </ul>
 </li>
-<li>
-<p>Queue</p>
+<li>Queue
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lucklycoder/article/details/115381856">ArrayDeque类详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lxyit/p/9052962.html">PriorityQueue详解</a></li>
 </ul>
 </li>
-<li>
-<p>Set</p>
+<li>Set
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44549134/article/details/109059724">TreeSet</a></li>
 </ul>
 </li>
-<li>
-<h2 id="集合工具类"><a class="markdownIt-Anchor" href="#集合工具类"></a> 集合工具类</h2>
+<li>集合工具类
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.yiibai.com/java/java-listiterator.html">易百教程-listiterator接口</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.yiibai.com/java/java_using_iterator.html">易百教程-iterator接口</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1252599548343744/1299919855943714">Collections使用</a></li>
+</ul>
 </li>
 </ul>
 <h2 id="java集合体系"><a class="markdownIt-Anchor" href="#java集合体系"></a> #Java集合体系</h2>
@@ -594,11 +590,11 @@
 <li>如果将compareTo()返回值写死为-1，元素值每次比较，都认为新插入的元素比上一个元素小，于是二叉树存储时，会存在根的左侧，读取时就是倒序序排列的。</li>
 </ol>
 </blockquote>
-<h2 id="集合工具类-2"><a class="markdownIt-Anchor" href="#集合工具类-2"></a> #集合工具类</h2>
+<h2 id="集合工具类"><a class="markdownIt-Anchor" href="#集合工具类"></a> #集合工具类</h2>
 <h4 id="iteratoriterable-listiterator"><a class="markdownIt-Anchor" href="#iteratoriterable-listiterator"></a> Iterator，Iterable &amp; ListIterator</h4>
 <ul>
 <li>
-<p><code>Iterator</code> 接口：迭代器（Iterator）有时又称为游标（cursor），<font style="color : red">提供一种方法访问一个容器（container）对象中各个元素，而又不暴露该对象的内部细节。</font></p>
+<p><code>Iterator</code> 接口：迭代器（Iterator）有时又称为游标（cursor），是<strong>单向迭代器</strong>，<font style="color : red">用于遍历Collection集合中的元素，Collection接口中的iterator方法能够直接提供Iterator实例化的对象。它能访问一个容器（container）对象中各个元素，而又不暴露该对象的内部细节。</font></p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs JAVA"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Iterator</span>&lt;E&gt; &#123;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">hasNext</span><span class="hljs-params">()</span>;<br>    E <span class="hljs-title function_">next</span><span class="hljs-params">()</span>;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">remove</span><span class="hljs-params">()</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p>提供的API接口含义如下：</p>
 <ul>
@@ -610,15 +606,131 @@
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs JAVA">List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>list.add(<span class="hljs-number">1</span>);<br>list.add(<span class="hljs-number">2</span>);<br>list.add(<span class="hljs-number">3</span>);<br>Iterator&lt;Integer&gt; iterator = list.iterator();<br><span class="hljs-keyword">while</span> (iterator.hasNext())&#123;<br>    <span class="hljs-type">Integer</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> iterator.next();<br>    System.out.println(next);<br>    <span class="hljs-keyword">if</span>(next==<span class="hljs-number">2</span>)&#123;iterator.remove();&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 </li>
 <li>
-<p><code>Iterable</code> 接口：</p>
+<p><code>Iterable</code> 接口主要是为为集合类提供for-each循环的支持，源码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Iterable</span>&lt;T&gt; &#123;<br>	Iterator&lt;T&gt; <span class="hljs-title function_">iterator</span><span class="hljs-params">()</span>;<br>    <span class="hljs-comment">// JDK1.8</span><br>    <span class="hljs-keyword">default</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">forEach</span><span class="hljs-params">(Consumer&lt;? <span class="hljs-built_in">super</span> T&gt; action)</span> &#123;<br>        Objects.requireNonNull(action);<br>        <span class="hljs-keyword">for</span> (T t : <span class="hljs-built_in">this</span>) &#123;<br>            action.accept(t);<br>        &#125;<br>    &#125;<br>    <br>    <span class="hljs-keyword">default</span> Spliterator&lt;T&gt; <span class="hljs-title function_">spliterator</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> Spliterators.spliteratorUnknownSize(iterator(), <span class="hljs-number">0</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-<p><font style="color:grey">待编纂。。</font></p>
+</li>
+<li>
+<p><code>ListIterator</code>和<code>Iterator</code>一样也是Java迭代器，<font style="color : red">它扩展了<code>Iterator</code>接口，且仅对<code>List</code>实现的类有用。</font></p>
+<p><code>ListIterator</code>&amp;<code>Iterator</code>区别：</p>
+<ul>
+<li><code>ListIterator</code>仅对<code>List</code>实现的类有用，<code>Iterator</code>作用在<code>Collection</code>实现的类。</li>
+<li><code>ListIterator</code>支持四种操作：<font style="color:yellow"><code>CRUD</code><sup>3</sup>(<code>CREATE</code>，<code>READ</code>，<code>UPDATE</code>和<code>DELETE</code>)</font>。</li>
+<li><code>ListIterator</code>是一个双向迭代器，它支持正向和反向迭代。</li>
+<li><code>ListIterator</code>没有当前元素; 它的光标位置总是位于调用<code>previous()</code>返回的元素和调用<code>next()</code>返回的元素之间。</li>
+</ul>
+<p><font style="color:yellow">③：可以对List对象的元素进行增删改查操作</font></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>void add(E e)</code></td>
+<td>将指定的元素插入列表中。</td>
+</tr>
+<tr>
+<td><code>boolean hasNext()</code></td>
+<td>如果此列表迭代器在向前遍历列表时具有元素，则返回<code>true</code>。</td>
+</tr>
+<tr>
+<td><code>boolean hasPrevious()</code></td>
+<td>如果此列表迭代器在反向遍历列表时具有元素，则返回<code>true</code>。</td>
+</tr>
+<tr>
+<td><code>E next()</code></td>
+<td>返回列表中的下一个元素。</td>
+</tr>
+<tr>
+<td><code>int nextIndex()</code></td>
+<td>返回元素的索引。</td>
+</tr>
+<tr>
+<td><code>E previous()</code></td>
+<td>返回列表中的上一个元素并向后移动光标位置。</td>
+</tr>
+<tr>
+<td><code>int previousIndex()</code></td>
+<td>返回元素的索引。</td>
+</tr>
+<tr>
+<td><code>void remove()</code></td>
+<td>从列表中删除由<code>next()</code>或<code>previous()</code>返回的最后一个元素。</td>
+</tr>
+<tr>
+<td><code>void set(E e)</code></td>
+<td>用指定的元素替换由<code>next()</code>或<code>previous()</code>返回的最后一个元素。</td>
+</tr>
+</tbody>
+</table>
+<p><code>ListIterator</code>使用示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ListIteratorDemo</span> &#123;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span>&#123;<br>    List&lt;String&gt; names = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();<br>    names.add(<span class="hljs-string">&quot;Java&quot;</span>);<br>    names.add(<span class="hljs-string">&quot;Python&quot;</span>);<br>    names.add(<span class="hljs-string">&quot;Rust&quot;</span>);<br><br>    <span class="hljs-comment">// 获取ListIterator</span><br>    ListIterator&lt;String&gt; namesIterator = names.listIterator();<br><br>    <span class="hljs-comment">// 遍历元素</span><br>    <span class="hljs-keyword">while</span>(namesIterator.hasNext())&#123;<br>       System.out.println(namesIterator.next());<br>    &#125;<br>      <br>    <span class="hljs-comment">// 反向遍历元素</span><br>    <span class="hljs-keyword">while</span>(namesIterator.hasPrevious())&#123;<br>	  System.out.println(namesIterator.previous());<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="collections"><a class="markdownIt-Anchor" href="#collections"></a> Collections</h4>
-<p><font style="color:grey">待编纂。。</font></p>
-<h4 id="arrays"><a class="markdownIt-Anchor" href="#arrays"></a> Arrays</h4>
-<p><font style="color:grey">待编纂。。</font></p>
+<p>Collections是JDK提供的集合工具类，提供了一系列的静态方法，能更方便的操作各种集合。</p>
+<ul>
+<li>
+<p>创建空集合，<code>Collections</code>提供了一系列方法创建空集合：</p>
+<blockquote>
+<p>List<T> emptyList()，创建空List</p>
+<p>Map&lt;K, V&gt; emptyMap()，创建空Map</p>
+<p>Set<T> emptySet()，创建空Set</p>
+</blockquote>
+<p><font style="color:red">这些返回的空集合是不可变集合，无法向其中添加或删除元素。</font>其实在<font style="color:#007777"><strong>Java9以后各个集合接口也提供了<code>of()</code>方法</strong></font>创建空集合：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">List&lt;String&gt; list1 = List.of();<br><span class="hljs-comment">//of方法等同于Collections.emptyList();</span><br>List&lt;String&gt; list2 = Collections.emptyList();<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p>创建单元素集合</p>
+<blockquote>
+<p>List<T> singletonList(T o)，创建单个元素List</p>
+<p>Map&lt;K, V&gt; singletonMap(K key, V value)，创建单个元素Map</p>
+<p>Set<T> singleton(T o)，创建单个元素Set</p>
+</blockquote>
+<p>各个集合接口也提供的<code>of()</code>方法也可以实现，因为<code>of()</code>可以创建任意元素集合：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//Collections创建单个元素方法</span><br>List&lt;String&gt; list1 = Collections.singletonList(<span class="hljs-string">&quot;A&quot;</span>);<br><span class="hljs-comment">//of方法创建任意元素的集合</span><br>List&lt;String&gt; list2 = List.of(<span class="hljs-string">&quot;A&quot;</span>,<span class="hljs-string">&quot;B&quot;</span>,<span class="hljs-string">&quot;C&quot;</span>);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p>排序</p>
+<p><code>Collections</code>可以对<code>List</code>进行排序。因为排序会直接修改<code>List</code>元素的位置，因此必须传入可变<code>List</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">List&lt;Integer&gt; list = List.of(<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">5</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)<br><span class="hljs-comment">// 排序前:</span><br>System.out.println(list);<br>Collections.sort(list);<br><span class="hljs-comment">// 排序后:</span><br>System.out.println(list);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p>乱序</p>
+<p><code>Collections</code>提供了洗牌算法，即传入一个有序的<code>List</code>，可以随机打乱<code>List</code>内部元素的顺序</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">10</span>; i++) &#123;<br>	list.add(i);<br>&#125;<br><span class="hljs-comment">// 乱序前:</span><br>System.out.println(list);<br>Collections.shuffle(list);<br><span class="hljs-comment">// 乱序后:</span><br>System.out.println(list);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p>不可变集合</p>
+<p><code>Collections</code>提供了一组方法把可变集合封装成不可变集合：</p>
+<blockquote>
+<ul>
+<li>封装成不可变List：<code>List&lt;T&gt; unmodifiableList(List&lt;? extends T&gt; list)</code></li>
+<li>封装成不可变Set：<code>Set&lt;T&gt; unmodifiableSet(Set&lt;? extends T&gt; set)</code></li>
+<li>封装成不可变Map：<code>Map&lt;K, V&gt; unmodifiableMap(Map&lt;? extends K, ? extends V&gt; m)</code></li>
+</ul>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// Java9以上才可用</span><br>List&lt;String&gt; mutable = List.of(<span class="hljs-string">&quot;A&quot;</span>,<span class="hljs-string">&quot;B&quot;</span>);<br><span class="hljs-comment">// 变为不可变集合</span><br>List&lt;String&gt; immutable = Collections.unmodifiableList(mutable);<br>immutable.add(<span class="hljs-string">&quot;C&quot;</span>); <span class="hljs-comment">// 抛出错误UnsupportedOperationException!</span><br></code></pre></div></td></tr></table></figure>
+<p>然而对原始的可变List进行增删会直接影响到封装后的List</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// Java9以上才可用</span><br>List&lt;String&gt; mutable = List.of(<span class="hljs-string">&quot;A&quot;</span>,<span class="hljs-string">&quot;B&quot;</span>);<br><span class="hljs-comment">// 变为不可变集合</span><br>List&lt;String&gt; immutable = Collections.unmodifiableList(mutable);<br>mutable.add(<span class="hljs-string">&quot;C&quot;</span>);<br>System.out.println(immutable);<br></code></pre></div></td></tr></table></figure>
+<p>所以，如果我们需要封装一个不可变集合，在返回不可变后最好立刻扔掉原来可变List的引用：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">List&lt;String&gt; mutable = List.of(<span class="hljs-string">&quot;A&quot;</span>,<span class="hljs-string">&quot;B&quot;</span>);<br><span class="hljs-comment">// 变为不可变集合</span><br>List&lt;String&gt; immutable1 = Collections.unmodifiableList(mutable);<br><span class="hljs-comment">// 立刻扔掉mutable的引用</span><br>mutable = <span class="hljs-literal">null</span>;<br>System.out.println(immutable1);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p><font style="color:grey">线程安全集合，<code>Collections</code>提供了一组方法，可以把线程不安全的集合变为线程安全的集合：</font></p>
+<blockquote>
+<ul>
+<li>变为线程安全的List：<code>List&lt;T&gt; synchronizedList(List&lt;T&gt; list)</code></li>
+<li>变为线程安全的Set：<code>Set&lt;T&gt; synchronizedSet(Set&lt;T&gt; s)</code></li>
+<li>变为线程安全的Map：<code>Map&lt;K,V&gt; synchronizedMap(Map&lt;K,V&gt; m)</code></li>
+</ul>
+</blockquote>
+<p>Java后来引入了更高效的并发集合类，所以上述这几个转变线程安全集合方法已经没有什么用了</p>
+</li>
+</ul>
 
             </div>
             <hr>
