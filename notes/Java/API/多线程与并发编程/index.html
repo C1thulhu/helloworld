@@ -202,7 +202,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      18k 字
+      20k 字
     </span>
   
 
@@ -783,7 +783,7 @@
 <p><font style="color:grey">待编纂。。</font></p>
 <h3 id="原子类"><a class="markdownIt-Anchor" href="#原子类"></a> 原子类</h3>
 <h4 id="cas"><a class="markdownIt-Anchor" href="#cas"></a> CAS</h4>
-<p>  <code>CAS</code>(Compare-And-Swap)意思是对比交换，这是一条<code>CPU</code>原子指令，其作用是让<code>CPU</code>先进行比较两个值是否相等，然后原子地更新某个位置的值。<font style="color:yellow"><code>CAS</code>实现方式是基于硬件平台的汇编指令，<code>JVM</code>只是封装了汇编调用。</font>而<code>java.util.concurrent.atomic</code>包下所有的原子类都是使用了封装<code>CAS</code>后的接口，包括<code>Lock</code>底层<code>AQS</code>也是基于<code>CAS</code>获取锁的。</p>
+<p>  在了解原子类之前我们需要先了解<code>CAS</code>，<code>CAS</code>(Compare-And-Swap)是指对比交换，这是一条<code>CPU</code>原子指令，其作用是让<code>CPU</code>先进行比较两个值是否相等，然后原子地更新某个位置的值。<font style="color:yellow"><code>CAS</code>实现方式是基于硬件平台的汇编指令，<code>JVM</code>只是封装了汇编调用。</font>而<code>java.util.concurrent.atomic</code>包下所有的原子类都是使用了封装<code>CAS</code>后的接口，包括<code>Lock</code>底层<code>AQS</code>也是基于<code>CAS</code>获取锁的。</p>
 <p><code>CAS</code>工作流程：</p>
 <img src="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/CAS%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.png" srcset="/helloworld/img/loading.gif" lazyload alt="CAS工作流程" style="zoom:80%;"/>
 <p>使用示例：</p>
@@ -860,6 +860,85 @@ Unsafe是位于sun.misc包下，主要<strong>提供一些用于执行低级别�
 <p><code>Unsafe</code>类尽管里面的方法都是 public 的，但是并没有办法使用它们，因为<code>AppClassLoader</code>应用程序加载器加载的，不是启动类加载器加载的，这是一种安全机制。然而可以使用<strong>反射</strong>来使用UnSafe类</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UnsafeDemo</span> &#123;<br>	<span class="hljs-keyword">volatile</span> <span class="hljs-type">long</span> <span class="hljs-variable">state</span> <span class="hljs-operator">=</span> O;<span class="hljs-comment">//变量</span><br>	<span class="hljs-keyword">static</span> Unsafe unsafe;<span class="hljs-comment">//获取Unsafe的实例</span><br>	<span class="hljs-keyword">static</span> <span class="hljs-type">long</span> stateoffset;<span class="hljs-comment">//记录变量state在类unsafeDemo类中的偏移值</span><br>	<span class="hljs-keyword">static</span> &#123;<br>		<span class="hljs-keyword">try</span> &#123;<br>			Field field;<br>            <span class="hljs-comment">//使用反射获取unsafe类的成员交量theUnsafe,</span><br>            field = Unsafe.class.getDeclaredField(<span class="hljs-string">&quot;theUnsafe&quot;</span> );<br>            field.setAccessible(<span class="hljs-literal">true</span>);<span class="hljs-comment">//设置为可存取</span><br>            unsafe = (unsafe) field.get(<span class="hljs-literal">null</span>);	<span class="hljs-comment">//获取该变量的值//获取state在unsafeDemo中的偏移量</span><br>            stateOffset = unsafe.objectFieldoffset(UnsafeDemo.class.getDeclaredField(<span class="hljs-string">&quot;state&quot;</span>));<br>		&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>			e.printstackTrace();<br>		&#125;<br>	&#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(string[] args)</span>&#123;<br>    	<span class="hljs-type">UnsafeDemo</span> <span class="hljs-variable">uDemo</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UnsafeDemo</span>();<br>    	System.out.println( <span class="hljs-string">&quot;before CAS: &quot;</span>+uDemo.state);<br>    	<span class="hljs-type">Boolean</span> <span class="hljs-variable">success</span> <span class="hljs-operator">=</span> unsafe.compareAndSwapInt(uDemo,stateoffset,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>);<br>		System.out.println(success);<br>		System.out.println( <span class="hljs-string">&quot;after CAS: &quot;</span>+uDemo.state);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <h4 id="atomic"><a class="markdownIt-Anchor" href="#atomic"></a> Atomic</h4>
+<p>在<code>atomic</code>包中主要有四种类型的原子更新类：原子更新基本类型、原子更新数组类型、原子更新引用和原子更新属性。<br />
+这些原子类都用了无锁的概念，或是直接使用<code>CAS</code>操作的线程安全类型</p>
+<table>
+<thead>
+<tr>
+<th>类名</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AtomicBoolean</td>
+<td><strong>原子更新基本类型</strong></td>
+<td>原子更新布尔变量</td>
+</tr>
+<tr>
+<td>AtomicInteger</td>
+<td><strong>原子更新基本类型</strong></td>
+<td>原子更新整型变量</td>
+</tr>
+<tr>
+<td>AtomicLong</td>
+<td><strong>原子更新基本类型</strong></td>
+<td>原子更新长整型变量</td>
+</tr>
+<tr>
+<td>AtomicIntegerArray</td>
+<td><strong>原子更新数组</strong></td>
+<td>原子更新整型数组的某个元素</td>
+</tr>
+<tr>
+<td>AtomicLongArray</td>
+<td><strong>原子更新数组</strong></td>
+<td>原子更新长整型数组的某个元素</td>
+</tr>
+<tr>
+<td>AtomicReferenceArray</td>
+<td><strong>原子更新数组</strong></td>
+<td>原子更新引用类型数组的某个元素</td>
+</tr>
+<tr>
+<td>AtomicReference</td>
+<td><strong>原子更新引用类型</strong></td>
+<td>原子更新引用类型</td>
+</tr>
+<tr>
+<td>AtomicReferenceFieldUpdater</td>
+<td><strong>原子更新引用类型</strong></td>
+<td>原子更新引用类型里的字段</td>
+</tr>
+<tr>
+<td>AtomicMarkableReference</td>
+<td><strong>原子更新引用类型</strong></td>
+<td>原子更新带有标记位的引用类型</td>
+</tr>
+<tr>
+<td>AtomicIntegerFieldUpdater</td>
+<td><strong>原子更新字段类</strong></td>
+<td>原子更新整型字段</td>
+</tr>
+<tr>
+<td>AtomicLongFieldUpdater</td>
+<td><strong>原子更新字段类</strong></td>
+<td>原子更新长整型字段</td>
+</tr>
+<tr>
+<td>AtomicStampedReference</td>
+<td><strong>原子更新字段类</strong></td>
+<td>原子更新带有版本号的引用类型</td>
+</tr>
+</tbody>
+</table>
+<p>在原子类中有相应的操作方法，以<code>AtomicInteger</code>为例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-type">AtomicInteger</span> <span class="hljs-variable">atomicInt</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AtomicInteger</span>(<span class="hljs-number">100</span>);<br><br><span class="hljs-comment">//addAndGet()以原子方式将给定值添加到当前值，并在添加后返回新值。</span><br>System.out.println(<span class="hljs-string">&quot;addAndGet event: &quot;</span> + atomicInteger.addAndGet(<span class="hljs-number">2</span>));<br>System.out.println(<span class="hljs-string">&quot;addAndGet after: &quot;</span> + atomicInteger);<br><span class="hljs-comment">//getAndAdd()以原子方式将给定值添加到当前值并返回旧值。</span><br>System.out.println(<span class="hljs-string">&quot;getAndAdd event: &quot;</span> + atomicInteger.getAndAdd(<span class="hljs-number">2</span>));<br>System.out.println(<span class="hljs-string">&quot;getAndAdd after: &quot;</span> + atomicInteger);<br><span class="hljs-comment">//incrementAndGet()以原子方式将当前值递增1并在递增后返回新值。它相当于i ++操作。</span><br>System.out.println(<span class="hljs-string">&quot;incrementAndGet event: &quot;</span> + atomicInteger.incrementAndGet());<br>System.out.println(<span class="hljs-string">&quot;incrementAndGet after: &quot;</span> + atomicInteger);<br><span class="hljs-comment">//getAndIncrement()以原子方式递增当前值并返回旧值。它相当于++ i操作。</span><br>System.out.println(<span class="hljs-string">&quot;getAndIncrement event: &quot;</span> + atomicInteger.getAndIncrement());<br>System.out.println(<span class="hljs-string">&quot;getAndIncrement after: &quot;</span> + atomicInteger);<br><span class="hljs-comment">//decrementAndGet()原子地将当前值减1并在减量后返回新值。它等同于i-操作。</span><br>System.out.println(<span class="hljs-string">&quot;decrementAndGet event: &quot;</span> + atomicInteger.decrementAndGet());<br>System.out.println(<span class="hljs-string">&quot;decrementAndGet after: &quot;</span> + atomicInteger);<br><span class="hljs-comment">//getAndDecrement()以原子方式递减当前值并返回旧值。它相当于-i操作。</span><br>System.out.println(<span class="hljs-string">&quot;getAndDecrement event: &quot;</span> + atomicInteger.getAndDecrement());<br>System.out.println(<span class="hljs-string">&quot;getAndDecrement after: &quot;</span> + atomicInteger);<br></code></pre></div></td></tr></table></figure>
+<p>每个原子类都会存在一个方法<code>compareAndSet</code>，它的作用是<font style="color:red">在多线程并发的情况下将当前状态值与旧值比较，当在某一线程修改值时，其他线程已经将该值修改了即当前状态值和旧值不一致，这时用<code>compareAndSet</code>方法就可以判断该值是否已经被修改，如果没被修改则成功赋值</font></p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-type">AtomicInteger</span> <span class="hljs-variable">atomicInt</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AtomicInteger</span>(<span class="hljs-number">100</span>);<br><span class="hljs-keyword">do</span>&#123;<br>	oldValue = atomicInt.get();<br>	newValue = Math.max(oldValue, atomicInt);<br>&#125;<span class="hljs-keyword">while</span>(!largest.compareAndSet(oldValue, newValue);<br></code></pre></div></td></tr></table></figure>
+<p>在<code>atomic</code>包下还有4个原子操作类，它们都依赖于<code>atomic</code>包中的<code>Striped64</code>实现：<br />
+<code>LongAdder</code>、<code>LongAccumulator</code>、<code>DoubleAdder</code>、<code>DoubleAccumulator</code>是JDK1.8提供的针对<code>long</code>和<code>double</code>类型的累加器实现，LongAdder和DoubleAdder只针对数值的增减，LongAccumulator和DoubleAccumulator针对自定义函数的增减。</p>
 <h3 id="juc集合"><a class="markdownIt-Anchor" href="#juc集合"></a> JUC集合</h3>
 <p><font style="color:grey">待编纂。。</font></p>
 <h3 id="线程池"><a class="markdownIt-Anchor" href="#线程池"></a> 线程池</h3>
