@@ -19,7 +19,7 @@
     <meta name="description" content="利用高效可靠的消息传递机制进行与平台无关的数据交流，并基于数据通信来进行分布式系统的集成，是在消息的传输过程中保存消息的容器。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="消息队列">
-<meta property="og:url" content="https://c1thulhu.github.io/helloworld/notes/%E4%B8%AD%E9%97%B4%E4%BB%B6/WMB/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/index.html">
+<meta property="og:url" content="https://c1thulhu.github.io/helloworld/notes/%E4%B8%AD%E9%97%B4%E4%BB%B6/MQ/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/index.html">
 <meta property="og:site_name" content="C1thulhu">
 <meta property="og:description" content="利用高效可靠的消息传递机制进行与平台无关的数据交流，并基于数据通信来进行分布式系统的集成，是在消息的传输过程中保存消息的容器。">
 <meta property="og:locale" content="en_US">
@@ -31,7 +31,7 @@
 <meta property="article:modified_time" content="2022-10-12T00:00:00.000Z">
 <meta property="article:author" content="C1thulhu">
 <meta property="article:tag" content="中间件">
-<meta property="article:tag" content="WMB">
+<meta property="article:tag" content="AMQP">
 <meta property="article:tag" content="MQ">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-%E6%B5%81%E9%87%8F%E5%89%8A%E5%B3%B0.png">
@@ -204,7 +204,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3k 字
+      3.5k 字
     </span>
   
 
@@ -263,6 +263,7 @@
 <li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1cb4y1o7zz/">尚硅谷RabbitMQ教程</a></li>
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/WMriUm27CZkiSWEt1f4lig">CodeSheep - RabbitMQ 养成攻略</a></li>
 <li><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/769883#slide-15">超详细的RabbitMQ入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.rabbitmq.com/getstarted.html">RabbitMQ官方文档</a></li>
 </ul>
 <h2 id="mq介绍"><a class="markdownIt-Anchor" href="#mq介绍"></a> #MQ介绍</h2>
 <p>  <font style = "color:red">MQ(message queue)消息队列，本质上是队列，<strong>FIFO先入先出</strong>，是一种跨进程的通讯机制，用于上下游传递信息。</font>在互联网架构中，MQ是一种非常常见的向下游 “逻辑解耦+物理解耦” 的消息通讯服务。使用MQ后，消息发发送上游只需要依赖MQ，不需要依赖其他服务。</p>
@@ -366,6 +367,43 @@
 </li>
 </ul>
 <h3 id="rabbitmq安装"><a class="markdownIt-Anchor" href="#rabbitmq安装"></a> RabbitMQ安装</h3>
+<h4 id="windows"><a class="markdownIt-Anchor" href="#windows"></a> Windows</h4>
+<ul>
+<li>
+<p>安装<code>ErLang</code>语言</p>
+<ol>
+<li>
+<p>ErLang官网下载安装包：<a target="_blank" rel="noopener" href="https://www.erlang.org/downloads%EF%BC%8C%E5%AE%89%E8%A3%85%E6%97%B6%E5%85%A8%E9%83%A8%E9%BB%98%E8%AE%A4%E4%B8%8B%E4%B8%80%E6%AD%A5%EF%BC%9B">https://www.erlang.org/downloads，安装时全部默认下一步；</a></p>
+</li>
+<li>
+<p>配置环境变量：</p>
+<p>ERLANG_HOME erlang安装目录</p>
+<p>Path %ERLANG_HOME%\bin</p>
+</li>
+<li>
+<p>验证安装</p>
+</li>
+</ol>
+</li>
+<li>
+<p>安装<code>RabbitMQ</code></p>
+<ol>
+<li>
+<p>在<code>RabbitMQ</code>官方安装地址中下载安装包：<a target="_blank" rel="noopener" href="https://www.rabbitmq.com/download.html%EF%BC%8C%E5%AE%89%E8%A3%85%E6%97%B6%E5%85%A8%E9%83%A8%E9%BB%98%E8%AE%A4%E4%B8%8B%E4%B8%80%E6%AD%A5%EF%BC%9B">https://www.rabbitmq.com/download.html，安装时全部默认下一步；</a></p>
+</li>
+<li>
+<p>在<code>RabbitMQ</code>安装目录下的<code>sbin</code>文件夹中打开<code>cmd</code>输入如下命令安装管理页面插件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">rabbitmq-plugins <span class="hljs-built_in">enable</span> rabbitmq_management<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p>然后执行<code>rabbitmq-server.bat</code>启动脚本，可在windows服务中查看<code>RabbitMQ</code>服务正在运行，</p>
+<p>在浏览器输入http://localhost:15672访问<code>RabbitMQ</code>管理页面，默认初始账号密码：guest/guest</p>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="linux"><a class="markdownIt-Anchor" href="#linux"></a> Linux</h4>
+<h3 id="rabbitmq使用示例"><a class="markdownIt-Anchor" href="#rabbitmq使用示例"></a> RabbitMQ使用示例</h3>
 
             </div>
             <hr>
@@ -377,9 +415,7 @@
                     
                       <a class="hover-with-bg" href="/helloworld/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
                     
-                      <a class="hover-with-bg" href="/helloworld/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/WMB/">WMB</a>
-                    
-                      <a class="hover-with-bg" href="/helloworld/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/WMB/MQ/">MQ</a>
+                      <a class="hover-with-bg" href="/helloworld/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/MQ/">MQ</a>
                     
                   </div>
                 
@@ -389,7 +425,7 @@
                     
                       <a class="hover-with-bg" href="/helloworld/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
                     
-                      <a class="hover-with-bg" href="/helloworld/tags/WMB/">WMB</a>
+                      <a class="hover-with-bg" href="/helloworld/tags/AMQP/">AMQP</a>
                     
                       <a class="hover-with-bg" href="/helloworld/tags/MQ/">MQ</a>
                     
