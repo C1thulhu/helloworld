@@ -312,16 +312,17 @@
 </ul>
 </blockquote>
 <h4 id="hashmap"><a class="markdownIt-Anchor" href="#hashmap"></a> HashMap</h4>
-<p>  HashMap 是一个 <strong>最通用的</strong> 利用哈希表存储元素的集合，将元素放入 HashMap 时，将 <code>key</code> 的哈希值转换为数组的 <code>索引</code> 下标 <strong>确定存放位置</strong>，查找时，根据 <code>key</code> 的哈希地址转换成数组的 <code>索引</code> 下标 <strong>确定查找位置</strong>。HashMap 的实现不是同步的，这意味着<b style="color:#00FFFF">它不是线程安全的</b>。<b style="color:#00FFFF">它的 key、value 都可以为 null</b>，此外，HashMap 中的映射不是有序的。</p>
+<p>  <b style="color:red">HashMap 是一个 最通用的 利用哈希表存储<code>&lt;key,value&gt;</code>元素的集合</b>，将元素放入 HashMap 时，将 <code>key</code> 的哈希值转换为数组的 <code>索引</code> 下标 <strong>确定存放位置</strong>，查找时，根据 <code>key</code> 的哈希地址转换成数组的 <code>索引</code> 下标 <strong>确定查找位置</strong>。HashMap 的实现不是同步的，这意味着它不是线程安全的。<b style="color:#00FFFF">它的 key、value 都可以为 null</b>，此外，HashMap 中的映射不是有序的。</p>
 <blockquote>
 <ul>
-<li><strong>底层结构</strong>：JDK1.8 之前 HashMap 由 数组 + 单向链表 组成，数组是 HashMap 的主体，单向链表则是主要为了解决<font style="color:#00FFFF">哈希冲突（两个对象调用的 hashCode 方法计算的哈希值经哈希函数算出来的地址被别的元素占用）</font >而存在的（“拉链法”解决冲突）。<font style="color:red">JDK1.8 以后在解决哈希冲突时有了较大的变化，当单向链表长度大于阈值（或者红黑树的边界值，默认为 8 ）并且当前数组的长度大于 64 时，此时此索引位置上的所有数据改为使用红黑树存储。</font ></li>
+<li><strong>底层结构</strong>：JDK1.8 之前 HashMap 由 数组 + 单向链表 组成，数组是 HashMap 的主体，单向链表则是主要为了解决<font style="color:#00FFFF">哈希冲突（两个不相等的key产生了相等的哈希值）</font >而存在的（&quot;<font style="color:yellow">拉链法<sup>1</sup></font>&quot;解决冲突）。<font style="color:red">JDK1.8 以后在解决哈希冲突时有了较大的变化，当单向链表长度大于阈值（默认为 8 ）并且当前数组的长度大于 64 时，此时此索引位置上的所有数据改为使用红黑树存储。</font ></li>
 <li><strong>扩充机制</strong>：<font style="color:red">HashMap扩充的两个重要元素<code>Capacity</code>(HashMap当前长度)和<code>LoadFactory</code>(负载因子，默认值为<strong>0.75f</strong>)</font>。<font style="color:#00FFFF">当存入第<code>Capacity</code>*<code>LoadFactory</code>+1个元素时就会进行<code>resize</code>(扩容)。扩容会创建一个新的Entry空数组，长度是原来的2倍；然后遍历原<code>Entry</code>数组，把所有的<code>Entry</code>重新<code>hash</code>(长度扩大后，hash的规则也会随之改变)到新数组。</font></li>
 <li><strong>Hash算法</strong>：…</li>
 </ul>
+<p><font style="color:yellow">①：将链表和数组相结合，创建的链表数组中，数组的每一格就是一个链表，<strong>当发生哈希冲突时，将冲突的值加到链表中。</strong></font></p>
 </blockquote>
 <h4 id="linkedhashmap"><a class="markdownIt-Anchor" href="#linkedhashmap"></a> LinkedHashMap</h4>
-<p>  LinkedHashMap 可以看作是 <code>HashMap</code> 和 <code>LinkedList</code> 的结合：它<font style="color:red">在 HashMap 的基础上添加了一条双向链表</font>，<code>默认</code> 存储各个元素的插入顺序，但由于这条双向链表，使得 LinkedHashMap 可以实现 <b style="color:yellow"><code>LRU</code> 缓存淘汰策略<sup>1</sup></b>，因为我们可以设置这条双向链表按照 <code>元素的访问次序</code> 进行排序。</p>
+<p>  LinkedHashMap 可以看作是 <code>HashMap</code> 和 <code>LinkedList</code> 的结合：它<font style="color:red">在 HashMap 的基础上添加了一条双向链表</font>，<code>默认</code> 存储各个元素的插入顺序，但由于这条双向链表，使得 LinkedHashMap 可以实现 <b style="color:yellow"><code>LRU</code> 缓存淘汰策略<sup>2</sup></b>，因为我们可以设置这条双向链表按照 <code>元素的访问次序</code> 进行排序。</p>
 <p><img src="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/LinkedHashMap%E7%BB%93%E6%9E%84.png" srcset="/helloworld/img/loading.gif" lazyload alt="LinkedHashMap结构" /></p>
 <blockquote>
 <ul>
@@ -329,7 +330,7 @@
 <li>LinkedHashMap 可实现 <code>LRU</code> 缓存淘汰策略，其原理是通过设置 <code>accessOrder</code> 为 <code>true</code> 并重写 <code>removeEldestEntry</code> 方法定义淘汰元素时需满足的条件。</li>
 </ul>
 </blockquote>
-<p><font style="color:yellow"> ① ：LRU缓存淘汰策略 简要来说就是当内存满了将优先删除长时间未使用的数据。</font></p>
+<p><font style="color:yellow"> ②：LRU缓存淘汰策略 简要来说就是当内存满了将优先删除长时间未使用的数据。</font></p>
 <h4 id="treemap"><a class="markdownIt-Anchor" href="#treemap"></a> TreeMap</h4>
 <p>  TreeMap 是 <code>SortedMap</code> 的子类，所以它<font style="color:red">具有 排序 功能</font>。它是基于 红黑树 数据结构实现的，每一个键值对 <code>&lt;key,value&gt;</code> 都是一个节点，<strong>默认情况下按照 <code>key</code> 自然排序(放入的Key必须实现<code>Comparable</code>接口)，另一种是可以通过传入定制的 <code>Comparator</code> 进行自定义规则排序</strong>。</p>
 <ul>
@@ -365,12 +366,12 @@
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Expunges stale entries from the table.</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">expungeStaleEntries</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">for</span> (Object x; (x = queue.poll()) != <span class="hljs-literal">null</span>; ) &#123;<br>            <span class="hljs-keyword">synchronized</span> (queue) &#123;<br>                <span class="hljs-meta">@SuppressWarnings(&quot;unchecked&quot;)</span><br>                    Entry&lt;K,V&gt; e = (Entry&lt;K,V&gt;) x;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> indexFor(e.hash, table.length);<br><br>                Entry&lt;K,V&gt; prev = table[i];<br>                Entry&lt;K,V&gt; p = prev;<br>                <span class="hljs-keyword">while</span> (p != <span class="hljs-literal">null</span>) &#123;<br>                    Entry&lt;K,V&gt; next = p.next;<br>                    <span class="hljs-keyword">if</span> (p == e) &#123;<br>                        <span class="hljs-keyword">if</span> (prev == e)<br>                            table[i] = next;<br>                        <span class="hljs-keyword">else</span><br>                            prev.next = next;<br>                        <span class="hljs-comment">// Must not null out e.next;</span><br>                        <span class="hljs-comment">// stale entries may be in use by a HashIterator</span><br>                        e.value = <span class="hljs-literal">null</span>; <span class="hljs-comment">// Help GC</span><br>                        size--;<br>                        <span class="hljs-keyword">break</span>;<br>                    &#125;<br>                    prev = p;<br>                    p = next;<br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br></code></pre></div></td></tr></table></figure>
 <blockquote>
 <ul>
-<li>WeakHashMap的键是一种<b style="color:yellow"> <code>弱键</code><sup>2</sup></b>，放入 WeakHashMap 时，随时会被回收掉，所以不能确保某次访问元素一定存在。</li>
+<li>WeakHashMap的键是一种<b style="color:yellow"> <code>弱键</code><sup>3</sup></b>，放入 WeakHashMap 时，随时会被回收掉，所以不能确保某次访问元素一定存在。</li>
 <li>它依赖普通的 <code>Map</code> 进行实现，是一个<strong>非线程安全的集合。</strong></li>
 <li>WeakHashMap 通常作为 <strong>缓存</strong> 使用，适用存储那些 <code>只需访问一次</code>、或 <code>只需保存短暂时间</code> 的键值对。</li>
 </ul>
 </blockquote>
-<p><font style="color:yellow"> ②：弱键 （<code>WeakReference</code>）:又称弱引用，被WeakReference引用时，在下个垃圾收集周期时该对象就会被回收。</font><br />
+<p><font style="color:yellow"> ③：弱键 （<code>WeakReference</code>）:又称弱引用，被WeakReference引用时，在下个垃圾收集周期时该对象就会被回收。</font><br />
 <font style="color:yellow">扩展：</font><br />
 <font style="color:yellow">- 软引用（<code>SoftReference</code>）:被<code>SoftReference</code>指向的对象可能会被垃圾收集器回收，但是只有在JVM内存不够的情况下才会回收。</font><br />
 <font style="color:yellow">- 强引用（<code>StrongReference</code>）:被强引用指向的对象，绝对不会被垃圾收集器回收。</font></p>
@@ -393,7 +394,7 @@
 </ul>
 </blockquote>
 <h5 id="arraylist"><a class="markdownIt-Anchor" href="#arraylist"></a> ArrayList</h5>
-<p><font style="color:red">ArrayList 以 <strong>数组</strong> 作为存储结构，它是 <strong>线程不安全</strong> 的集合；具有 <strong>查询快、在数组中或头部增删慢</strong> 的特点</font>，所以它除了线程不安全这一点，其余可以替代 <code>Vector</code> ，而线程安全的 ArrayList 可以使用 <code>CopyOnWriteArrayList</code> 代替 Vector。</p>
+<p><font style="color:red">ArrayList 以 <strong>数组</strong> 作为存储结构，但长度不受限制(自动扩容)的集合</font>，所以它除了线程不安全这一点，其余可以替代 <code>Vector</code> ，而线程安全的 ArrayList 可以使用 <code>CopyOnWriteArrayList</code> 代替 Vector。</p>
 <blockquote>
 <ul>
 <li><strong>底层结构</strong>：ArrayList 底层是使用数组作为存储结构，具有 <strong>查找快、增删慢、随机访问</strong> 的特点</li>
@@ -556,7 +557,7 @@
 </ul>
 </blockquote>
 <h5 id="hashset"><a class="markdownIt-Anchor" href="#hashset"></a> HashSet</h5>
-<p><font style="color:red"><code>HashSet</code>是<code>Set</code>的实现类，自然其中不能存储相同的数据，存储数据时是无序的。而且HashSet存储元素的顺序并不是按照存入时的顺序（和List显然不同） 是按照哈希值来存的所以取数据也是按照哈希值取得。</font>HashSet 底层是借助 <code>HashMap</code> 实现，HashSet 中又没有额外添加同步策略所以HashSet 也是 <strong>线程不安全</strong>。</p>
+<p><font style="color:red"><code>HashSet</code>是<code>Set</code>的实现类，自然其中<strong>不能存储相同的数据</strong>，存储数据时是无序的。而且HashSet存储元素的顺序并不是按照存入时的顺序（和List显然不同） 是按照哈希值来存的所以取数据也是按照哈希值取得。</font>HashSet 底层是借助 <code>HashMap</code> 实现，HashSet 中又没有额外添加同步策略所以HashSet 也是 <strong>线程不安全</strong>。</p>
 <p>观察它的多个构造方法，本质上都是 new 一个 HashMap。</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">transient</span> HashMap&lt;E,Object&gt; map;<br><span class="hljs-comment">// Dummy value to associate with an Object in the backing Map</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Object</span> <span class="hljs-variable">PRESENT</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>();<br><span class="hljs-keyword">public</span> <span class="hljs-title function_">HashSet</span><span class="hljs-params">(Collection&lt;? extends E&gt; c)</span> &#123;<br>        map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;(Math.max((<span class="hljs-type">int</span>) (c.size()/<span class="hljs-number">.75f</span>) + <span class="hljs-number">1</span>, <span class="hljs-number">16</span>));<br>        addAll(c);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">HashSet</span><span class="hljs-params">(<span class="hljs-type">int</span> initialCapacity, <span class="hljs-type">float</span> loadFactor)</span> &#123;<br>        map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;(initialCapacity, loadFactor);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">HashSet</span><span class="hljs-params">(<span class="hljs-type">int</span> initialCapacity)</span> &#123;<br>        map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;(initialCapacity);<br>    &#125;<br><br>    HashSet(<span class="hljs-type">int</span> initialCapacity, <span class="hljs-type">float</span> loadFactor, <span class="hljs-type">boolean</span> dummy) &#123;<br>        map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedHashMap</span>&lt;&gt;(initialCapacity, loadFactor);<br>    &#125;<br></code></pre></div></td></tr></table></figure>
 <p>其次还能看到一个 <strong>静态常量</strong><code>PRESENT</code>：使用 PRESENT 作为 HashMap 的 value 值，使用 HashSet 的开发者只需要 <strong>关注</strong> 插入的 <code>key</code>，<strong>屏蔽</strong> 了其中 HashMap 的 <code>value</code>。</p>
@@ -614,11 +615,11 @@
 <p><code>ListIterator</code>&amp;<code>Iterator</code>区别：</p>
 <ul>
 <li><code>ListIterator</code>仅对<code>List</code>实现的类有用，<code>Iterator</code>作用在<code>Collection</code>实现的类。</li>
-<li><code>ListIterator</code>支持四种操作：<font style="color:yellow"><code>CRUD</code><sup>3</sup>(<code>CREATE</code>，<code>READ</code>，<code>UPDATE</code>和<code>DELETE</code>)</font>。</li>
+<li><code>ListIterator</code>支持四种操作：<font style="color:yellow"><code>CRUD</code><sup>4</sup>(<code>CREATE</code>，<code>READ</code>，<code>UPDATE</code>和<code>DELETE</code>)</font>。</li>
 <li><code>ListIterator</code>是一个双向迭代器，它支持正向和反向迭代。</li>
 <li><code>ListIterator</code>没有当前元素; 它的光标位置总是位于调用<code>previous()</code>返回的元素和调用<code>next()</code>返回的元素之间。</li>
 </ul>
-<p><font style="color:yellow">③：可以对List对象的元素进行增删改查操作</font></p>
+<p><font style="color:yellow">④：可以对List对象的元素进行增删改查操作</font></p>
 <table>
 <thead>
 <tr>
@@ -679,7 +680,7 @@
 <p>Map&lt;K, V&gt; emptyMap()，创建空Map</p>
 <p>Set<T> emptySet()，创建空Set</p>
 </blockquote>
-<p><font style="color:red">这些返回的空集合是不可变集合，无法向其中添加或删除元素。</font>其实在<font style="color:#007777"><strong>Java9以后各个集合接口也提供了<code>of()</code>方法</strong></font>创建空集合：</p>
+<p><font style="color:red">这些返回的空集合是不可变集合，无法向其中添加或删除元素。</font>其实在<font style="color:#00FFFF"><strong>Java9以后各个集合接口也提供了<code>of()</code>方法</strong></font>创建空集合：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">List&lt;String&gt; list1 = List.of();<br><span class="hljs-comment">//of方法等同于Collections.emptyList();</span><br>List&lt;String&gt; list2 = Collections.emptyList();<br></code></pre></div></td></tr></table></figure>
 </li>
 <li>
@@ -690,7 +691,7 @@
 <p>Set<T> singleton(T o)，创建单个元素Set</p>
 </blockquote>
 <p>各个集合接口也提供的<code>of()</code>方法也可以实现，因为<code>of()</code>可以创建任意元素集合：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//Collections创建单个元素方法</span><br>List&lt;String&gt; list1 = Collections.singletonList(<span class="hljs-string">&quot;A&quot;</span>);<br><span class="hljs-comment">//of方法创建任意元素的集合</span><br>List&lt;String&gt; list2 = List.of(<span class="hljs-string">&quot;A&quot;</span>,<span class="hljs-string">&quot;B&quot;</span>,<span class="hljs-string">&quot;C&quot;</span>);<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//Collections创建单个元素方法</span><br>List&lt;String&gt; list1 = Collections.singletonList(<span class="hljs-string">&quot;A&quot;</span>);<br><span class="hljs-comment">//of方法创建任意元素的集合(Java9)</span><br>List&lt;String&gt; list2 = List.of(<span class="hljs-string">&quot;A&quot;</span>,<span class="hljs-string">&quot;B&quot;</span>,<span class="hljs-string">&quot;C&quot;</span>);<br></code></pre></div></td></tr></table></figure>
 </li>
 <li>
 <p>排序</p>
@@ -713,7 +714,7 @@
 </ul>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// Java9以上才可用</span><br>List&lt;String&gt; mutable = List.of(<span class="hljs-string">&quot;A&quot;</span>,<span class="hljs-string">&quot;B&quot;</span>);<br><span class="hljs-comment">// 变为不可变集合</span><br>List&lt;String&gt; immutable = Collections.unmodifiableList(mutable);<br>immutable.add(<span class="hljs-string">&quot;C&quot;</span>); <span class="hljs-comment">// 抛出错误UnsupportedOperationException!</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">List&lt;String&gt; mutable = List.of(<span class="hljs-string">&quot;A&quot;</span>,<span class="hljs-string">&quot;B&quot;</span>);<br><span class="hljs-comment">// 变为不可变集合</span><br>List&lt;String&gt; immutable = Collections.unmodifiableList(mutable);<br>immutable.add(<span class="hljs-string">&quot;C&quot;</span>); <span class="hljs-comment">// 抛出错误UnsupportedOperationException!</span><br></code></pre></div></td></tr></table></figure>
 <p>然而对原始的可变List进行增删会直接影响到封装后的List</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// Java9以上才可用</span><br>List&lt;String&gt; mutable = List.of(<span class="hljs-string">&quot;A&quot;</span>,<span class="hljs-string">&quot;B&quot;</span>);<br><span class="hljs-comment">// 变为不可变集合</span><br>List&lt;String&gt; immutable = Collections.unmodifiableList(mutable);<br>mutable.add(<span class="hljs-string">&quot;C&quot;</span>);<br>System.out.println(immutable);<br></code></pre></div></td></tr></table></figure>
 <p>所以，如果我们需要封装一个不可变集合，在返回不可变后最好立刻扔掉原来可变List的引用：</p>

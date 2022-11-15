@@ -286,7 +286,7 @@
 <h2 id="file"><a class="markdownIt-Anchor" href="#file"></a> #File</h2>
 <p>Java的标准库<code>java.io</code>提供了<code>File</code>对象来操作文件和目录。<font style="color:#00FFFF">File 类不能访问文件内容本身，如果需要访问文件内容本身，则需要使用输入/输出流。</font></p>
 <p>构造File对象时，既可以传入绝对路径，也可以传入相对路径。<font style="color:yellow">注意Windows平台使用<code>\</code>作为路径分隔符，在Java字符串中需要用<code>\\</code>表示一个<code>\</code>。Linux平台使用<code>/</code>作为路径分隔符。</font>例：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//Window平台</span><br><span class="hljs-type">File</span> <span class="hljs-variable">file1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;C:\\Windows\\test.text&quot;</span>);<br><span class="hljs-comment">//Linux平台</span><br><span class="hljs-type">File</span> <span class="hljs-variable">file2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;/usr/bin/test.text&quot;</span>);<br><br><span class="hljs-comment">//相对路径(假设当前目录为&quot;C:\Windows&quot;) .表示当前目录 ..表示上级目录</span><br><span class="hljs-type">File</span> <span class="hljs-variable">f1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;docs\\Test.text&quot;</span>);    <span class="hljs-comment">//绝对路径是 C:\Windowsdocs\Test.text</span><br><span class="hljs-type">File</span> <span class="hljs-variable">f2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;.\\docs\\Test.text&quot;</span>); <span class="hljs-comment">//绝对路径是 C:\Windowsdocs\Test.text</span><br><span class="hljs-type">File</span> <span class="hljs-variable">f3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;..\\Downloads&quot;</span>);      <span class="hljs-comment">//绝对路径是 C:\Downloads</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//Window平台</span><br><span class="hljs-type">File</span> <span class="hljs-variable">file1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;C:\\Windows\\test.text&quot;</span>);<br><span class="hljs-comment">//Linux平台</span><br><span class="hljs-type">File</span> <span class="hljs-variable">file2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;/usr/bin/test.text&quot;</span>);<br><br><span class="hljs-comment">//相对路径(假设当前目录为&quot;C:\Windows&quot;) .表示当前目录 ..表示上级目录</span><br><span class="hljs-type">File</span> <span class="hljs-variable">f1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;docs\\Test.text&quot;</span>);    <span class="hljs-comment">//绝对路径是 C:\Windows\docs\Test.text</span><br><span class="hljs-type">File</span> <span class="hljs-variable">f2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;.\\docs\\Test.text&quot;</span>); <span class="hljs-comment">//绝对路径是 C:\Windows\docs\Test.text</span><br><span class="hljs-type">File</span> <span class="hljs-variable">f3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;..\\Downloads&quot;</span>);      <span class="hljs-comment">//绝对路径是 C:\Downloads</span><br></code></pre></div></td></tr></table></figure>
 <p>File方法归类：</p>
 <table>
 <thead>
@@ -560,26 +560,6 @@
 <tr>
 <td style="text-align:center">synchronized void mark(int readlimit)</td>
 <td style="text-align:center">标记读取位置，下次还可以从这里开始读取，使用前要看当前流是否支持，可以使用 markSupport() 方法判断</td>
-</tr>
-<tr>
-<td style="text-align:center">boolean markSupported()</td>
-<td style="text-align:center">判断当前流是否支持标记流，和上面两个方法配套使用</td>
-</tr>
-<tr>
-<td style="text-align:center">byte[] readAllBytes()</td>
-<td style="text-align:center">JDK9新增：读取 InputStream 中的所有剩余字节，调用readNBytes(Integer.MAX_VALUE)方法</td>
-</tr>
-<tr>
-<td style="text-align:center">int readNBytes(byte[] b, int off, int len)</td>
-<td style="text-align:center">JDK9新增：从输入流读取请求的字节数并保存在byte数组中； 此方法会一直阻塞，直到读取了请求的字节数、检测到流结束或引发异常为止。此方法不会关闭输入流。</td>
-</tr>
-<tr>
-<td style="text-align:center">long transferTo(OutputStream out)</td>
-<td style="text-align:center">JDK9新增：读取 InputStream 中的全部字节并写入到指定的 OutputStream 中</td>
-</tr>
-<tr>
-<td style="text-align:center">byte[] readNBytes(int len)</td>
-<td style="text-align:center">JDK11更新：读取 InputStream 中的剩余字节的指定上限大小的字节内容；此方法会一直阻塞，直到读取了请求的字节数、检测到流结束或引发异常为止。此方法不会关闭输入流。</td>
 </tr>
 </tbody>
 </table>

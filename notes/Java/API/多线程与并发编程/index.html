@@ -270,7 +270,7 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43478694/article/details/123622726">Unsafe类详解</a></li>
 </ul>
 <h2 id="多线程"><a class="markdownIt-Anchor" href="#多线程"></a> #多线程</h2>
-<p>  <font style="color : red"><strong>线程</strong>是CPU调度和执行的单位。</font>而多个线程组成一个进程，<font style="color : red"><strong>进程</strong>是一个动态的概念，是系统资源分配的单位。</font>进程又是执行程序的一次执行过程，<font style="color : red"><strong>程序</strong>是一个静态的概念，是指令和数据的有序集合，其本身没有任何运行的含义。</font></p>
+<p>  <font style="color : red"><strong>线程</strong>是CPU调度和运算的<strong>最小</strong>单位。</font>而多个线程组成一个进程，<font style="color : red"><strong>进程</strong>是一个动态的概念，是系统资源分配的单位。</font>进程又是执行程序的一次执行过程，<font style="color : red"><strong>程序</strong>是一个静态的概念，是指令和数据的有序集合，其本身没有任何运行的含义。</font></p>
 <p><strong>多线程核心概念</strong></p>
 <ul>
 <li>
@@ -303,27 +303,28 @@
 <li>
 <p>实现Callable接口</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CallableTest</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Callable</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">call</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">5</span>;i++)&#123;<br>            System.out.println(<span class="hljs-string">&quot;Runnable方式&quot;</span>+i);<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;call结束&quot;</span>;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> ExecutionException, InterruptedException &#123;<br>        <span class="hljs-comment">//创建一个callable接口实现类对象</span><br>        <span class="hljs-type">CallableTest</span> <span class="hljs-variable">callableTest</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">CallableTest</span>();<br>        <span class="hljs-comment">//创建执行服务</span><br>        <span class="hljs-type">ExecutorService</span> <span class="hljs-variable">service</span> <span class="hljs-operator">=</span> Executors.newFixedThreadPool(<span class="hljs-number">1</span>);<br>        <span class="hljs-comment">//提交执行</span><br>        Future&lt;String&gt; future = service.submit(callableTest);<br>        <span class="hljs-comment">//获取call返回结果</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> future.get();<br>        System.out.println(result);<br>        <span class="hljs-comment">//关闭服务</span><br>        service.shutdownNow();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-<blockquote></blockquote>
-<p><strong>小结</strong></p>
 <ul>
-<li>继承<code>Thread</code>类
-<ul>
-<li>启动线程：子类对象.start()</li>
-<li><b style="color:red">存在OOP单继承局限性</b></li>
-</ul>
+<li>
+<p>继承<code>Thread</code>类</p>
+<blockquote>
+<p>启动线程：子类对象.start()</p>
+<p><b style="color:red">存在OOP单继承局限性</b></p>
+</blockquote>
 </li>
-<li>实现<code>Runnable</code>接口
-<ul>
-<li>启动线程：传入目标对象+Thread对象.start()</li>
-<li><b style="color:red">灵活方便，方便同一个对象被多个线程使用，减少程序之间的耦合度，面向接口编程也是设计模式六大原则的核心。</b></li>
-</ul>
+<li>
+<p>实现<code>Runnable</code>接口</p>
+<blockquote>
+<p>启动线程：传入目标对象+Thread对象.start()</p>
+<p><b style="color:red">灵活方便，方便同一个对象被多个线程使用，减少程序之间的耦合度，面向接口编程也是设计模式六大原则的核心。</b></p>
+</blockquote>
 </li>
-<li>实现<code>Callable</code>接口
-<ul>
-<li>启动线程：执行对象(线程池).submit(目标对象)</li>
-<li>获取结果：执行对象(线程池).submit(目标对象).get()</li>
-<li><b style="color:red">Callable主要用于线程池可以抛出异常并且有返回值。</b></li>
-</ul>
+<li>
+<p>实现<code>Callable</code>接口</p>
+<blockquote>
+<p>启动线程：执行对象(线程池).submit(目标对象)</p>
+<p>获取结果：执行对象(线程池).submit(目标对象).get()</p>
+<p><b style="color:red">Callable主要用于线程池可以抛出异常并且有返回值。</b></p>
+</blockquote>
 </li>
 </ul>
 </li>
@@ -450,7 +451,7 @@
 <p><font style="color:grey">待完善。。</font></p>
 <h2 id="并发编程juc"><a class="markdownIt-Anchor" href="#并发编程juc"></a> #并发编程(JUC)</h2>
 <p>  JUC是<code>java.util.concurrent</code>的简写，是jdk针对java并发编程的工具包。</p>
-<p>  在了解JUC之前我们先了解<strong>并发</strong>的概念：<font style="color:red"><strong>单核下多线程操作同一个资源</strong>，将CPU运行时间划分成若干个时间段,再将时间段分配给各个线程执行，在一个时间段的线程代码运行时，其它线程处于挂起状。这种方式我们称之为并发(Concurrent)。</font><font style="color:#00FFFF">并发实质是一个物理CPU（也可以是多个物理CPU）在若干个程序之间多路复用，并发性是对有限物理资源强制行使 多用户共享以提高效率。</font><br />
+<p>  在了解JUC之前我们先了解<strong>并发</strong>的概念：<font style="color:red"><strong>单核下多线程操作同一个资源</strong>，将CPU运行时间划分成若干个时间段,再将时间段分配给各个线程执行，在一个时间段的线程代码运行时，其它线程处于挂起状态。这种方式我们称之为并发(Concurrent)。</font><font style="color:#00FFFF">并发实质是一个物理CPU（也可以是多个物理CPU）在若干个程序之间多路复用，并发性是对有限物理资源强制行使 多用户共享以提高效率。</font><br />
 而和并发相似的<strong>并行</strong>是在<font style="color:red"><strong>多核下多线程同时执行</strong>，多个线程之间互不抢占CPU资源，可以同时进行，这种方式我们称之为并行(Parallel)。</font></p>
 <p>并发问题的三要素：可见性、原子性和有序性：</p>
 <ul>
