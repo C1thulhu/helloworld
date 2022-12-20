@@ -1,0 +1,571 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/helloworld/img/icon/log_1.png">
+  <link rel="icon" href="/helloworld/img/icon/log_1.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="C1thulhu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="接口文档是项目开发过程中前后端工程师进行沟通交流开发的统一文件，在项目维护或者项目人员更迭的时候，方便后期人员查看、维">
+<meta property="og:type" content="article">
+<meta property="og:title" content="接口文档">
+<meta property="og:url" content="https://c1thulhu.github.io/helloworld/notes/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/index.html">
+<meta property="og:site_name" content="C1thulhu">
+<meta property="og:description" content="接口文档是项目开发过程中前后端工程师进行沟通交流开发的统一文件，在项目维护或者项目人员更迭的时候，方便后期人员查看、维">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-08T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-10-08T00:00:00.000Z">
+<meta property="article:author" content="C1thulhu">
+<meta property="article:tag" content="开发工具">
+<meta property="article:tag" content="接口文档">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>接口文档 - C1thulhu</title>
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github-dark-dimmed.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/helloworld/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"c1thulhu.github.io","root":"/helloworld/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/helloworld/local-search.xml"};
+  </script>
+  <script  src="/helloworld/js/utils.js" ></script>
+  <script  src="/helloworld/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/helloworld/">
+      <strong>C1thulhu</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/helloworld/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/helloworld/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/helloworld/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/helloworld/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/helloworld/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/helloworld/img/background/default.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="接口文档">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-10-08 00:00" pubdate>
+        2022-10-08
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      12k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">接口文档</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022-10-08
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p><font style="color:grey">待完善</font></p>
+<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> #前言</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51660523/article/details/118671162">接口文档与接口文档管理工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.pdai.tech/md/spring/springboot/springboot-x-interface-doc.html">SpringBoot接口 - 如何生成接口文档之Swagger技术栈 | Java 全栈知识体系</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.pdai.tech/md/spring/springboot/springboot-x-interface-doc-smart.html">SpringBoot接口 - 如何生成接口文档之集成Smart-Doc | Java 全栈知识体系</a></li>
+</ul>
+<h2 id="openapi"><a class="markdownIt-Anchor" href="#openapi"></a> #OpenAPI</h2>
+<p>  <code>OpenAPI</code> 规范（<code>OAS</code>）在新窗口打开定义了一个标准的、语言无关的 RESTful API 接口规范，它可以同时允许开发人员和操作系统查看并理解某个服务的功能，而无需访问源代码，文档或网络流量检查（既方便人类学习和阅读，也方便机器阅读）。正确定义 <code>OAS</code> 后，开发者可以使用最少的实现逻辑来理解远程服务并与之交互。</p>
+<p>此外，文档生成工具可以使用 <code>OpenAPI</code> 规范来生成 API 文档，代码生成工具可以生成各种编程语言下的服务端和客户端代码，测试代码和其他用例。</p>
+<h2 id="接口文档"><a class="markdownIt-Anchor" href="#接口文档"></a> #接口文档</h2>
+<ul>
+<li>
+<p>什么是接口文档<br />
+  在项目开发汇总，web项目的前后端是分离开发的。应用程序的开发，需要由前后端工程师共同定义接口，编写接口文档，之后大家都根据这个接口文档进行开发，到项目结束前都要一直维护。</p>
+</li>
+<li>
+<p>功能与目的</p>
+<p>  <font style="color:red">项目开发过程中前后端工程师有一个统一的文件进行沟通交流开发，项目维护或者项目人员更迭的时候，方便后期人员查看、维护。</font></p>
+</li>
+<li>
+<p>接口文档规范</p>
+<ol>
+<li>请求方式：GET / PUT / POST / DELETE；</li>
+<li>url：接口的url路径；</li>
+<li>请求参数：请求参数的字段名、字段类型、说明、备注、是否必填；</li>
+<li>响应参数：响应编码、响应数据和响应数据说明 或者响应错误信息。</li>
+</ol>
+</li>
+</ul>
+<h2 id="接口文档管理工具"><a class="markdownIt-Anchor" href="#接口文档管理工具"></a> #接口文档管理工具</h2>
+<p>  在项目开发测试中，接口文档是贯穿始终的。前后端开发需要在开发前期进行接口定义并形成文档，QA在功能测试和接口测试的环节也需要依赖于这些接口文档进行测试。<strong>接口文档往往以最简单的静态文档的形态存在</strong>。然而在紧张的**敏捷开发模式下，随着版本迭代，很多接口发生了变化或者被废弃，而开发几乎不会在后期去更新这种静态文档。**QA人员阅读“过期”的接口文档是一件痛苦的事情，与开发的沟通成本不降反升。而这些不便于及时维护的静态文档，随着时间的推移最终无人问津。因此，我们需要找到一种长期可维护且轻量便捷的接口文档工具。</p>
+<h3 id="postman"><a class="markdownIt-Anchor" href="#postman"></a> Postman</h3>
+<p>  Postman是一个接口测试工具，在做接口测试的时候，Postman相当于一个客户端，它可以模拟用户发起的各类HTTP请求，将请求数据发送至服务端，获取对应的响应结果，从而校验接口和数据。</p>
+<p>  <font style="color:#00FFFF">我们可以创建团队类型项目工作区再添加协作人便可以共同管理接口文档，然后在Postman中根据 模块/功能 创建对应的<code>folder</code>，校验接口后就已经基本可以算上一个接口的文档了。</font><br />
+  <font style="color:red"> 总而言之Postmaan作为一个接口测试工具，适合小体量团队使用并维护。</font></p>
+<h3 id="doclever"><a class="markdownIt-Anchor" href="#doclever"></a> DOClever</h3>
+<p>  DOClever是一个可视化接口管理工具，可以分析接口结构，校验接口正确性， 围绕接口定义文档，通过一系列自动化工具提升我们的协作效率。DOClever功能如下：</p>
+<ol>
+<li>可以对接口信息进行编辑管理，支持 https 和 https 协议，并且支持 query，body，json，raw，rest，formdata 的参数可视化编辑。并且 状态码，代码注入，markdown 文档等附加功能应有尽有。</li>
+<li>接口调试运行，可以对参数进行加密，从md5 到 aes 一应俱全，返回参数与模型实时分析对比，给出不一致的地方，找出接口可能出现的问题，可以对接口运行的数据一键生成文档信息。</li>
+<li><font style="color:yellow">mock<sup>1</sup></font> 的无缝整合，DOClever 自己就是一个 mock 服务器，当你把接口的开发状态设置成已完成，本地 mock 便会自动请求真实接口数据，否则返回事先定义好的 mock 数据。</li>
+<li>支持 postman，rap，swagger 的导入，方便你做无缝迁移，同时也支持 html 文件的导出，方便离线浏览</li>
+<li>项目版本和接口快照功能并行，你可以为一个项目定义 1.0，1.1，1.2 版本，并且可以自由的在不同版本间切换回滚</li>
+<li>自动化测试</li>
+<li>团队协作功能</li>
+</ol>
+<p><font style="color:yellow">①：mock测试就是在测试过程中，对于某些不容易构造或者不容易获取的对象，用一个虚拟的对象来创建以便测试的测试方法。</font></p>
+<h3 id="swagger"><a class="markdownIt-Anchor" href="#swagger"></a> Swagger</h3>
+<p>  Swagger 是一个用于生成、描述和调用 RESTful 接口的 Web 服务。通俗的来讲，Swagger 就是将项目中所有（想要暴露的）接口展现在页面上，并且可以进行接口调用和测试的服务。</p>
+<p>从上述 Swagger 定义我们不难看出 Swagger 有以下 3 个重要的作用：</p>
+<ul>
+<li>将项目中所有的接口展现在页面上，这样后端程序员就不需要专门为前端使用者编写专门的接口文档；</li>
+<li>当接口更新之后，只需要修改代码中的 Swagger 描述就可以实时生成新的接口文档了，从而规避了接口文档老旧不能使用的问题；</li>
+<li>通过 Swagger 页面，我们可以直接进行接口调用，降低了项目开发阶段的调试成本。</li>
+</ul>
+<p>Swagger3完全遵循了 <code>OpenAPI</code> 规范。Swagger 官网地址：<a target="_blank" rel="noopener" href="https://swagger.io/">https://swagger.io/</a></p>
+<h4 id="swagger使用"><a class="markdownIt-Anchor" href="#swagger使用"></a> Swagger使用</h4>
+<ul>
+<li>
+<p>maven依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>io.springfox<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>springfox-boot-starter<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p>Swagger Config</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * swagger config for open api.</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@EnableOpenApi</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SwaggerConfig</span> &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> swagger config</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> Docket <span class="hljs-title function_">openApi</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Docket</span>(DocumentationType.OAS_30)<br>                .groupName(<span class="hljs-string">&quot;Test group&quot;</span>)<br>                .apiInfo(apiInfo())<br>                .select()<br>                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))<br>                .paths(PathSelectors.any())<br>                .build()<br>                .globalRequestParameters(getGlobalRequestParameters())<br>                .globalResponses(HttpMethod.GET, getGlobalResponse());<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> global response code-&gt;description</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> List&lt;Response&gt; <span class="hljs-title function_">getGlobalResponse</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> ResponseStatus.HTTP_STATUS_ALL.stream().map(<br>                a -&gt; <span class="hljs-keyword">new</span> <span class="hljs-title class_">ResponseBuilder</span>().code(a.getResponseCode()).description(a.getDescription()).build())<br>                .collect(Collectors.toList());<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> global request parameters</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> List&lt;RequestParameter&gt; <span class="hljs-title function_">getGlobalRequestParameters</span><span class="hljs-params">()</span> &#123;<br>        List&lt;RequestParameter&gt; parameters = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        parameters.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">RequestParameterBuilder</span>()<br>                .name(<span class="hljs-string">&quot;AppKey&quot;</span>)<br>                .description(<span class="hljs-string">&quot;App Key&quot;</span>)<br>                .required(<span class="hljs-literal">false</span>)<br>                .in(ParameterType.QUERY)<br>                .query(q -&gt; q.model(m -&gt; m.scalarModel(ScalarType.STRING)))<br>                .required(<span class="hljs-literal">false</span>)<br>                .build());<br>        <span class="hljs-keyword">return</span> parameters;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> api info</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> ApiInfo <span class="hljs-title function_">apiInfo</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ApiInfoBuilder</span>()<br>                .title(<span class="hljs-string">&quot;Swagger API&quot;</span>)<br>                .description(<span class="hljs-string">&quot;test api&quot;</span>)<br>                .contact(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Contact</span>(<span class="hljs-string">&quot;c1thulhu&quot;</span>, <span class="hljs-string">&quot;http://xxxxxxx.com&quot;</span>, <span class="hljs-string">&quot;c1thulhu@qq.com&quot;</span>))<br>                .termsOfServiceUrl(<span class="hljs-string">&quot;http://xxxxxx.com/&quot;</span>)<br>                .version(<span class="hljs-string">&quot;1.0&quot;</span>)<br>                .build();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p>Controller接口</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Api</span><br><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(&quot;/user&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserController</span> &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * http://localhost:8080/user/add .</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> userParam user param</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> user</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@ApiOperation(&quot;Add User&quot;)</span><br>    <span class="hljs-meta">@PostMapping(&quot;add&quot;)</span><br>    <span class="hljs-meta">@ApiImplicitParam(name = &quot;userParam&quot;, type = &quot;body&quot;, dataTypeClass = UserParam.class, required = true)</span><br>    <span class="hljs-keyword">public</span> ResponseEntity&lt;String&gt; <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> UserParam userParam)</span> &#123;<br>        <span class="hljs-keyword">return</span> ResponseEntity.ok(<span class="hljs-string">&quot;success&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * http://localhost:8080/user/list .</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> user list</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@ApiOperation(&quot;Query User List&quot;)</span><br>    <span class="hljs-meta">@GetMapping(&quot;list&quot;)</span><br>    <span class="hljs-keyword">public</span> ResponseEntity&lt;List&lt;UserVo&gt;&gt; <span class="hljs-title function_">list</span><span class="hljs-params">()</span> &#123;<br>        List&lt;UserVo&gt; userVoList = Collections.singletonList(UserVo.builder().name(<span class="hljs-string">&quot;test_name&quot;</span>).age(<span class="hljs-number">18</span>)<br>                .address(AddressVo.builder().city(<span class="hljs-string">&quot;shanghai&quot;</span>).zipcode(<span class="hljs-string">&quot;200001&quot;</span>).build()).build());<br>        <span class="hljs-keyword">return</span> ResponseEntity.ok(userVoList);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p>测试运行</p>
+</li>
+</ul>
+<h3 id="smart-doc"><a class="markdownIt-Anchor" href="#smart-doc"></a> Smart-Doc</h3>
+<p>为何会产生Smart-Doc这类工具？目前主流接口文档工具存在问题：</p>
+<ol>
+<li>侵入性强，需要编写大量注解。如swagger；</li>
+<li>强依赖性，如果项目不想使用该工具，业务代码无法编译通过；</li>
+<li>代码解析能力弱，使用文档不齐全；</li>
+<li>众多基于注释分析工具无法解析jar包中的注释，需要人工配置源码路径，无法满足DevOps构建场景；</li>
+<li>部分工具无法支持多模板复杂代码分析。</li>
+</ol>
+<h3 id="smart-doc使用"><a class="markdownIt-Anchor" href="#smart-doc使用"></a> Smart-Doc使用</h3>
+<ul>
+<li>
+<p>maven插件</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">plugins</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.github.shalousun<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>smart-doc-maven-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.4.8<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span><br>                <span class="hljs-comment">&lt;!--指定生成文档的使用的配置文件,配置文件放在自己的项目中--&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">configFile</span>&gt;</span>./src/main/resources/smart-doc.json<span class="hljs-tag">&lt;/<span class="hljs-name">configFile</span>&gt;</span><br>                <span class="hljs-comment">&lt;!--指定项目名称，推荐使用动态参数，例如$&#123;project.description&#125;--&gt;</span><br>                <span class="hljs-comment">&lt;!--如果smart-doc.json中和此处都未设置projectName，2.3.4开始，插件自动采用pom中的projectName作为设置--&gt;</span><br>                <span class="hljs-comment">&lt;!--&lt;projectName&gt;$&#123;project.description&#125;&lt;/projectName&gt;--&gt;</span><br>                <span class="hljs-comment">&lt;!--smart-doc实现自动分析依赖树加载第三方依赖的源码，如果一些框架依赖库加载不到导致报错，这时请使用excludes排除掉--&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">excludes</span>&gt;</span><br>                    <span class="hljs-comment">&lt;!--格式为：groupId:artifactId;参考如下--&gt;</span><br>                    <span class="hljs-comment">&lt;!--也可以支持正则式如：com.alibaba:.* --&gt;</span><br>                    <span class="hljs-tag">&lt;<span class="hljs-name">exclude</span>&gt;</span>com.alibaba:fastjson<span class="hljs-tag">&lt;/<span class="hljs-name">exclude</span>&gt;</span><br>                <span class="hljs-tag">&lt;/<span class="hljs-name">excludes</span>&gt;</span><br>                <span class="hljs-comment">&lt;!--includes配置用于配置加载外部依赖源码,配置后插件会按照配置项加载外部源代码而不是自动加载所有，因此使用时需要注意--&gt;</span><br>                <span class="hljs-comment">&lt;!--smart-doc能自动分析依赖树加载所有依赖源码，原则上会影响文档构建效率，因此你可以使用includes来让插件加载你配置的组件--&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">includes</span>&gt;</span><br>                    <span class="hljs-comment">&lt;!--格式为：groupId:artifactId;参考如下--&gt;</span><br>                    <span class="hljs-comment">&lt;!--也可以支持正则式如：com.alibaba:.* --&gt;</span><br>                    <span class="hljs-tag">&lt;<span class="hljs-name">include</span>&gt;</span>com.alibaba:fastjson<span class="hljs-tag">&lt;/<span class="hljs-name">include</span>&gt;</span><br>                <span class="hljs-tag">&lt;/<span class="hljs-name">includes</span>&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">executions</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">execution</span>&gt;</span><br>                    <span class="hljs-comment">&lt;!--如果不需要在执行编译时启动smart-doc，则将phase注释掉--&gt;</span><br>                    <span class="hljs-tag">&lt;<span class="hljs-name">phase</span>&gt;</span>compile<span class="hljs-tag">&lt;/<span class="hljs-name">phase</span>&gt;</span><br>                    <span class="hljs-tag">&lt;<span class="hljs-name">goals</span>&gt;</span><br>                        <span class="hljs-comment">&lt;!--smart-doc提供了html、openapi、markdown等goal，可按需配置--&gt;</span><br>                        <span class="hljs-tag">&lt;<span class="hljs-name">goal</span>&gt;</span>html<span class="hljs-tag">&lt;/<span class="hljs-name">goal</span>&gt;</span><br>                    <span class="hljs-tag">&lt;/<span class="hljs-name">goals</span>&gt;</span><br>                <span class="hljs-tag">&lt;/<span class="hljs-name">execution</span>&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">executions</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">plugins</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p>配置文件</p>
+<p><code>./src/main/resources/smart-doc.json</code>：</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;serverUrl&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;http://127.0.0.1&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//服务器地址,非必须。导出postman建议设置成http://&#123;&#123;server&#125;&#125;方便直接在postman直接设置环境变量</span><br>  <span class="hljs-attr">&quot;pathPrefix&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//设置path前缀,非必须。如配置Servlet ContextPath 。@since 2.2.3</span><br>  <span class="hljs-attr">&quot;isStrict&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">false</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//是否开启严格模式</span><br>  <span class="hljs-attr">&quot;allInOne&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span><span class="hljs-punctuation">,</span>  <span class="hljs-comment">//是否将文档合并到一个文件中，一般推荐为true</span><br>  <span class="hljs-attr">&quot;outPath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;D://md2&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//指定文档的输出路径</span><br>  <span class="hljs-attr">&quot;coverOld&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span><span class="hljs-punctuation">,</span>  <span class="hljs-comment">//是否覆盖旧的文件，主要用于markdown文件覆盖</span><br>  <span class="hljs-attr">&quot;createDebugPage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//@since 2.0.0 smart-doc支持创建可以测试的html页面，仅在AllInOne模式中起作用。</span><br>  <span class="hljs-attr">&quot;packageFilters&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//controller包过滤，多个包用英文逗号隔开，2.2.2开始需要采用正则：com.test.controller.*</span><br>  <span class="hljs-attr">&quot;md5EncryptedHtmlName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">false</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//只有每个controller生成一个html文件时才使用</span><br>  <span class="hljs-attr">&quot;style&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;xt256&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//基于highlight.js的代码高设置,可选值很多可查看码云wiki，喜欢配色统一简洁的同学可以不设置</span><br>  <span class="hljs-attr">&quot;projectName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pdai-springboot-demo-smart-doc&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//配置自己的项目名称，不设置则插件自动获取pom中的projectName</span><br>  <span class="hljs-attr">&quot;skipTransientField&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//目前未实现</span><br>  <span class="hljs-attr">&quot;sortByTitle&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-keyword">false</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//接口标题排序，默认为false,@since 1.8.7版本开始</span><br>  <span class="hljs-attr">&quot;showAuthor&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-keyword">true</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//是否显示接口作者名称，默认是true,不想显示可关闭</span><br>  <span class="hljs-attr">&quot;requestFieldToUnderline&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-keyword">true</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//自动将驼峰入参字段在文档中转为下划线格式,//@since 1.8.7版本开始</span><br>  <span class="hljs-attr">&quot;responseFieldToUnderline&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-keyword">true</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//自动将驼峰入参字段在文档中转为下划线格式,//@since 1.8.7版本开始</span><br>  <span class="hljs-attr">&quot;inlineEnum&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-keyword">true</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//设置为true会将枚举详情展示到参数表中，默认关闭，//@since 1.8.8版本开始</span><br>  <span class="hljs-attr">&quot;recursionLimit&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">7</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//设置允许递归执行的次数用于避免一些对象解析卡主，默认是7，正常为3次以内，//@since 1.8.8版本开始</span><br>  <span class="hljs-attr">&quot;allInOneDocFileName&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;index.html&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//自定义设置输出文档名称, @since 1.9.0</span><br>  <span class="hljs-attr">&quot;requestExample&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;true&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//是否将请求示例展示在文档中，默认true，@since 1.9.0</span><br>  <span class="hljs-attr">&quot;responseExample&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;true&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//是否将响应示例展示在文档中，默认为true，@since 1.9.0</span><br><br>  <span class="hljs-attr">&quot;ignoreRequestParams&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span> <span class="hljs-comment">//忽略请求参数对象，把不想生成文档的参数对象屏蔽掉，@since 1.9.2</span><br>    <span class="hljs-string">&quot;org.springframework.ui.ModelMap&quot;</span><br>  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;dataDictionaries&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">&#123;</span> <span class="hljs-comment">//配置数据字典，没有需求可以不设置</span><br>    <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;http状态码字典&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//数据字典的名称</span><br>    <span class="hljs-attr">&quot;enumClassName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;tech.pdai.springboot.smartdoc.constant.ResponseStatus&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//数据字典枚举类名称</span><br>    <span class="hljs-attr">&quot;codeField&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;responseCode&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//数据字典字典码对应的字段名称</span><br>    <span class="hljs-attr">&quot;descField&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;description&quot;</span><span class="hljs-comment">//数据字典对象的描述信息字典</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;errorCodeDictionaries&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">&#123;</span> <span class="hljs-comment">//错误码列表，没有需求可以不设置</span><br>    <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;title&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;enumClassName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;tech.pdai.springboot.smartdoc.constant.ResponseStatus&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//错误码枚举类</span><br>    <span class="hljs-attr">&quot;codeField&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;responseCode&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//错误码的code码字段名称</span><br>    <span class="hljs-attr">&quot;descField&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;description&quot;</span><span class="hljs-comment">//错误码的描述信息对应的字段名</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;revisionLogs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">&#123;</span> <span class="hljs-comment">//文档变更记录，非必须</span><br>    <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.1&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//文档版本号</span><br>    <span class="hljs-attr">&quot;revisionTime&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-07-01 22:12:01&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//文档修订时间</span><br>    <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;update&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//变更操作状态，一般为：创建、更新等</span><br>    <span class="hljs-attr">&quot;author&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pdai&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//文档变更作者</span><br>    <span class="hljs-attr">&quot;remarks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;init user api&quot;</span> <span class="hljs-comment">//变更描述</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><span class="hljs-punctuation">&#123;</span> <span class="hljs-comment">//文档变更记录，非必须</span><br>    <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.2&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//文档版本号</span><br>    <span class="hljs-attr">&quot;revisionTime&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-07-01 22:12:02&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//文档修订时间</span><br>    <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;update&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//变更操作状态，一般为：创建、更新等</span><br>    <span class="hljs-attr">&quot;author&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pdai&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//文档变更作者</span><br>    <span class="hljs-attr">&quot;remarks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;add address api&quot;</span> <span class="hljs-comment">//变更描述</span><br>  <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;customResponseFields&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">&#123;</span> <span class="hljs-comment">//自定义添加字段和注释，一般用户处理第三方jar包库，非必须</span><br>    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;code&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//覆盖响应码字段</span><br>    <span class="hljs-attr">&quot;desc&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;响应代码&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//覆盖响应码的字段注释</span><br>    <span class="hljs-attr">&quot;ownerClassName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;org.springframework.data.domain.Pageable&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//指定你要添加注释的类名</span><br>    <span class="hljs-attr">&quot;ignore&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-keyword">true</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//设置true会被自动忽略掉不会出现在文档中</span><br>    <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;00000&quot;</span><span class="hljs-comment">//设置响应码的值</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;requestHeaders&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">&#123;</span> <span class="hljs-comment">//设置请求头，没有需求可以不设置</span><br>    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;token&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//请求头名称</span><br>    <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//请求头类型</span><br>    <span class="hljs-attr">&quot;desc&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;desc&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//请求头描述信息</span><br>    <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;token请求头的值&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//不设置默认null</span><br>    <span class="hljs-attr">&quot;required&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">false</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//是否必须</span><br>    <span class="hljs-attr">&quot;since&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//什么版本添加的改请求头</span><br>    <span class="hljs-attr">&quot;pathPatterns&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/app/test/**&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//请看https://gitee.com/smart-doc-team/smart-doc/wikis/请求头高级配置?sort_id=4178978</span><br>    <span class="hljs-attr">&quot;excludePathPatterns&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;/app/page/**&quot;</span><span class="hljs-comment">//请看https://gitee.com/smart-doc-team/smart-doc/wikis/请求头高级配置?sort_id=4178978</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;appkey&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//请求头</span><br>    <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//请求头类型</span><br>    <span class="hljs-attr">&quot;desc&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;desc&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//请求头描述信息</span><br>    <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;appkey请求头的值&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//不设置默认null</span><br>    <span class="hljs-attr">&quot;required&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">false</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//是否必须</span><br>    <span class="hljs-attr">&quot;pathPatterns&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/test/add,/testConstants/1.0&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//正则表达式过滤请求头,url匹配上才会添加该请求头，多个正则用分号隔开</span><br>    <span class="hljs-attr">&quot;since&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-&quot;</span><span class="hljs-comment">//什么版本添加的改请求头</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;requestParams&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span> <span class="hljs-comment">//设置公共参数，没有需求可以不设置</span><br>    <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;configPathParam&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//请求名称</span><br>      <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//请求类型</span><br>      <span class="hljs-attr">&quot;desc&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;desc&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//请求描述信息</span><br>      <span class="hljs-attr">&quot;paramIn&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;path&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// 参数所在位置 header-请求头, path-路径参数, query-参数</span><br>      <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;testPath&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//不设置默认null</span><br>      <span class="hljs-attr">&quot;required&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">false</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//是否必须</span><br>      <span class="hljs-attr">&quot;since&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2.2.3&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//什么版本添加的该请求</span><br>      <span class="hljs-attr">&quot;pathPatterns&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/app/test/**&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//请看https://gitee.com/smart-doc-team/smart-doc/wikis/请求高级配置?sort_id=4178978</span><br>      <span class="hljs-attr">&quot;excludePathPatterns&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;/app/page/**&quot;</span><span class="hljs-comment">//请看https://gitee.com/smart-doc-team/smart-doc/wikis/请求高级配置?sort_id=4178978</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;responseBodyAdvice&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">&#123;</span> <span class="hljs-comment">//自smart-doc 1.9.8起，非必须项，ResponseBodyAdvice统一返回设置(不要随便配置根据项目的技术来配置)，可用ignoreResponseBodyAdvice tag来忽略</span><br>    <span class="hljs-attr">&quot;className&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;tech.pdai.springboot.smartdoc.entity.ResponseResult&quot;</span> <span class="hljs-comment">//通用响应体</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></div></td></tr></table></figure>
+</li>
+<li>
+<p>运行测试</p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/helloworld/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a>
+                    
+                      <a class="hover-with-bg" href="/helloworld/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/">接口文档</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/helloworld/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a>
+                    
+                      <a class="hover-with-bg" href="/helloworld/tags/%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/">接口文档</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/helloworld/notes/%E4%B8%AD%E9%97%B4%E4%BB%B6/NoSql/Redis/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Redis</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/helloworld/notes/%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7/Docker/">
+                        <span class="hidden-mobile">Docker</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/helloworld/js/events.js" ></script>
+<script  src="/helloworld/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/helloworld/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/helloworld/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/helloworld/js/boot.js" ></script>
+
+
+</body>
+</html>

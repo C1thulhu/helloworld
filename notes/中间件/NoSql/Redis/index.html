@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://c1thulhu.oss-cn-shanghai.aliyuncs.com/notes_SCSX/redis-%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B.jpeg">
 <meta property="article:published_time" content="2022-10-17T00:00:00.000Z">
-<meta property="article:modified_time" content="2022-10-17T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-11-17T00:00:00.000Z">
 <meta property="article:author" content="C1thulhu">
 <meta property="article:tag" content="Database">
 <meta property="article:tag" content="中间件">
@@ -202,7 +202,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.6k 字
+      4k 字
     </span>
   
 
@@ -249,7 +249,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022-10-17
+                  本文最后更新于：2022-11-17
                 
               </p>
             
@@ -260,6 +260,7 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/redis-tutorial.html">Redis 教程-菜鸟教程</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.pdai.tech/md/db/nosql-redis/db-redis-overview.html">Redis教程 - Redis知识体系详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://redis.io/docs/">Redis官方文档</a></li>
 </ul>
 <h2 id="redis介绍"><a class="markdownIt-Anchor" href="#redis介绍"></a> #Redis介绍</h2>
 <p>  Redis是一种内存高速缓存数据库，支持key-value等多种数据结构的存储系统。可用于缓存，事件发布或订阅，高速队列等场景。支持网络，提供字符串，哈希，列表，队列，集合结构直接存取，基于内存，可持久化。</p>
@@ -660,7 +661,20 @@
 </li>
 </ol>
 <h2 id="持久化"><a class="markdownIt-Anchor" href="#持久化"></a> #持久化</h2>
+<p><strong>Redis是个基于内存的数据库，服务一旦宕机，内存中的数据将全部丢失</strong>。通常的解决方案是从后端数据库恢复这些数据，但后端数据库有性能瓶颈，如果是大数据量的恢复会存在很大的弊端：</p>
+<ul>
+<li>对数据库带来巨大压力，</li>
+<li>数据库性能不如Redis，程序响应慢。</li>
+</ul>
+<p>所以对Redis来说实现数据的持久化，避免从数据库中恢复数据至关重要！</p>
+<p>根据官方文档来看：<a target="_blank" rel="noopener" href="https://redis.io/docs/management/persistence/">https://redis.io/docs/management/persistence/</a> ，Redis主要提供了两种持久化的存储方案：</p>
+<ul>
+<li><code>RDB</code>，全称Redis DataBase，快照/内存快照。将当前当前进程数据生成快照保存在磁盘上，由于是某一时刻的快照，快照中的值可能要早于或者等于内存中的值。</li>
+<li><code>AOF</code>，Redis采用&quot;写后&quot;日志方式，即先执行命令，将数据写入内存再记录日志。日志中记录的是Redis收到的每一条命令，这些命令以文本方式保存。<font style="color:yellow">大多数数据库采用的&quot;写前&quot;日志方式(<code>WAL</code>)，例如MySql通过写前日志和两阶段提交实现数据与逻辑一致性。</font></li>
+<li><code>RDB</code>&amp;<code>AOF</code>混合方式</li>
+</ul>
 <h2 id="事件事务"><a class="markdownIt-Anchor" href="#事件事务"></a> #事件&amp;事务</h2>
+<h2 id="应用"><a class="markdownIt-Anchor" href="#应用"></a> #应用</h2>
 
             </div>
             <hr>
@@ -705,12 +719,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/helloworld/notes/%E4%B8%AD%E9%97%B4%E4%BB%B6/MQ/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">消息队列</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/helloworld/notes/%E4%B8%AD%E9%97%B4%E4%BB%B6/MQ/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">
-                        <span class="hidden-mobile">消息队列</span>
+                      <a href="/helloworld/notes/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/">
+                        <span class="hidden-mobile">接口文档</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
