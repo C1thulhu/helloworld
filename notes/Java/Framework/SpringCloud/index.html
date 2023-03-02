@@ -16,20 +16,24 @@
   <meta name="author" content="C1thulhu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="待编纂">
+    <meta name="description" content="Spring Cloud是建立在Spring Boot的开发便利性上巧妙地简化了分布式系统基础设施的开发。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue3">
-<meta property="og:url" content="https://c1thulhu.github.io/helloworld/notes/Vue/Vue3.x/index.html">
+<meta property="og:title" content="SpringCloud">
+<meta property="og:url" content="https://c1thulhu.github.io/helloworld/notes/Java/Framework/SpringCloud/index.html">
 <meta property="og:site_name" content="C1thulhu">
-<meta property="og:description" content="待编纂">
+<meta property="og:description" content="Spring Cloud是建立在Spring Boot的开发便利性上巧妙地简化了分布式系统基础设施的开发。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-03-02T01:53:41.894Z">
-<meta property="article:modified_time" content="2023-03-02T01:53:41.894Z">
+<meta property="article:published_time" content="2022-12-07T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-12-11T00:00:00.000Z">
 <meta property="article:author" content="C1thulhu">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="SpringBoot">
+<meta property="article:tag" content="SpringCloud">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>vue3 - C1thulhu</title>
+  <title>SpringCloud - C1thulhu</title>
 
   <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -175,7 +179,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="vue3">
+            <span class="h2" id="subtitle" title="SpringCloud">
               
             </span>
 
@@ -185,8 +189,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-03-02 01:53" pubdate>
-        2023-03-02
+      <time datetime="2022-12-07 00:00" pubdate>
+        2022-12-07
       </time>
     </span>
   
@@ -196,7 +200,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      442 字
+      1.9k 字
     </span>
   
 
@@ -239,70 +243,185 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">vue3</h1>
+            <h1 style="display: none">SpringCloud</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2023-03-02
+                  本文最后更新于：2022-12-11
                 
               </p>
             
             <div class="markdown-body">
               <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> #前言</h2>
-<h4 id="概述"><a class="markdownIt-Anchor" href="#概述"></a> 概述</h4>
+<p><font style="color:grey">待完善。。</font></p>
+<p>参考文章：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.pdai.tech/md/arch/arch-z-overview.html">分布式系统</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.springcloud.cc/spring-cloud-greenwich.html">SpringCloud中文网-官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="http://c.biancheng.net/springcloud/what-is-cloud.html">SpringCloud详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/alibaba/spring-cloud-alibaba/blob/2.2.x/README-zh.md">Spring Cloud Alibaba官方中文文档</a></li>
+</ul>
+<h2 id="分布式系统"><a class="markdownIt-Anchor" href="#分布式系统"></a> #分布式系统</h2>
+<p>  在介绍SpringCloud之前我们需要先了解什么是分布式系统，<font style="color:red"><strong>简单来说就是一群计算机集合共同对外提供服务，它们彼此之间仅通过消息传递进行通信和协调。</strong></font>计算机越多，CPU、内存、储存空间等资源也越多，能够处理的并发访问量也越大。</p>
+<h3 id="主要特征"><a class="markdownIt-Anchor" href="#主要特征"></a> 主要特征</h3>
 <ul>
 <li>
-<p>vue 2.x 使用的是<strong>Option API</strong> 构建组件。一个组件的功能需要通过methods，computed，watch，data等属性和方法，共同处理页面逻辑。存在多个业务功能共同使用一个实例化new vue()，这种构建方式在业务逻辑复杂的大项目中，API比较分散，可能会存在分不清哪个方法对应哪个功能。项目的易读性、可复用性相对较差，耦合性较高。</p>
+<p><strong>分布性</strong></p>
+<p>分布式系统的多台计算机空间位置可以随意分布，机器分布情况也可随时变动</p>
 </li>
 <li>
-<p>vue 3.x 使用的是**<mark>Composition API</mark>** 构建组件。代码是根据逻辑功能来组织的，一个功能所定义的所有api会放在一起（高内聚，低耦合），我们能快速的定位到这个功能所用到的所有API，提高代码可读性和可维护性</p>
+<p><strong>对等性</strong></p>
+<p>分布式系统计算机没有从属关系，所有计算机节点都是对等的</p>
 </li>
 <li>
-<p>生命周期函数比较：</p>
+<p><strong>自治性</strong></p>
+<p>分布式系统中各个节点包含各自的处理器与内存，都具有独立的处理数据功能。能自治地进行工作又能利用共享通信线路来传递信息，协调任务处理。</p>
+</li>
+<li>
+<p><strong>并发性</strong></p>
+<p>在一个计算机网络中，程序运行过程的并发性操作是非常常见的行为。<font style="color:red">同一个分布式系统中的多个节点，可能会并发地操作一些共享的资源，如何准确并高效地协调分布式并发操作也成为了分布式系统架构与设计中最大的挑战之一。</font></p>
+</li>
+</ul>
+<h2 id="springcloud介绍"><a class="markdownIt-Anchor" href="#springcloud介绍"></a> #SpringCloud介绍</h2>
+<p>  <font style="color:red"><strong>SpringCloud是一系列框架的有序集合体，它是建立在Spring Boot的开发便利性上巧妙地简化了分布式系统基础设施的开发。</strong></font><font style="color:#00FFFF">SpringCloud只是将已经成熟的服务框架组合，通过SpringBoot风格再封装，屏蔽了复杂的配置和实现原理，最终给开发者提供了一套简单易懂、易部署、易维护的分布式系统开发工具包。</font></p>
+<p>  Spring Cloud 本身并不是一个拿来即可用的框架，它是一套微服务规范，目前共有两代实现。Spring Cloud 中包含了近20个子项目，提供了服务注册、服务网关、智能路由、负载均衡、断路器、监控跟踪、分布式消息队列、配置管理等具体问题的解决方案。</p>
+<ul>
+<li>Spring Cloud Netflix 是 Spring Cloud 的第一代实现，主要由 <code>Eureka</code>、<code>Ribbon</code>、<code>Feign</code>、<code>Hystrix</code> 等组件组成。</li>
+<li>Spring Cloud Alibaba 是 Spring Cloud 的第二代实现，主要由 <code>Nacos</code>、<code>Sentinel</code>、<code>Seata</code> 等组件组成。</li>
+</ul>
+<p>  2018年12月12日，Netflix公司宣布Spring Cloud Netflix系列大部分组件停更进入维护模式，不再添加新特性。Spring Cloud Alibaba吸收Spring Cloud Netflix核心架构思想，并进行了高性能改进。自 Spring Cloud Netflix 进入停更维护后，Spring Cloud Alibaba 逐渐代替它成为主流的微服务框架。<br />
+<font style="color:grey">本篇只针对Spring Cloud Alibaba做详细介绍。</font></p>
+<p>Spring Cloud两代实现组件对比：</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"></th>
-<th style="text-align:center"></th>
+<th>组件功能</th>
+<th>Spring Cloud Netflix</th>
+<th>优缺</th>
+<th>Spring Cloud Alibaba</th>
+<th>优缺</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
+<td>服务注册</td>
+<td>Ereka</td>
+<td>2.0 孵化失败</td>
+<td>Nacos Discovery</td>
+<td>性能更好，感知力更强</td>
 </tr>
 <tr>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
+<td>负载均衡</td>
+<td>Ribbon</td>
+<td>停更进维</td>
+<td>Spring Cloud Loadbalancer</td>
+<td>Spring Cloud 原生组件，用于代替 Ribbon</td>
 </tr>
 <tr>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
+<td>断路器</td>
+<td>Hystrix</td>
+<td>停更进维</td>
+<td>Sentinel</td>
+<td>可视化配置，上手简单</td>
+</tr>
+<tr>
+<td>服务网关</td>
+<td>Zuul</td>
+<td>停更进维</td>
+<td>Spring Cloud Gateway</td>
+<td>性能为 Zuul 的 1.6 倍</td>
+</tr>
+<tr>
+<td>配置管理</td>
+<td>Spring Cloud Config</td>
+<td>搭建过程复杂，约定过多，无可视化界面，上手难点大</td>
+<td>Nacos Config</td>
+<td>搭建过程简单，有可视化界面，配置管理更简单，容易上手</td>
 </tr>
 </tbody>
 </table>
-</li>
-</ul>
-<ol>
-<li></li>
-</ol>
-<h4 id="构建vuecli项目"><a class="markdownIt-Anchor" href="#构建vuecli项目"></a> 构建VueCli项目</h4>
+<h2 id="spring-cloud组件"><a class="markdownIt-Anchor" href="#spring-cloud组件"></a> #Spring Cloud组件</h2>
+<h3 id="nacos"><a class="markdownIt-Anchor" href="#nacos"></a> Nacos</h3>
+<p>Nacos 是一个更易于帮助构建云原生应用的动态服务发现、配置和服务管理平台即：服务注册和配置管理的组合体。</p>
+<h4 id="nacos特性"><a class="markdownIt-Anchor" href="#nacos特性"></a> Nacos特性</h4>
 <ul>
 <li>
-<p>通过cmd命令行cd到想要创建项目的目录下，</p>
+<p>服务发现</p>
+<p>Nacos 支持基于 DNS 和 RPC 的服务发现。当服务提供者使用原生 SDK、OpenAPI 或一个独立的 Agent TODO 向 Nacos 注册服务后，服务消费者可以在 Nacos 上通过 DNS TODO 或 HTTP&amp;API 查找、发现服务。</p>
 </li>
 <li>
-<p>在命令行中运行命令 <mark>**vue create **</mark> projectName（初始化一个完整版的项目）</p>
-<p>projectName是指生成项目文件夹的名称</p>
-<p>若在编辑器中<strong>已经手动创建了项目存放的</strong>文件夹直接通过**<code>vue create</code>**初始化一下即可</p>
+<p>服务健康监测</p>
+<p>Nacos 提供对服务的实时健康检查，能够阻止请求发送到不健康主机或服务实例上。Nacos 还提供了一个健康检查仪表盘，能够帮助我们根据健康状态管理服务的可用性及流量。</p>
+</li>
+<li>
+<p>动态配置服务</p>
+</li>
+<li>
+<p>动态DNS服务</p>
+</li>
+<li>
+<p>服务及其元数据管理</p>
 </li>
 </ul>
+<h4 id="nacos快速入门"><a class="markdownIt-Anchor" href="#nacos快速入门"></a> Nacos快速入门</h4>
+<ul>
+<li>
+<p>Nacos服务注册</p>
+<ol>
+<li>
+<p>安装运行Nacos Server</p>
+<p>直接在<code>Nacos</code>的github中下载源码或编译后压缩包方式启动<code>Nacos Server</code></p>
+<p>启动命令：<code>startup.cmd -m standalone</code></p>
+</li>
+<li>
+<p>服务提供者</p>
+</li>
+<li>
+<p>服务消费者</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Nacos配置管理<br />
+1.</p>
+</li>
+</ul>
+<h3 id="gateway"><a class="markdownIt-Anchor" href="#gateway"></a> GateWay</h3>
+<h3 id="sentinel"><a class="markdownIt-Anchor" href="#sentinel"></a> Sentinel</h3>
+<p>Sentinel 主要以流量为切入点，从流量控制、熔断降级、系统负载保护等多个维度帮助用户保护服务的稳定性。</p>
+<h3 id="seata"><a class="markdownIt-Anchor" href="#seata"></a> Seata</h3>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/helloworld/categories/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/helloworld/categories/Java/Spring/">Spring</a>
+                    
+                      <a class="hover-with-bg" href="/helloworld/categories/Java/Spring/SpringBoot/">SpringBoot</a>
+                    
+                      <a class="hover-with-bg" href="/helloworld/categories/Java/Spring/SpringBoot/SpringCloud/">SpringCloud</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/helloworld/tags/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/helloworld/tags/Spring/">Spring</a>
+                    
+                      <a class="hover-with-bg" href="/helloworld/tags/SpringBoot/">SpringBoot</a>
+                    
+                      <a class="hover-with-bg" href="/helloworld/tags/SpringCloud/">SpringCloud</a>
+                    
+                  </div>
                 
               </div>
               

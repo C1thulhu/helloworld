@@ -24,7 +24,7 @@
 <meta property="og:description" content="开发过程中遇到的常用开源的工具类">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-11-11T00:00:00.000Z">
-<meta property="article:modified_time" content="2022-11-11T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-11T00:00:00.000Z">
 <meta property="article:author" content="C1thulhu">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="API">
@@ -199,7 +199,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      72 字
+      2.5k 字
     </span>
   
 
@@ -246,16 +246,58 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022-11-11
+                  本文最后更新于：2023-01-11
                 
               </p>
             
             <div class="markdown-body">
               <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> #前言</h2>
 <p><font style="color:grey">待完善。</font></p>
-<h2 id="apache-commons"><a class="markdownIt-Anchor" href="#apache-commons"></a> #Apache-commons</h2>
-<p>Commons包含了很多开源的工具，用于解决平时编程经常会遇到的问题，减少重复劳动。</p>
+<h2 id="apache-httpcomponents"><a class="markdownIt-Anchor" href="#apache-httpcomponents"></a> #Apache-httpcomponents</h2>
+<p>  <code>Apache HttpComponents</code> 项目负责创建和维护一组底层Java组件工具集，这些组件主要是<strong>提供对http服务器的访问功能</strong>。</p>
+<p><b style="color:red">HttpComponents项目就是专门设计来简化HTTP客户端与服务器进行各种通讯编程。</b></p>
+<h3 id="特性"><a class="markdownIt-Anchor" href="#特性"></a> 特性</h3>
+<ol>
+<li>基于标准、纯净的java语言。实现了<code>Http1.0</code>和<code>Http1.1</code></li>
+<li>以可扩展的面向对象的结构实现了Http全部的方法（GET, POST, PUT, DELETE, HEAD, OPTIONS, and TRACE）。</li>
+<li>支持<code>HTTPS</code>协议。</li>
+<li>通过<code>Http</code>代理建立透明的连接。</li>
+<li>利用CONNECT方法通过Http代理建立隧道的https连接。</li>
+<li>Basic, Digest, NTLMv1, NTLMv2, NTLM2 Session, SNPNEGO/Kerberos认证方案。</li>
+<li>插件式的自定义认证方案。</li>
+<li>便携可靠的套接字工厂使它更容易的使用第三方解决方案。</li>
+<li>连接管理器支持多线程应用。支持设置最大连接数，同时支持设置每个主机的最大连接数，发现并关闭过期的连接。</li>
+<li>自动处理Set-Cookie中的Cookie。</li>
+<li>插件式的自定义Cookie策略。</li>
+<li>Request的输出流可以避免流中内容直接缓冲到socket服务器。</li>
+<li>Response的输入流可以有效的从socket服务器直接读取相应内容。</li>
+<li>在http1.0和http1.1中利用KeepAlive保持持久连接。\15. 直接获取服务器发送的response code和 headers。</li>
+<li>设置连接超时的能力。</li>
+<li>实验性的支持http1.1 response caching。</li>
+<li>源代码基于Apache License 可免费获取。</li>
+</ol>
+<h3 id="使用方法"><a class="markdownIt-Anchor" href="#使用方法"></a> 使用方法</h3>
+<p>使用HttpClient发送请求、接收响应很简单，一般需要如下几步即可：</p>
+<blockquote>
+<ol>
+<li>创建HttpClient对象。</li>
+<li>创建请求方法的实例，并指定请求URL。如果需要发送GET请求，创建HttpGet对象；如果需要发送POST请求，创建HttpPost对象。</li>
+<li>设置请求头</li>
+<li>如果需要发送请求参数，可调用HttpGet、HttpPost共同的setParams(HetpParams params)方法来添加请求参数；对于HttpPost对象而言，也可调用setEntity(HttpEntity entity)方法来设置请求参数。</li>
+<li>调用HttpClient对象的execute(HttpUriRequest request)发送请求，该方法返回一个HttpResponse。</li>
+<li>调用HttpResponse的getAllHeaders()、getHeaders(String name)等方法可获取服务器的响应头；调用HttpResponse的getEntity()方法可获取HttpEntity对象，该对象包装了服务器的响应内容。程序可通过该对象获取服务器的响应内容。</li>
+<li>释放连接。无论执行方法是否成功，都必须释放连接</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RequestUtils</span> &#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> HttpResponse <span class="hljs-title function_">requestGet</span><span class="hljs-params">(String url, Map&lt;String, Object&gt; headerParam,</span><br><span class="hljs-params">                                          Map&lt;String, Object&gt; bodyParam)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        <span class="hljs-comment">//[1]HttpClient对象</span><br>        <span class="hljs-type">HttpClient</span> <span class="hljs-variable">httpClient</span> <span class="hljs-operator">=</span> HttpClientBuilder.create().build();<br>        <span class="hljs-comment">//[2]创建请求方法的实例</span><br>        <span class="hljs-type">HttpGet</span> <span class="hljs-variable">httpGet</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HttpGet</span>(url);<br>        <span class="hljs-comment">//[3]设置请求的header</span><br>        Set&lt;String&gt; strings = headerParam.keySet();<br>        <span class="hljs-keyword">for</span> (String key: strings) &#123;<br>            httpGet.addHeader(key, String.valueOf(headerParam.get(key)));<br>        &#125;<br>        <span class="hljs-keyword">if</span> (Objects.nonNull(headerParam)) &#123;<br>            <span class="hljs-keyword">if</span> (StringUtils.isEmpty(String.valueOf(headerParam.get(<span class="hljs-string">&quot;Content-Type&quot;</span>)))) &#123;<br>                httpGet.addHeader(<span class="hljs-string">&quot;Content-Type&quot;</span>, <span class="hljs-string">&quot;application/json;charset=utf-8&quot;</span>);<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">//[4]设置请求的参数</span><br>        List&lt;NameValuePair&gt; param = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;NameValuePair&gt;();<br>        Set&lt;String&gt; keySet = bodyParam.keySet();<br>        <span class="hljs-keyword">for</span> (String key: keySet) &#123;<br>            param.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">BasicNameValuePair</span>(key, String.valueOf(bodyParam.get(key))));<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> httpClient.execute(httpGet);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <h2 id="json工具类"><a class="markdownIt-Anchor" href="#json工具类"></a> #JSON工具类</h2>
+<p>  JSON（JavaScript Object Notation, JS对象简谱）是<b style="color:red">一种轻量级的数据交换格式，采用完全独立于编程语言的文本格式来存储和表示数据。</b><b style="color:#00FFFF">简洁和清晰的层次结构使得 JSON 成为理想的数据交换语言，易于人阅读和编写，同时也易于机器解析和生成，并有效地提升网络传输效率。</b></p>
+<p>  常用的Json序列化与反序列化工具有<code>Gson</code>、<code>fastjson</code>、<code>jackson</code>等。本文只简单介绍这三种JSON工具的使用。</p>
+<h3 id="gson"><a class="markdownIt-Anchor" href="#gson"></a> Gson</h3>
+<p>  是 Google 提供的用来在 Java 对象和 JSON 数据之间进行映射的 Java 类库，可以快速的将一个 Json 字符转成一个 Java 对象，或者将一个 Java 对象转化为 Json 字符串。</p>
+<p>gson 在 github 上开源地址：<a target="_blank" rel="noopener" href="https://github.com/google/gson">https://github.com/google/gson</a></p>
+<h3 id="fastjson"><a class="markdownIt-Anchor" href="#fastjson"></a> fastjson</h3>
+<h3 id="jackson"><a class="markdownIt-Anchor" href="#jackson"></a> jackson</h3>
 
             </div>
             <hr>
